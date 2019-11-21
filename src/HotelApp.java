@@ -15,11 +15,10 @@ public class HotelApp {
             System.out.println("1. Hotel manager login");
             System.out.println("2. Customer login");
             String choice = input.nextLine();
-
             if (choice.equals("1")) {
                 System.out.print("Please enter password: ");
-                input.nextLine();
-                if (input.nextLine().equals("abc123")) {
+                String password = input.nextLine();
+                if (password.equals("abc123")) {
                     System.out.println("Welcome to the hotel app!");
                     cont = false;
                 } else {
