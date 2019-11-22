@@ -5,8 +5,9 @@ public class HotelApp {
     Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
-        HotelApp myApp = new HotelApp();
-        myApp.showMenu();
+        HotelApp myHotelApp = new HotelApp();
+        Customer myCustomer = new Customer("", "", "", "");
+        myHotelApp.showMenu();
     }
 
     private void showMenu() {
