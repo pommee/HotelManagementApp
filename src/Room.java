@@ -23,4 +23,9 @@ public class Room{
         this.hasBalcony = hasBalcony;
         this.isBooked = isBooked;
     }
+
+    public boolean getIsBooked() {
+        return isBooked;
+    }
+
 }

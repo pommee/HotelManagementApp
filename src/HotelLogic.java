@@ -48,5 +48,16 @@ public class HotelLogic {
                 System.out.println(arrListRoom);
             }
         }
+
+        public List<Room> getAvailableRooms() {
+            List<Room> availableRooms = new ArrayList<Room>();
+            Room room = null;
+            for (Room post : arrListRoom) {
+                if (room.getIsBooked()) {
+                    availableRooms.add(post);
+                }
+            }
+            return availableRooms;
+        }
     }
 
