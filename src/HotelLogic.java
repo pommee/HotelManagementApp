@@ -5,6 +5,15 @@ import java.util.ArrayList;
 public class HotelLogic {
 
     private ArrayList<Room> arrListRoom = new ArrayList<Room>();
+    private ArrayList<Customer> customers = new ArrayList<Customer>();
+
+    public void getCustomers(ArrayList customers) {
+        for (Customer post: customers) {
+            System.out.println(customers);
+        }
+        public getCustomer(String ssn) {
+            return customer;
+        }
 
         public void createRooms(){
             if (arrListRoom.size() <= 0) {
