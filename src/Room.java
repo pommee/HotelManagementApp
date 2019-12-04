@@ -24,7 +24,7 @@ public class Room{
         this.isBooked = isBooked;
     }
 
-    public boolean getIsBooked() {
+    public boolean isBooked() {
         return isBooked;
     }
 

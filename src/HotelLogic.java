@@ -8,14 +8,14 @@ public class HotelLogic {
     private ArrayList<Customer> customers = new ArrayList<Customer>();
 
     public void getCustomers(ArrayList customers) {
-        for (Customer post: customers) {
+        for (Customer post : customers) {
             System.out.println(customers);
         }
         public getCustomer(String ssn) {
             return customer;
         }
 
-        public void createRooms(){
+        public void createRooms () {
             if (arrListRoom.size() <= 0) {
                 int roomNumber = 0;
                 for (int i = 0; i < 11; i++) {
@@ -41,23 +41,23 @@ public class HotelLogic {
             }
         }
 
-        public void getRooms(){
+        public void getRooms () {
 
-            for (Room post: arrListRoom
-                 ) {
+            for (Room post : arrListRoom
+            ) {
                 System.out.println(arrListRoom);
             }
         }
 
-        public List<Room> getAvailableRooms() {
-            List<Room> availableRooms = new ArrayList<Room>();
-            Room room = null;
-            for (Room post : arrListRoom) {
-                if (room.getIsBooked()) {
-                    availableRooms.add(post);
+        public void getAvailableRooms () {
+            for (Room room : arrListRoom) {
+                if (!room.isBooked()) {
+                    System.out.println(room);
+                } else {
+                    System.out.println("Room is booked.");
                 }
             }
-            return availableRooms;
         }
     }
+}
 
