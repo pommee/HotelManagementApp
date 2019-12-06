@@ -174,6 +174,7 @@ public class HotelLogic {
                                 }
                             }
                             System.out.println("Booked");
+                            input.nextLine();
                         } else if (answer == 2) {
                             System.out.println("No booking has been done");
                         }
