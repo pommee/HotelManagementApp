@@ -28,6 +28,10 @@ public class Room {
         this.bookedBy = bookedBy;
     }
 
+    public String getBookedBy() {
+        return bookedBy;
+    }
+
     public Room(int roomNumber, int numberOfBeds, boolean hasBalcony, Double pricePerNight) {
         this.roomNumber = roomNumber;
         this.numberOfBeds = numberOfBeds;

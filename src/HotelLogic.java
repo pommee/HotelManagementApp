@@ -129,6 +129,24 @@ public class HotelLogic {
         return false;
     }
 
+    public void searchBooking() {
+        if (arrListRoom.size() > 0) {
+            System.out.print("Enter ssn: ");
+            String ssn = input.nextLine();
+            if (isCustomerCreated(ssn)) {
+                for (Room room : arrListRoom) {
+                    if (ssn.equals(room.getBookedBy())) {
+                        System.out.println(room);
+                    }
+                }
+            } else {
+                System.out.println("Customer not registered");
+            }
+        } else {
+            System.out.println("No rooms created");
+        }
+    }
+
     public void checkInCustomer() {
         if (arrListCustomer.size() <= 0) {
             System.out.println("No customers in the system");

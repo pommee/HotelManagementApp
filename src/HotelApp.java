@@ -41,6 +41,7 @@ public class HotelApp {
             System.out.println("4. Check in customer");
             System.out.println("5. Create rooms");
             System.out.println("6. Exit");
+            System.out.println("7. Search for booking");
             String choice = input.nextLine();
 
             if (choice.equals("1")) {
@@ -55,6 +56,8 @@ public class HotelApp {
                 myHotelLogic.createRooms();
             } else if (choice.equals("6")) {
                 cont = false;
+            } else if (choice.equals("7")) {
+                myHotelLogic.searchBooking();
             }
         } while (cont);
     }
