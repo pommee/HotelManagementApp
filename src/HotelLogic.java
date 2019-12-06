@@ -87,12 +87,15 @@ public class HotelLogic {
     }
 
     public void getRooms() {
-        {
+        if (arrListRoom.size() > 0) {
             for (Room print : arrListRoom) {
                 System.out.println(print);
             }
+        } else {
+            System.out.println("No rooms created");
         }
     }
+
 
     public void getAvailableRooms() {
         for (Room room : arrListRoom) {
@@ -127,32 +130,40 @@ public class HotelLogic {
     }
 
     public void checkInCustomer() {
-        System.out.print("ssn of customer: ");
-        String ssn = input.nextLine();
-        boolean exists = customerExists(ssn);
-        if (exists) {
-            getAvailableRooms();
-            System.out.print("What room do you want to book: ");
-            int choice = input.nextInt();
-            if (roomNumberExists(choice)) {
-                System.out.println("Do you want to book " + ssn + " to room number: " + choice + "?");
-                System.out.println("1. Yes");
-                System.out.println("2. No");
-                int answer = input.nextInt();
-                if (answer == 1) {
-                    for (Room room : arrListRoom) {
-                        if (room.getRoomNumber() == choice) {
-                            room.setBooked(true);
-                            room.setBookedBy(ssn);
+        if (arrListCustomer.size() <= 0) {
+            System.out.println("No customers in the system");
+        } else {
+            System.out.print("ssn of customer: ");
+            String ssn = input.nextLine();
+            boolean exists = customerExists(ssn);
+            if (exists) {
+                if (arrListRoom.size() <= 0) {
+                    System.out.println("No rooms to book");
+                } else {
+                    getAvailableRooms();
+                    System.out.print("What room do you want to book: ");
+                    int choice = input.nextInt();
+                    if (roomNumberExists(choice)) {
+                        System.out.println("Do you want to book " + ssn + " to room number: " + choice + "?");
+                        System.out.println("1. Yes");
+                        System.out.println("2. No");
+                        int answer = input.nextInt();
+                        if (answer == 1) {
+                            for (Room room : arrListRoom) {
+                                if (room.getRoomNumber() == choice) {
+                                    room.setBooked(true);
+                                    room.setBookedBy(ssn);
+                                }
+                            }
+                            System.out.println("Booked");
+                        } else if (answer == 2) {
+                            System.out.println("No booking has been done");
                         }
                     }
-                    System.out.println("Booked");
-                } else if (answer == 2) {
-                    System.out.println("No booking has been done");
                 }
+            } else {
+                System.out.println("Customer does not exist");
             }
-        } else {
-            System.out.println("Customer does not exist");
         }
     }
 }
