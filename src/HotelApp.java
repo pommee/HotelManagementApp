@@ -20,33 +20,35 @@ public class HotelApp {
                 System.out.print("Please enter password: ");
                 String password = input.nextLine();
                 if (password.equals("abc123")) {
-                    showMenu();
+                    showManagerMenu();
                     cont = false;
                 } else {
                     System.out.println("Please try again!");
                 }
-            } else {
-                System.out.println("That option is unavailable!");
+            } else if (choice.equals("2")) {
+                showCustomerMenu();
+                cont = false;
             }
         } while (cont);
     }
 
-    private void showMenu() {
+    private void showManagerMenu() {
         boolean cont = true;
         do {
-            System.out.println("--- Menu ---");
+            System.out.println("--- Manager ---");
             System.out.println("1. Add customer");
             System.out.println("2. Show all customers");
             System.out.println("3. Show all rooms");
             System.out.println("4. Check in customer");
             System.out.println("5. Check out customer");
             System.out.println("6. Create customers");
-            System.out.println("7. Search for booking");
-            System.out.println("8. Edit room");
-            System.out.println("9. Edit customer");
-            System.out.println("10. Remove customer");
-            System.out.println("11. Remove room");
-            System.out.println("12. Exit");
+            System.out.println("7. Create rooms");
+            System.out.println("8. Search for booking");
+            System.out.println("9. Edit room");
+            System.out.println("10. Edit customer");
+            System.out.println("11. Remove customer");
+            System.out.println("12. Remove room");
+            System.out.println("13. Exit");
             String choice = input.nextLine();
             System.out.println();
 
@@ -62,22 +64,40 @@ public class HotelApp {
                 myHotelLogic.checkOutCustomer();
             } else if (choice.equals("6")) {
                 myHotelLogic.createCustomers();
-            } else if (choice.equals("7")){
-                myHotelLogic.searchBooking();
+            } else if (choice.equals("7")) {
+                myHotelLogic.createRooms();
             } else if (choice.equals("8")) {
-                myHotelLogic.editRoom();
+                myHotelLogic.searchBooking();
             } else if (choice.equals("9")) {
-                myHotelLogic.editCustomer();
+                myHotelLogic.editRoom();
             } else if (choice.equals("10")) {
-                myHotelLogic.removeCustomer();
+                myHotelLogic.editCustomer();
             } else if (choice.equals("11")) {
-                myHotelLogic.removeRoom();
+                myHotelLogic.removeCustomer();
             } else if (choice.equals("12")) {
+                myHotelLogic.removeRoom();
+            } else if (choice.equals("13")) {
                 System.out.println("Thank you for visiting our hotel!");
-
                 cont = false;
             }
 
+        } while (cont);
+    }
+
+    private void showCustomerMenu() {
+        boolean cont = true;
+        do {
+            System.out.println("--- Customer ---");
+            System.out.println("1. ");
+            System.out.println("2. Exit");
+
+            String choice = input.nextLine();
+            if (choice.equals("1")) {
+                System.out.println("Test");
+            } else if (choice.equals("2")) {
+                cont = false;
+                System.out.println("Thanks for using HKR Hotel app");
+            }
         } while (cont);
     }
 }

@@ -26,7 +26,7 @@ public class Room {
     @Override
     public String toString() {
         return "Room-Number: " + roomNumber + ", Number of beds: " + numberOfBeds +
-                ", Balcony:  " + hasBalcony + ", Price: " + pricePerNight + ", Booked: " + isBooked + ", Booked by: " + bookedBy + "Customer note: " + customerNote;
+                ", Balcony:  " + hasBalcony + ", Price: " + pricePerNight + ", Booked: " + isBooked + ", Booked by: " + bookedBy + ", Customer note: " + customerNote;
     }
 
     public int getRoomNumber() {

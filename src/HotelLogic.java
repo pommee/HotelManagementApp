@@ -8,6 +8,7 @@ public class HotelLogic {
     private Scanner input = new Scanner(System.in);
     private ArrayList<Room> arrListRoom = new ArrayList<>();
     private ArrayList<Customer> arrListCustomer = new ArrayList<>();
+    private ArrayList<Booking> arrListBookings = new ArrayList<>();
 
     public void addCustomer() {
         boolean cont = true;
@@ -266,12 +267,12 @@ public class HotelLogic {
                 } else {
                     getAvailableRooms();
                     System.out.print("What room do you want to book: ");
-                    int choice = getUserNumberInput();
+                    int choice = input.nextInt();
                     if (roomNumberExists(choice)) {
                         System.out.println("Do you want to book " + ssn + " to room number: " + choice + "?");
                         System.out.println("1. Yes");
                         System.out.println("2. No");
-                        int answer = getUserNumberInput();
+                        int answer = input.nextInt();
                         if (answer == 1) {
                             for (Room room : arrListRoom) {
                                 if (room.getRoomNumber() == choice) {
@@ -354,7 +355,8 @@ public class HotelLogic {
                 System.out.println("2.No");
                 int option = getUserNumberInput();
                 if (option == 1) {
-                    room.setNumberOfBeds(room.getNumberOfBeds() + 1);
+                    int beds = room.getNumberOfBeds();
+                    room.setNumberOfBeds(beds + 1);
                     System.out.println("An extra bed has been added to the room");
                 }
 
