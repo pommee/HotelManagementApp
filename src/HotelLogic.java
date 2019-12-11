@@ -11,7 +11,7 @@ public class HotelLogic {
     public void addCustomer() {
         boolean cont = true;
         do {
-            System.out.print("Enter ssn: ");
+            System.out.print("Enter ssn YYYYMMDD-XXXX: ");
             String ssn = input.nextLine();
             if (ssn.equals("")) {
                 System.out.println("No ssn was entered, try again");
@@ -207,7 +207,7 @@ public class HotelLogic {
             if (!room.isBooked()) {
                 System.out.println(room);
             } else {
-                System.out.println("Room is booked.");
+                System.out.println("Room number [" + room.getRoomNumber() + "] is booked.");
             }
         }
     }
