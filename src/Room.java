@@ -5,11 +5,28 @@ public class Room {
     private double pricePerNight;
     private boolean isBooked;
     private String bookedBy;
+    String customerNote;
+
+    public int getNumberOfBeds() {
+        return numberOfBeds;
+    }
+
+    public void setNumberOfBeds(int numberOfBeds) {
+        this.numberOfBeds = numberOfBeds;
+    }
+
+    public String getCustomerNote() {
+        return customerNote;
+    }
+
+    public void setCustomerNote(String customerNote) {
+        this.customerNote = customerNote;
+    }
 
     @Override
     public String toString() {
         return "Room-Number: " + roomNumber + ", Number of beds: " + numberOfBeds +
-                ", Balcony:  " + hasBalcony + ", Price: " + pricePerNight + ", Booked: " + isBooked + ", Booked by: " + bookedBy;
+                ", Balcony:  " + hasBalcony + ", Price: " + pricePerNight + ", Booked: " + isBooked + ", Booked by: " + bookedBy + "Customer note: " + customerNote;
     }
 
     public int getRoomNumber() {
@@ -22,6 +39,10 @@ public class Room {
 
     public void setBooked(boolean booked) {
         isBooked = booked;
+    }
+
+    public boolean isBookedBy(String bookedBy) {
+        return bookedBy.equals(this.bookedBy);
     }
 
     public void setBookedBy(String bookedBy) {

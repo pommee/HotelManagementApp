@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -142,12 +143,12 @@ public class HotelLogic {
                 } else {
                     getAvailableRooms();
                     System.out.print("What room do you want to book: ");
-                    int choice = input.nextInt();
+                    int choice = getUserNumberInput();
                     if (roomNumberExists(choice)) {
                         System.out.println("Do you want to book " + ssn + " to room number: " + choice + "?");
                         System.out.println("1. Yes");
                         System.out.println("2. No");
-                        int answer = input.nextInt();
+                        int answer = getUserNumberInput();
                         if (answer == 1) {
                             for (Room room : arrListRoom) {
                                 if (room.getRoomNumber() == choice) {
@@ -165,6 +166,101 @@ public class HotelLogic {
                 System.out.println("Customer does not exist");
             }
         }
+    }
+
+
+    public Room getCustomerRoom(String ssn) {
+        for (Room room : arrListRoom) {
+            if (room.isBookedBy(ssn)) {
+                return room;
+            }
+        }
+        return null;
+    }
+
+
+    public void listCustomerRooms(String ssn) {
+        for (Room room : arrListRoom) {
+            if (room.isBookedBy(ssn)) {
+                System.out.println(room);
+            }
+        }
+    }
+
+    public void checkOutCustomer() {
+        if (arrListCustomer.size() > 0) {
+            System.out.println("Enter the social security number of the customer who wishes to check out: ");
+            String ssn = input.nextLine();
+            boolean exists = customerExists(ssn);
+            if (exists) {
+                listCustomerRooms(ssn);
+
+                System.out.println("Do you wish to check out?");
+                System.out.println("1.Yes");
+                System.out.println("2.No");
+                int option = getUserNumberInput();
+                if (option == 1) {
+                    for (Room room : arrListRoom) {
+                        if (room.isBookedBy(ssn)) {
+                            room.setBooked(false);
+                            room.setBookedBy(null);
+                        }
+                    }
+                    System.out.println("The customer has now checked out");
+                } else if (option == 2) {
+                    System.out.println("Cancelled");
+                }
+            }
+        } else {
+            System.out.println("No customer");
+        }
+    }
+
+    public void editRoom() {
+        if (arrListCustomer.size() > 0) {
+            System.out.println("Enter the social security number of the customer who wishes to edit their room: ");
+            String ssn = input.nextLine();
+            boolean exists = customerExists(ssn);
+            if (exists) {
+                Room room = getCustomerRoom(ssn);
+                System.out.println(room);
+
+                System.out.println("Would you like to add an extra bed to a current booked room?");
+                System.out.println("1.Yes");
+                System.out.println("2.No");
+                int option = getUserNumberInput();
+                if (option == 1) {
+                    room.setNumberOfBeds(room.getNumberOfBeds() + 1);
+                    System.out.println("An extra bed has been added to the room");
+                }
+
+                System.out.println("Do you want to add a customer note?");
+                System.out.println("1.Yes");
+                System.out.println("2.No");
+                int choice = getUserNumberInput();
+                if (choice == 1) {
+                    System.out.print("Enter your note: ");
+                    String customerNote = input.nextLine();
+                    room.setCustomerNote(customerNote);
+                    System.out.println("Customer notes: " + room.getCustomerNote());
+                }
+            }
+        }
+    }
+
+    public int getUserNumberInput() {
+        boolean doLoop = true;
+        int number = 0;
+        while (doLoop) {
+            String userInput = input.nextLine();
+            try {
+                number = Integer.parseInt(userInput);
+                doLoop = false;
+            } catch (NumberFormatException e) {
+                System.out.println("Enter a number instead");
+            }
+        }
+        return number;
     }
 }
 

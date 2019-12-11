@@ -39,9 +39,12 @@ public class HotelApp {
             System.out.println("2. Show customers registered");
             System.out.println("3. Show all rooms");
             System.out.println("4. Check in customer");
-            System.out.println("5. Create rooms");
-            System.out.println("6. Exit");
+            System.out.println("5. Check out customer");
+            System.out.println("6. Create rooms");
+            System.out.println("7. Edit a room");
+            System.out.println("8. Exit");
             String choice = input.nextLine();
+            System.out.println();
 
             if (choice.equals("1")) {
                 myHotelLogic.addCustomer();
@@ -52,8 +55,12 @@ public class HotelApp {
             } else if (choice.equals("4")) {
                 myHotelLogic.checkInCustomer();
             } else if (choice.equals("5")) {
-                myHotelLogic.createRooms();
+                myHotelLogic.checkOutCustomer();
             } else if (choice.equals("6")) {
+                myHotelLogic.createRooms();
+            } else if (choice.equals("7")){
+                myHotelLogic.editRoom();
+            } else if (choice.equals("8")) {
                 cont = false;
             }
         } while (cont);
