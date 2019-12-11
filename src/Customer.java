@@ -20,4 +20,20 @@ public class Customer {
         this.address = address;
         this.telephoneNumber = telephoneNumber;
     }
+
+    public void setSsn(String ssn) {
+        this.ssn = ssn;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
+    }
 }
