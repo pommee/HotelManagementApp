@@ -234,7 +234,7 @@ public class HotelLogic {
         return false;
     }
 
-	    public void searchBooking() {
+    public void searchBooking() {
         if (arrListRoom.size() > 0) {
             System.out.print("Enter ssn: ");
             String ssn = input.nextLine();
