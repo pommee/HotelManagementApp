@@ -1,5 +1,6 @@
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class HotelLogic {
@@ -11,7 +12,7 @@ public class HotelLogic {
     public void addCustomer() {
         boolean cont = true;
         do {
-            System.out.print("Enter ssn: ");
+            System.out.print("Enter ssn YYYYMMDD-XXXX: ");
             String ssn = input.nextLine();
             if (ssn.equals("")) {
                 System.out.println("No ssn was entered, try again");
@@ -44,6 +45,98 @@ public class HotelLogic {
                 cont = false;
             }
         } while (cont);
+    }
+
+    public void removeCustomer() {
+        boolean running = true;
+        int custId = 0;
+        do {
+            System.out.println("Enter the ID of the customer you would like to remove:");
+            if (arrListCustomer.size() > 0) {
+                for (Customer post : arrListCustomer) {
+                    System.out.println("ID: " + custId + ", " + post);
+                    custId++;
+                }
+                try {
+                    int removeIndex = input.nextInt();
+                    System.out.println("Customer has successfully been removed.");
+                    arrListCustomer.remove(removeIndex);
+                    running = false;
+                } catch (InputMismatchException e) {
+                    System.out.println("Please enter a number.");
+                }
+            }
+        } while (running);
+    }
+
+    public void removeRoom() {
+
+        System.out.println("Enter the number of the room you would like to remove:");
+        if (arrListRoom.size() > 0) {
+            for (Room post : arrListRoom) {
+                System.out.println(post);
+            }
+            try {
+                int roomNumber = input.nextInt();
+                System.out.println("Room " + roomNumber + " has successfully been removed.");
+                arrListRoom.remove(roomNumber);
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a number.");
+            }
+        }
+    }
+
+    public void editCustomer() {
+        int customerId = 0;
+
+        for (Customer element : arrListCustomer) {
+            System.out.println("ID: " + customerId + ", " + element);
+            customerId++;
+        }
+        System.out.print("Enter the ID of the customer you would like to edit: ");
+        int editIndex = input.nextInt();
+        System.out.println("What type of information would you like to edit of customer " + arrListCustomer.get(editIndex) + "?");
+        System.out.println("1. SSN");
+        System.out.println("2. Name");
+        System.out.println("3. Address");
+        System.out.println("4. Telephone number");
+
+        try {
+            int choice = input.nextInt();
+            if (choice == 1) {
+                System.out.print("Enter new SSN: ");
+                input.nextLine();
+                String newSSN = input.nextLine();
+                Customer custChange = arrListCustomer.get(editIndex);
+                custChange.setSsn(newSSN);
+                System.out.println("Successfully changed customers SSN.");
+            } else if (choice == 2) {
+                System.out.print("Enter new name: ");
+                input.nextLine();
+                String newName = input.nextLine();
+                Customer custChange = arrListCustomer.get(editIndex);
+                custChange.setName(newName);
+                System.out.println("Successfully changed customers name.");
+            } else if (choice == 3) {
+                System.out.print("Enter new address: ");
+                input.nextLine();
+                String newAddress = input.nextLine();
+                Customer custChange = arrListCustomer.get(editIndex);
+                custChange.setAddress(newAddress);
+                System.out.println("Successfully changed customers address.");
+            } else if (choice == 4) {
+                System.out.print("Enter new telephone nr: ");
+                input.nextLine();
+                String newNr = input.nextLine();
+                Customer custChange = arrListCustomer.get(editIndex);
+                custChange.setTelephoneNumber(newNr);
+                System.out.println("Successfully changed customers telephone number.");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Please enter a number.");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Please enter a number between 1-4.");
+        }
     }
 
     private boolean isCustomerCreated(String customerSsn) {
@@ -87,6 +180,19 @@ public class HotelLogic {
         }
     }
 
+    public void createCustomers() {
+
+        if (arrListCustomer.size() <= 0) {
+            arrListCustomer.add(new Customer("195705060688", "Jakob Kristiansson", "Fältvägen 9A", "0736205531"));
+            arrListCustomer.add(new Customer("198704359382", "Mikael Persson", "Hjortgatan 3C", "0702716273"));
+            arrListCustomer.add(new Customer("197712224855", "Åke Jonsson", "Gladiolvägen 6B", "0738351905"));
+
+            System.out.println("Customers created.");
+        } else {
+            System.out.println("Customers already created.");
+        }
+    }
+
     public void getRooms() {
         if (arrListRoom.size() > 0) {
             for (Room print : arrListRoom) {
@@ -97,13 +203,12 @@ public class HotelLogic {
         }
     }
 
-
     public void getAvailableRooms() {
         for (Room room : arrListRoom) {
             if (!room.isBooked()) {
                 System.out.println(room);
             } else {
-                System.out.println("Room is booked.");
+                System.out.println("Room number [" + room.getRoomNumber() + "] is booked.");
             }
         }
     }
@@ -128,6 +233,24 @@ public class HotelLogic {
         }
         System.out.println("SSN" + " not in system");
         return false;
+    }
+
+    public void searchBooking() {
+        if (arrListRoom.size() > 0) {
+            System.out.print("Enter ssn: ");
+            String ssn = input.nextLine();
+            if (isCustomerCreated(ssn)) {
+                for (Room room : arrListRoom) {
+                    if (ssn.equals(room.getBookedBy())) {
+                        System.out.println(room);
+                    }
+                }
+            } else {
+                System.out.println("Customer not registered");
+            }
+        } else {
+            System.out.println("No rooms created");
+        }
     }
 
     public void checkInCustomer() {
@@ -157,6 +280,7 @@ public class HotelLogic {
                                 }
                             }
                             System.out.println("Booked");
+                            input.nextLine();
                         } else if (answer == 2) {
                             System.out.println("No booking has been done");
                         }

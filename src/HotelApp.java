@@ -36,13 +36,17 @@ public class HotelApp {
         do {
             System.out.println("--- Menu ---");
             System.out.println("1. Add customer");
-            System.out.println("2. Show customers registered");
+            System.out.println("2. Show all customers");
             System.out.println("3. Show all rooms");
             System.out.println("4. Check in customer");
             System.out.println("5. Check out customer");
-            System.out.println("6. Create rooms");
-            System.out.println("7. Edit a room");
-            System.out.println("8. Exit");
+            System.out.println("6. Create customers");
+            System.out.println("7. Search for booking");
+            System.out.println("8. Edit room");
+            System.out.println("9. Edit customer");
+            System.out.println("10. Remove customer");
+            System.out.println("11. Remove room");
+            System.out.println("12. Exit");
             String choice = input.nextLine();
             System.out.println();
 
@@ -57,12 +61,23 @@ public class HotelApp {
             } else if (choice.equals("5")) {
                 myHotelLogic.checkOutCustomer();
             } else if (choice.equals("6")) {
-                myHotelLogic.createRooms();
+                myHotelLogic.createCustomers();
             } else if (choice.equals("7")){
-                myHotelLogic.editRoom();
+                myHotelLogic.searchBooking();
             } else if (choice.equals("8")) {
+                myHotelLogic.editRoom();
+            } else if (choice.equals("9")) {
+                myHotelLogic.editCustomer();
+            } else if (choice.equals("10")) {
+                myHotelLogic.removeCustomer();
+            } else if (choice.equals("11")) {
+                myHotelLogic.removeRoom();
+            } else if (choice.equals("12")) {
+                System.out.println("Thank you for visiting our hotel!");
+
                 cont = false;
             }
+
         } while (cont);
     }
 }
