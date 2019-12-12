@@ -39,16 +39,20 @@ public class HotelApp {
             System.out.println("1. Add customer");
             System.out.println("2. Show all customers");
             System.out.println("3. Show all rooms");
-            System.out.println("4. Check in customer");
-            System.out.println("5. Check out customer");
-            System.out.println("6. Create customers");
-            System.out.println("7. Create rooms");
-            System.out.println("8. Search for booking");
-            System.out.println("9. Edit room");
-            System.out.println("10. Edit customer");
-            System.out.println("11. Remove customer");
-            System.out.println("12. Remove room");
-            System.out.println("13. Exit");
+            System.out.println("4. Show all bookings");
+            System.out.println("5. Check in customer");
+            System.out.println("6. Check out customer");
+            System.out.println("7. Create customers");
+            System.out.println("8. Create rooms");
+            System.out.println("9. Search for booking");
+            System.out.println("10. Edit room");
+            System.out.println("11. Edit customer");
+            System.out.println("12. Remove customer");
+            System.out.println("13. Remove room");
+            System.out.println("14. Edit booking");
+            System.out.println("15. Create bookings");
+            System.out.println("16. Cancel booking");
+            System.out.println("17. Exit");
             String choice = input.nextLine();
             System.out.println();
 
@@ -59,24 +63,32 @@ public class HotelApp {
             } else if (choice.equals("3")) {
                 myHotelLogic.getRooms();
             } else if (choice.equals("4")) {
-                myHotelLogic.checkInCustomer();
+                myHotelLogic.getBookings();
             } else if (choice.equals("5")) {
-                myHotelLogic.checkOutCustomer();
+                myHotelLogic.checkInCustomer();
             } else if (choice.equals("6")) {
-                myHotelLogic.createCustomers();
+                myHotelLogic.checkOutCustomer();
             } else if (choice.equals("7")) {
-                myHotelLogic.createRooms();
+                myHotelLogic.createCustomers();
             } else if (choice.equals("8")) {
-                myHotelLogic.searchBooking();
+                myHotelLogic.createRooms();
             } else if (choice.equals("9")) {
-                myHotelLogic.editRoom();
+                myHotelLogic.searchBooking();
             } else if (choice.equals("10")) {
-                myHotelLogic.editCustomer();
+                myHotelLogic.editRoom();
             } else if (choice.equals("11")) {
-                myHotelLogic.removeCustomer();
+                myHotelLogic.editCustomer();
             } else if (choice.equals("12")) {
-                myHotelLogic.removeRoom();
+                myHotelLogic.removeCustomer();
             } else if (choice.equals("13")) {
+                myHotelLogic.removeRoom();
+            } else if (choice.equals("14")) {
+                myHotelLogic.editBooking();
+            } else if (choice.equals("15")) {
+                myHotelLogic.createBookings();
+            } else if (choice.equals("16")) {
+                //myHotelLogic.cancelBooking();
+            } else if (choice.equals("17")) {
                 System.out.println("Thank you for visiting our hotel!");
                 cont = false;
             }

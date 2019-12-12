@@ -388,6 +388,73 @@ public class HotelLogic {
         }
         return number;
     }
-}
 
+    public void editBooking() {
+        for (Booking element : arrListBookings) {
+            System.out.println("ID: " + element);
+
+        }
+        System.out.print("Enter the ID of the Booking you would like to edit: ");
+        int editIndex = input.nextInt() - 1;
+        System.out.println("What type of information would you like to edit of the booking " + arrListBookings.get(editIndex) + "?");
+        System.out.println("1. Booking ID");
+        System.out.println("2. Check-in date");
+        System.out.println("3. Check-out date");
+        System.out.println("4. Total price");
+
+        int menuChoice = input.nextInt();
+        if (menuChoice == 1) {
+            System.out.print("Enter new Booking ID: ");
+            input.nextLine();
+            int newBookingID = input.nextInt();
+            Booking bookChange = arrListBookings.get(editIndex);
+            bookChange.setBookingId(newBookingID);
+            System.out.println("Successfully changed Booking ID.");
+        } else if (menuChoice == 2) {
+            System.out.print("Enter new Check-in date (YYYY-MM-DD): ");
+            input.nextLine();
+            String newCheckIn = input.nextLine();
+            Booking bookChange = arrListBookings.get(editIndex);
+            bookChange.setCheckInDate(newCheckIn);
+            System.out.println("Successfully changed check-in date.");
+        } else if (menuChoice == 3) {
+            System.out.print("Enter new Check-out date (YYYY-MM-DD): ");
+            input.nextLine();
+            String newCheckOut = input.nextLine();
+            Booking bookChange = arrListBookings.get(editIndex);
+            bookChange.setCheckOutDate(newCheckOut);
+            System.out.println("Successfully changed check-out date.");
+        } else if (menuChoice == 4) {
+            System.out.print("Enter new total price: ");
+            input.nextLine();
+            double newTotalPrice = input.nextDouble();
+            Booking bookChange = arrListBookings.get(editIndex);
+            bookChange.setTotalPrice(newTotalPrice);
+            System.out.println("Successfully changed total price.");
+        }
+    }
+
+    public void createBookings() {
+
+        if (arrListBookings.size() <= 0) {
+            arrListBookings.add(new Booking(1, "2019-12-12", "2019-12-13", 250.0));
+            arrListBookings.add(new Booking(2, "2019-12-17", "2019-12-20", 350.0));
+            arrListBookings.add(new Booking(3, "2019-12-25", "2019-12-20", 400.0));
+
+            System.out.println("Booking created.");
+        } else {
+            System.out.println("Bookings already created.");
+        }
+    }
+
+    public void getBookings() {
+        if (arrListBookings.size() > 0) {
+            for (Booking element : arrListBookings) {
+                System.out.println(element);
+            }
+        } else {
+            System.out.println("No rooms bookings created");
+        }
+    }
+}
 

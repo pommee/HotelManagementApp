@@ -1,9 +1,8 @@
-import java.util.Date;
 
 public class Booking {
     private int bookingId;
-    private Date checkInDate;
-    private Date checkOutDate;
+    private String checkInDate;
+    private String checkOutDate;
     private double totalPrice;
 
     public void setBookingId(int bookingId) {
@@ -16,11 +15,40 @@ public class Booking {
 
     @Override
     public String toString() {
-        return "Booking ID: " + bookingId;
+        return "Booking{" +
+                "bookingId=" + bookingId +
+                ", checkInDate='" + checkInDate + '\'' +
+                ", checkOutDate='" + checkOutDate + '\'' +
+                ", totalPrice=" + totalPrice +
+                '}';
     }
 
-    public Booking(int bookingId, Date checkInDate) {
+    public Booking(int bookingId, String checkInDate, String checkOutDate, double totalPrice) {
         this.bookingId = bookingId;
         this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.totalPrice = totalPrice;
     }
+
+    public void setCheckInDate(String checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public void setCheckOutDate(String checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getCheckInDate() {
+        return checkInDate;
+    }
+
+    public String getCheckOutDate() {
+        return checkOutDate;
+    }
+
+
 }
