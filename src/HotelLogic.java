@@ -165,7 +165,7 @@ public class HotelLogic {
             Random random = new Random();
             for (int i = 0; i <= 20; i++) {
                 int randomBeds = random.nextInt((3 - 1) + 1) + 1;
-                double randomPrice = random.nextInt(300);
+                double randomPrice = random.nextInt(300 - 100) + 100;
                 boolean randomHasBalcony = random.nextBoolean();
                 boolean randomIsBooked = random.nextBoolean();
                 arrListRoom.add(new Room(i, randomBeds, randomHasBalcony, randomPrice));
