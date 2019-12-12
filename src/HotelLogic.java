@@ -1,4 +1,4 @@
-import java.util.Random;
+﻿import java.util.Random;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -455,5 +455,16 @@ public class HotelLogic {
             System.out.println("No rooms bookings created.");
         }
     }
+
+    public void cancelBooking() {
+        for (Room element : arrListRoom) {
+            if (element.isBooked()) {
+                System.out.println(element);
+            }
+        }
+        System.out.print("Enter the number of the room which you would like to cancel booking: ");
+        int cancelBooking = input.nextInt();
+        arrListRoom.get(cancelBooking).setBooked(false);
+    }	
 }
 

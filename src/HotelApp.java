@@ -95,7 +95,7 @@ public class HotelApp {
             } else if (choice.equals("15")) {
                 myHotelLogic.createBookings();
             } else if (choice.equals("16")) {
-                //myHotelLogic.cancelBooking();
+                myHotelLogic.cancelBooking();
             } else if (choice.equals("17")) {
                 System.out.println("Thank you for visiting our hotel!");
                 cont = false;
