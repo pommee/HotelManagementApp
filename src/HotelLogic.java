@@ -1,4 +1,4 @@
-﻿import java.util.Random;
+import java.util.Random;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -49,31 +49,30 @@ public class HotelLogic {
     }
 
     public void removeCustomer() {
-        boolean running = true;
+
         int custId = 0;
-        do {
+        if (!arrListCustomer.isEmpty()) {
             System.out.println("Enter the ID of the customer you would like to remove:");
-            if (arrListCustomer.size() > 0) {
-                for (Customer post : arrListCustomer) {
-                    System.out.println("ID: " + custId + ", " + post);
-                    custId++;
-                }
-                try {
-                    int removeIndex = input.nextInt();
-                    System.out.println("Customer has successfully been removed.");
-                    arrListCustomer.remove(removeIndex);
-                    running = false;
-                } catch (InputMismatchException e) {
-                    System.out.println("Please enter a number.");
-                }
+            for (Customer post : arrListCustomer) {
+                System.out.println("ID: " + custId + ", " + post);
+                custId++;
             }
-        } while (running);
+            try {
+                int removeIndex = input.nextInt();
+                System.out.println("Customer has successfully been removed.");
+                arrListCustomer.remove(removeIndex);
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a number.");
+            }
+        } else {
+            System.out.println("There are no customers.");
+        }
     }
 
     public void removeRoom() {
 
-        System.out.println("Enter the number of the room you would like to remove:");
-        if (arrListRoom.size() > 0) {
+        if (!arrListRoom.isEmpty()) {
+            System.out.println("Enter the number of the room you would like to remove:");
             for (Room post : arrListRoom) {
                 System.out.println(post);
             }
@@ -84,6 +83,8 @@ public class HotelLogic {
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a number.");
             }
+        } else {
+            System.out.println("There are no rooms.");
         }
     }
 
@@ -465,6 +466,6 @@ public class HotelLogic {
         System.out.print("Enter the number of the room which you would like to cancel booking: ");
         int cancelBooking = input.nextInt();
         arrListRoom.get(cancelBooking).setBooked(false);
-    }	
+    }
 }
 
