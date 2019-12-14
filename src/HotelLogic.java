@@ -65,7 +65,7 @@ public class HotelLogic {
                 System.out.println("Please enter a number.");
             }
         } else {
-            System.out.println("There are no customers.");
+            System.out.println("There are no customers to remove.");
         }
     }
 
@@ -91,53 +91,57 @@ public class HotelLogic {
     public void editCustomer() {
         int customerId = 0;
 
-        for (Customer element : arrListCustomer) {
-            System.out.println("ID: " + customerId + ", " + element);
-            customerId++;
-        }
-        System.out.print("Enter the ID of the customer you would like to edit: ");
-        int editIndex = input.nextInt();
-        System.out.println("What type of information would you like to edit of customer " + arrListCustomer.get(editIndex) + "?");
-        System.out.println("1. SSN");
-        System.out.println("2. Name");
-        System.out.println("3. Address");
-        System.out.println("4. Telephone number");
-
-        try {
-            int choice = input.nextInt();
-            if (choice == 1) {
-                System.out.print("Enter new SSN: ");
-                input.nextLine();
-                String newSSN = input.nextLine();
-                Customer custChange = arrListCustomer.get(editIndex);
-                custChange.setSsn(newSSN);
-                System.out.println("Successfully changed customers SSN.");
-            } else if (choice == 2) {
-                System.out.print("Enter new name: ");
-                input.nextLine();
-                String newName = input.nextLine();
-                Customer custChange = arrListCustomer.get(editIndex);
-                custChange.setName(newName);
-                System.out.println("Successfully changed customers name.");
-            } else if (choice == 3) {
-                System.out.print("Enter new address: ");
-                input.nextLine();
-                String newAddress = input.nextLine();
-                Customer custChange = arrListCustomer.get(editIndex);
-                custChange.setAddress(newAddress);
-                System.out.println("Successfully changed customers address.");
-            } else if (choice == 4) {
-                System.out.print("Enter new telephone nr: ");
-                input.nextLine();
-                String newNr = input.nextLine();
-                Customer custChange = arrListCustomer.get(editIndex);
-                custChange.setTelephoneNumber(newNr);
-                System.out.println("Successfully changed customers telephone number.");
+        if (!arrListCustomer.isEmpty()) {
+            for (Customer element : arrListCustomer) {
+                System.out.println("ID: " + customerId + ", " + element);
+                customerId++;
             }
-        } catch (InputMismatchException e) {
-            System.out.println("Please enter a number.");
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Please enter a number between 1-4.");
+            System.out.print("Enter the ID of the customer you would like to edit: ");
+            int editIndex = input.nextInt();
+            System.out.println("What type of information would you like to edit of customer " + arrListCustomer.get(editIndex) + "?");
+            System.out.println("1. SSN");
+            System.out.println("2. Name");
+            System.out.println("3. Address");
+            System.out.println("4. Telephone number");
+
+            try {
+                int choice = input.nextInt();
+                if (choice == 1) {
+                    System.out.print("Enter new SSN: ");
+                    input.nextLine();
+                    String newSSN = input.nextLine();
+                    Customer custChange = arrListCustomer.get(editIndex);
+                    custChange.setSsn(newSSN);
+                    System.out.println("Successfully changed customers SSN.");
+                } else if (choice == 2) {
+                    System.out.print("Enter new name: ");
+                    input.nextLine();
+                    String newName = input.nextLine();
+                    Customer custChange = arrListCustomer.get(editIndex);
+                    custChange.setName(newName);
+                    System.out.println("Successfully changed customers name.");
+                } else if (choice == 3) {
+                    System.out.print("Enter new address: ");
+                    input.nextLine();
+                    String newAddress = input.nextLine();
+                    Customer custChange = arrListCustomer.get(editIndex);
+                    custChange.setAddress(newAddress);
+                    System.out.println("Successfully changed customers address.");
+                } else if (choice == 4) {
+                    System.out.print("Enter new telephone nr: ");
+                    input.nextLine();
+                    String newNr = input.nextLine();
+                    Customer custChange = arrListCustomer.get(editIndex);
+                    custChange.setTelephoneNumber(newNr);
+                    System.out.println("Successfully changed customers telephone number.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a number.");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Please enter a number between 1-4.");
+            }
+        } else {
+            System.out.println("There are no customers to edit.");
         }
     }
 
@@ -162,7 +166,7 @@ public class HotelLogic {
 
     public void createRooms() {
 
-        if (arrListRoom.size() <= 0) {
+        if (arrListRoom.isEmpty()) {
             Random random = new Random();
             for (int i = 0; i <= 20; i++) {
                 int randomBeds = random.nextInt((3 - 1) + 1) + 1;
@@ -174,20 +178,20 @@ public class HotelLogic {
             }
             System.out.println("Rooms created.");
         } else {
-            System.out.println("Rooms already created");
+            System.out.println("There are rooms already created");
         }
     }
 
     public void createCustomers() {
 
-        if (arrListCustomer.size() <= 0) {
+        if (arrListCustomer.isEmpty()) {
             arrListCustomer.add(new Customer("195705060688", "Jakob Kristiansson", "Fältvägen 9A", "0736205531"));
             arrListCustomer.add(new Customer("198704359382", "Mikael Persson", "Hjortgatan 3C", "0702716273"));
             arrListCustomer.add(new Customer("197712224855", "Åke Jonsson", "Gladiolvägen 6B", "0738351905"));
 
             System.out.println("Customers created.");
         } else {
-            System.out.println("Customers already created.");
+            System.out.println("There are customers already created.");
         }
     }
 
