@@ -64,11 +64,16 @@ public class HotelApp {
                 System.out.println("-- Select option --");
                 System.out.println("1. Show available rooms only");
                 System.out.println("2. Show all rooms");
-                int roomChoice = input.nextInt();
-                if (roomChoice == 1) {
+                System.out.println("3. Return to manager menu");
+                String subMenu = input.nextLine();
+                if (subMenu.equals("1")) {
                     myHotelLogic.getAvailableRooms();
-                } else if (roomChoice == 2) {
+                } else if (subMenu.equals("2")) {
                     myHotelLogic.getRooms();
+                } else if (subMenu.equals("3")) {
+                    showManagerMenu();
+                } else {
+                    System.out.println("Please enter a number between 1-3.");
                 }
             } else if (choice.equals("4")) {
                 myHotelLogic.getBookings();

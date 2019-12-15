@@ -201,15 +201,19 @@ public class HotelLogic {
                 System.out.println(print);
             }
         } else {
-            System.out.println("No rooms created");
+            System.out.println("There are no rooms created to show.");
         }
     }
 
     public void getAvailableRooms() {
-        for (Room room : arrListRoom) {
-            if (!room.isBooked()) {
-                System.out.println(room);
+        if (!arrListRoom.isEmpty()) {
+            for (Room room : arrListRoom) {
+                if (!room.isBooked()) {
+                    System.out.println("Available: " + room);
+                }
             }
+        } else {
+            System.out.println("There are no rooms created to show only available rooms.");
         }
     }
 
