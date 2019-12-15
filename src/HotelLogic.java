@@ -461,7 +461,7 @@ public class HotelLogic {
                 System.out.println(element);
             }
         } else {
-            System.out.println("No rooms bookings created.");
+            System.out.println("No room bookings created.");
         }
     }
 

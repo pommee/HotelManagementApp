@@ -13,6 +13,27 @@ public class Booking {
         return bookingId;
     }
 
+    public void setCheckInDate(String checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public void setCheckOutDate(String checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    }
+
+    public String getCheckInDate() {
+        return checkInDate;
+    }
+
+    public String getCheckOutDate() {
+        return checkOutDate;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+
     @Override
     public String toString() {
         return "Booking{" +
@@ -29,26 +50,4 @@ public class Booking {
         this.checkOutDate = checkOutDate;
         this.totalPrice = totalPrice;
     }
-
-    public void setCheckInDate(String checkInDate) {
-        this.checkInDate = checkInDate;
-    }
-
-    public void setCheckOutDate(String checkOutDate) {
-        this.checkOutDate = checkOutDate;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public String getCheckInDate() {
-        return checkInDate;
-    }
-
-    public String getCheckOutDate() {
-        return checkOutDate;
-    }
-
-
 }
