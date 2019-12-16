@@ -86,6 +86,7 @@ public class HotelApp {
             } else if (choice.equals("8")) {
                 myHotelLogic.createRooms();
             } else if (choice.equals("9")) {
+                System.out.println();
                 myHotelLogic.searchBooking();
             } else if (choice.equals("10")) {
                 myHotelLogic.editRoom();
