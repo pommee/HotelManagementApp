@@ -220,7 +220,7 @@ public class HotelLogic {
     private boolean roomNumberExists(Integer roomNumber) {
         for (Room element : arrListRoom) {
             if (element.getRoomNumber() == (roomNumber)) {
-                System.out.println("Room informations: " + element);
+                System.out.println("Room information: " + element);
                 return true;
             }
         }
@@ -296,7 +296,6 @@ public class HotelLogic {
         }
     }
 
-
     public Room getCustomerRoom(String ssn) {
         for (Room room : arrListRoom) {
             if (room.isBookedBy(ssn)) {
@@ -305,7 +304,6 @@ public class HotelLogic {
         }
         return null;
     }
-
 
     public void listCustomerRooms(String ssn) {
         for (Room room : arrListRoom) {
@@ -397,49 +395,42 @@ public class HotelLogic {
             for (Booking element : arrListBookings) {
                 System.out.println("ID: " + element);
             }
-
-            try {
-                System.out.print("Enter the ID of the Booking you would like to edit: ");
-                int editIndex = input.nextInt() - 1;
-                System.out.println("What type of information would you like to edit of the booking " + arrListBookings.get(editIndex) + "?");
-                System.out.println("1. Booking ID");
-                System.out.println("2. Check-in date");
-                System.out.println("3. Check-out date");
-                System.out.println("4. Total price");
-                int menuChoice = input.nextInt();
-                if (menuChoice == 1) {
-                    System.out.print("Enter new Booking ID: ");
-                    input.nextLine();
-                    int newBookingID = input.nextInt();
-                    Booking bookChange = arrListBookings.get(editIndex);
-                    bookChange.setBookingId(newBookingID);
-                    System.out.println("Successfully changed Booking ID.");
-                } else if (menuChoice == 2) {
-                    System.out.print("Enter new Check-in date (YYYY-MM-DD): ");
-                    input.nextLine();
-                    String newCheckIn = input.nextLine();
-                    Booking bookChange = arrListBookings.get(editIndex);
-                    bookChange.setCheckInDate(newCheckIn);
-                    System.out.println("Successfully changed check-in date.");
-                } else if (menuChoice == 3) {
-                    System.out.print("Enter new Check-out date (YYYY-MM-DD): ");
-                    input.nextLine();
-                    String newCheckOut = input.nextLine();
-                    Booking bookChange = arrListBookings.get(editIndex);
-                    bookChange.setCheckOutDate(newCheckOut);
-                    System.out.println("Successfully changed check-out date.");
-                } else if (menuChoice == 4) {
-                    System.out.print("Enter new total price: ");
-                    input.nextLine();
-                    double newTotalPrice = input.nextDouble();
-                    Booking bookChange = arrListBookings.get(editIndex);
-                    bookChange.setTotalPrice(newTotalPrice);
-                    System.out.println("Successfully changed total price.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Please enter a number.");
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Please enter a number between 1-4.");
+            System.out.print("Enter the ID of the Booking you would like to edit: ");
+            int editIndex = input.nextInt() - 1;
+            System.out.println("What type of information would you like to edit of the booking " + arrListBookings.get(editIndex) + "?");
+            System.out.println("1. Booking ID");
+            System.out.println("2. Check-in date");
+            System.out.println("3. Check-out date");
+            System.out.println("4. Total price");
+            String menuChoice = input.nextLine();
+            if (menuChoice.equals("1")) {
+                System.out.print("Enter new Booking ID: ");
+                input.nextLine();
+                int newBookingID = input.nextInt();
+                Booking bookChange = arrListBookings.get(editIndex);
+                bookChange.setBookingId(newBookingID);
+                System.out.println("Successfully changed Booking ID.");
+            } else if (menuChoice.equals("2")) {
+                System.out.print("Enter new Check-in date (YYYY-MM-DD): ");
+                input.nextLine();
+                String newCheckIn = input.nextLine();
+                Booking bookChange = arrListBookings.get(editIndex);
+                bookChange.setCheckInDate(newCheckIn);
+                System.out.println("Successfully changed check-in date.");
+            } else if (menuChoice.equals("3")) {
+                System.out.print("Enter new Check-out date (YYYY-MM-DD): ");
+                input.nextLine();
+                String newCheckOut = input.nextLine();
+                Booking bookChange = arrListBookings.get(editIndex);
+                bookChange.setCheckOutDate(newCheckOut);
+                System.out.println("Successfully changed check-out date.");
+            } else if (menuChoice.equals("4")) {
+                System.out.print("Enter new total price: ");
+                input.nextLine();
+                double newTotalPrice = input.nextDouble();
+                Booking bookChange = arrListBookings.get(editIndex);
+                bookChange.setTotalPrice(newTotalPrice);
+                System.out.println("Successfully changed total price.");
             }
         } else {
             System.out.println("There are no bookings to edit.");
