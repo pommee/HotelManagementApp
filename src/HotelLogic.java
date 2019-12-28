@@ -176,9 +176,6 @@ public class HotelLogic {
                 arrListRoom.add(new Room(i, randomBeds, randomHasBalcony, randomPrice));
                 arrListRoom.get(i).setBooked(randomIsBooked);
             }
-            System.out.println("Rooms created.");
-        } else {
-            System.out.println("There are rooms already created");
         }
     }
 
@@ -315,7 +312,7 @@ public class HotelLogic {
 
     public void checkOutCustomer() {
         if (arrListCustomer.size() > 0) {
-            System.out.println("Enter the social security number of the customer who wishes to check out: ");
+            System.out.print("Enter the social security number of the customer who wishes to check out: ");
             String ssn = input.nextLine();
             boolean exists = customerExists(ssn);
             if (exists) {
@@ -338,7 +335,7 @@ public class HotelLogic {
                 }
             }
         } else {
-            System.out.println("No customer");
+            System.out.println("No customers in the system");
         }
     }
 
@@ -474,6 +471,57 @@ public class HotelLogic {
         } else {
             System.out.println("There are no bookings to cancel.");
         }
+    }
+
+    public void customerMenuCheckIn() {
+        boolean cont = true;
+        do {
+            System.out.print("\n" + "Enter ssn YYYYMMDD-XXXX: ");
+            String ssn = input.nextLine();
+            if (ssn.equals("")) {
+                System.out.println("No ssn was entered, try again");
+                break;
+            }
+            System.out.print("Enter name: ");
+            String name = input.nextLine();
+            if (name.equals("")) {
+                System.out.println("No name was entered, try again");
+                break;
+            }
+            System.out.print("Enter address: ");
+            String address = input.nextLine();
+            if (address.equals("")) {
+                System.out.println("No address was entered, try again");
+                break;
+            }
+            System.out.print("Enter telephone-number: ");
+            String telephoneNumber = input.nextLine();
+            if (telephoneNumber.equals("")) {
+                System.out.println("No telephone-number was entered, try again");
+                break;
+            }
+
+            isCustomerCreated(ssn);
+            if (isCustomerCreated(ssn)) {
+                System.out.println("That ssn already exists");
+            } else {
+                boolean successful = true;
+                do {
+                    System.out.println("\n" + "Is all information correct? (y/n)");
+                    System.out.print("> ");
+                    String answer = input.nextLine();
+                    if (answer.equals("y")) {
+                        arrListCustomer.add(new Customer(ssn, name, address, telephoneNumber));
+                        cont = false;
+                        successful = false;
+                    } else if (answer.equals("n")) {
+                        customerMenuCheckIn();
+                    } else {
+                        System.out.println("That is not a valid option. Please try again");
+                    }
+                } while (successful);
+            }
+        } while (cont);
     }
 }
 
