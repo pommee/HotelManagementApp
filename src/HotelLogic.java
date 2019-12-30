@@ -1,7 +1,6 @@
-import java.util.Random;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class HotelLogic {
 
@@ -9,6 +8,7 @@ public class HotelLogic {
     private ArrayList<Room> arrListRoom = new ArrayList<>();
     private ArrayList<Customer> arrListCustomer = new ArrayList<>();
     private ArrayList<Booking> arrListBookings = new ArrayList<>();
+    SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
 
     public void addCustomer() {
         boolean cont = true;
@@ -269,7 +269,27 @@ public class HotelLogic {
                     System.out.print("What room do you want to book: ");
                     int choice = input.nextInt();
                     if (roomNumberExists(choice)) {
+                        System.out.print("What date do you want to check-in (mm-dd-yyy): ");
+                        String checkInDate = input.next();
+                        Date checkInDate1 = null;
+                        try {
+                            checkInDate1 = dateFormat.parse(checkInDate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.print("What date do you want to check out (mm-dd-yyy): ");
+                        String checkOutDate = input.next();
+                        Date checkOutDate1 = null;
+                        try {
+                            checkOutDate1 = dateFormat.parse(checkOutDate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                         System.out.println("Do you want to book " + ssn + " to room number: " + choice + "?");
+                        System.out.print("Check-in Date: ");
+                        System.out.println(dateFormat.format(checkInDate1));
+                        System.out.print("Check-out Date: ");
+                        System.out.println(dateFormat.format(checkOutDate1));
                         System.out.println("1. Yes");
                         System.out.println("2. No");
                         int answer = input.nextInt();
@@ -280,6 +300,7 @@ public class HotelLogic {
                                     room.setBookedBy(ssn);
                                 }
                             }
+                            arrListBookings.add(new Booking(1, checkInDate1,  checkOutDate1, 2 ));
                             System.out.println("Booked");
                             input.nextLine();
                         } else if (answer == 2) {
@@ -411,15 +432,29 @@ public class HotelLogic {
                 System.out.print("Enter new Check-in date (YYYY-MM-DD): ");
                 input.nextLine();
                 String newCheckIn = input.nextLine();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+                Date newCheckIn2 = null;
+                try {
+                    newCheckIn2 = dateFormat.parse(newCheckIn);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 Booking bookChange = arrListBookings.get(editIndex);
-                bookChange.setCheckInDate(newCheckIn);
+                bookChange.setCheckInDate(newCheckIn2);
                 System.out.println("Successfully changed check-in date.");
             } else if (menuChoice.equals("3")) {
                 System.out.print("Enter new Check-out date (YYYY-MM-DD): ");
                 input.nextLine();
                 String newCheckOut = input.nextLine();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+                Date newCheckOut2 = null;
+                try {
+                    newCheckOut2 = dateFormat.parse(newCheckOut);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 Booking bookChange = arrListBookings.get(editIndex);
-                bookChange.setCheckOutDate(newCheckOut);
+                bookChange.setCheckOutDate(newCheckOut2);
                 System.out.println("Successfully changed check-out date.");
             } else if (menuChoice.equals("4")) {
                 System.out.print("Enter new total price: ");
@@ -431,19 +466,6 @@ public class HotelLogic {
             }
         } else {
             System.out.println("There are no bookings to edit.");
-        }
-    }
-
-    public void createBookings() {
-
-        if (arrListBookings.size() <= 0) {
-            arrListBookings.add(new Booking(1, "2019-12-12", "2019-12-13", 250.0));
-            arrListBookings.add(new Booking(2, "2019-12-17", "2019-12-20", 350.0));
-            arrListBookings.add(new Booking(3, "2019-12-25", "2019-12-20", 400.0));
-
-            System.out.println("Bookings created.");
-        } else {
-            System.out.println("Bookings already created.");
         }
     }
 

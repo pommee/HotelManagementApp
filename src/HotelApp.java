@@ -13,8 +13,9 @@ public class HotelApp {
 
     private void loginMenu() {
         LocalDate date = LocalDate.now();
+        System.out.println();
         System.out.println("Welcome to HKR Hotel Application");
-        System.out.println("Current date: " + (date) + "\n");
+        System.out.println("Current date: " + (date));
         do {
             myHotelLogic.createRooms();
             System.out.println();
@@ -55,9 +56,8 @@ public class HotelApp {
             System.out.println("10. Remove customer");
             System.out.println("11. Remove room");
             System.out.println("12. Edit booking");
-            System.out.println("13. Create bookings");
-            System.out.println("14. Cancel booking");
-            System.out.println("15. Exit");
+            System.out.println("13. Cancel booking");
+            System.out.println("14. Exit");
             System.out.print("> ");
             String choice = input.nextLine();
             System.out.println();
@@ -115,10 +115,8 @@ public class HotelApp {
             } else if (choice.equals("12")) {
                 myHotelLogic.editBooking();
             } else if (choice.equals("13")) {
-                myHotelLogic.createBookings();
-            } else if (choice.equals("14")) {
                 myHotelLogic.cancelBooking();
-            } else if (choice.equals("15")) {
+            } else if (choice.equals("14")) {
                 System.out.println("Thank you for visiting our hotel!");
                 cont = false;
             }
