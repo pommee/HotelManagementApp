@@ -47,10 +47,18 @@ public class Room {
         return bookedBy;
     }
 
+    public double getPricePerNight() {
+        return pricePerNight;
+    }
+
+    public void setPricePerNight(double pricePerNight) {
+        this.pricePerNight = pricePerNight;
+    }
+
     @Override
     public String toString() {
         return "Room-Number: " + roomNumber + ", Number of beds: " + numberOfBeds +
-                ", Balcony:  " + hasBalcony + ", Price: " + pricePerNight + ", Booked: " + isBooked + ", Booked by: " + bookedBy + ", Customer note: " + customerNote;
+                ", Balcony: " + hasBalcony + ", Price: " + pricePerNight + ", Booked: " + isBooked + ", Booked by: " + bookedBy + ", Customer note: " + customerNote;
     }
 
     public Room(int roomNumber, int numberOfBeds, boolean hasBalcony, Double pricePerNight) {

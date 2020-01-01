@@ -12,9 +12,16 @@ public class HotelApp {
     }
 
     private void loginMenu() {
+        System.out.println("  _    _  _  __ _____    _    _         _         _ \n" +
+                " | |  | || |/ /|  __ \\  | |  | |       | |       | |\n" +
+                " | |__| || ' / | |__) | | |__| |  ___  | |_  ___ | |\n" +
+                " |  __  ||  <  |  _  /  |  __  | / _ \\ | __|/ _ \\| |\n" +
+                " | |  | || . \\ | | \\ \\  | |  | || (_) || |_|  __/| |\n" +
+                " |_|  |_||_|\\_\\|_|  \\_\\ |_|  |_| \\___/  \\__|\\___||_|\n" +
+                "                                                    \n" +
+                "                                                    ");
         LocalDate date = LocalDate.now();
         System.out.println();
-        System.out.println("Welcome to HKR Hotel Application");
         System.out.println("Current date: " + (date));
         do {
             myHotelLogic.createRooms();

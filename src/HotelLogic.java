@@ -300,7 +300,7 @@ public class HotelLogic {
                                     room.setBookedBy(ssn);
                                 }
                             }
-                            arrListBookings.add(new Booking(1, checkInDate1,  checkOutDate1, 2 ));
+                            arrListBookings.add(new Booking(1, checkInDate1, checkOutDate1, 2));
                             System.out.println("Booked");
                             input.nextLine();
                         } else if (answer == 2) {
@@ -432,7 +432,6 @@ public class HotelLogic {
                 System.out.print("Enter new Check-in date (YYYY-MM-DD): ");
                 input.nextLine();
                 String newCheckIn = input.nextLine();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
                 Date newCheckIn2 = null;
                 try {
                     newCheckIn2 = dateFormat.parse(newCheckIn);
@@ -446,7 +445,6 @@ public class HotelLogic {
                 System.out.print("Enter new Check-out date (YYYY-MM-DD): ");
                 input.nextLine();
                 String newCheckOut = input.nextLine();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
                 Date newCheckOut2 = null;
                 try {
                     newCheckOut2 = dateFormat.parse(newCheckOut);

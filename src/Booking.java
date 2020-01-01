@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -6,7 +7,7 @@ public class Booking {
     private Date checkInDate;
     private Date checkOutDate;
     private double totalPrice;
-    SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
 
     public void setBookingId(int bookingId) {
         this.bookingId = bookingId;
@@ -36,9 +37,9 @@ public class Booking {
         this.totalPrice = totalPrice;
     }
 
-
     @Override
     public String toString() {
+
         return "Booking-Id: " + bookingId + ", Check-in date: " + checkInDate + ", Check-Out date: " + checkOutDate + ", Total price: " + totalPrice;
     }
 
