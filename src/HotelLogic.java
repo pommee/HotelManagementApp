@@ -89,56 +89,49 @@ public class HotelLogic {
     }
 
     public void editCustomer() {
-        int customerId = 0;
-
         if (!arrListCustomer.isEmpty()) {
             for (Customer element : arrListCustomer) {
-                System.out.println("ID: " + customerId + ", " + element);
-                customerId++;
+                System.out.println(element);
             }
-            System.out.print("Enter the ID of the customer you would like to edit: ");
-            int editIndex = input.nextInt();
-            System.out.println("What type of information would you like to edit of customer " + arrListCustomer.get(editIndex) + "?");
-            System.out.println("1. SSN");
-            System.out.println("2. Name");
-            System.out.println("3. Address");
-            System.out.println("4. Telephone number");
+            System.out.print("Enter the SSN of the customer you would like to edit: ");
+            String inputSSN = input.nextLine();
+            System.out.println();
+            for (Customer element : arrListCustomer) {
+                if (element.getSsn().equals(inputSSN)) {
 
-            try {
-                int choice = input.nextInt();
-                if (choice == 1) {
-                    System.out.print("Enter new SSN: ");
-                    input.nextLine();
-                    String newSSN = input.nextLine();
-                    Customer custChange = arrListCustomer.get(editIndex);
-                    custChange.setSsn(newSSN);
-                    System.out.println("Successfully changed customers SSN.");
-                } else if (choice == 2) {
-                    System.out.print("Enter new name: ");
-                    input.nextLine();
-                    String newName = input.nextLine();
-                    Customer custChange = arrListCustomer.get(editIndex);
-                    custChange.setName(newName);
-                    System.out.println("Successfully changed customers name.");
-                } else if (choice == 3) {
-                    System.out.print("Enter new address: ");
-                    input.nextLine();
-                    String newAddress = input.nextLine();
-                    Customer custChange = arrListCustomer.get(editIndex);
-                    custChange.setAddress(newAddress);
-                    System.out.println("Successfully changed customers address.");
-                } else if (choice == 4) {
-                    System.out.print("Enter new telephone nr: ");
-                    input.nextLine();
-                    String newNr = input.nextLine();
-                    Customer custChange = arrListCustomer.get(editIndex);
-                    custChange.setTelephoneNumber(newNr);
-                    System.out.println("Successfully changed customers telephone number.");
+                    System.out.println("What type of information would you like to edit of customer " + arrListCustomer.get(arrListCustomer.indexOf(element)) + "?");
+                    System.out.println("1. SSN");
+                    System.out.println("2. Name");
+                    System.out.println("3. Address");
+                    System.out.println("4. Telephone number");
+
+                    String choice = input.nextLine();
+                    if (choice.equals("1")) {
+                        System.out.print("Enter new SSN: ");
+                        String newSSN = input.nextLine();
+                        Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
+                        custChange.setSsn(newSSN);
+                        System.out.println("Successfully changed customers SSN.");
+                    } else if (choice.equals("2")) {
+                        System.out.print("Enter new name: ");
+                        String newName = input.nextLine();
+                        Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
+                        custChange.setName(newName);
+                        System.out.println("Successfully changed customers name.");
+                    } else if (choice.equals("3")) {
+                        System.out.print("Enter new address: ");
+                        String newAddress = input.nextLine();
+                        Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
+                        custChange.setAddress(newAddress);
+                        System.out.println("Successfully changed customers address.");
+                    } else if (choice.equals("4")) {
+                        System.out.print("Enter new telephone nr: ");
+                        String newNr = input.nextLine();
+                        Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
+                        custChange.setTelephoneNumber(newNr);
+                        System.out.println("Successfully changed customers telephone number.");
+                    }
                 }
-            } catch (InputMismatchException e) {
-                System.out.println("Please enter a number.");
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Please enter a number between 1-4.");
             }
         } else {
             System.out.println("There are no customers to edit.");
@@ -292,8 +285,8 @@ public class HotelLogic {
                         System.out.println(dateFormat.format(checkOutDate1));
                         System.out.println("1. Yes");
                         System.out.println("2. No");
-                        int answer = input.nextInt();
-                        if (answer == 1) {
+                        String answer = input.nextLine();
+                        if (answer.equals("1")) {
                             for (Room room : arrListRoom) {
                                 if (room.getRoomNumber() == choice) {
                                     room.setBooked(true);
@@ -303,7 +296,7 @@ public class HotelLogic {
                             arrListBookings.add(new Booking(1, checkInDate1, checkOutDate1, 2));
                             System.out.println("Booked");
                             input.nextLine();
-                        } else if (answer == 2) {
+                        } else if (answer.equals("2")) {
                             System.out.println("No booking has been done");
                         }
                     }

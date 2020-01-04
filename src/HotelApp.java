@@ -28,7 +28,8 @@ public class HotelApp {
             System.out.println();
             System.out.println("--- Login options ---");
             System.out.println("1. Hotel manager login");
-            System.out.print("2. Customer login" + "\n> ");
+            System.out.println("2. Customer login");
+            System.out.print("3. Developer login" + "\n> ");
             String choice = input.nextLine();
             if (choice.equals("1")) {
                 System.out.print("Please enter password: ");
@@ -42,6 +43,14 @@ public class HotelApp {
             } else if (choice.equals("2")) {
                 showCustomerMenu();
                 cont = false;
+            } else if (choice.equals("3")) {
+                System.out.print("Please enter password: ");
+                String password = input.nextLine();
+                if (password.equals("hkradmin")) {
+                    //call showDeveloperMenu
+                } else {
+                    System.out.println("Please try again!");
+                }
             }
         } while (cont);
     }
@@ -64,7 +73,8 @@ public class HotelApp {
             System.out.println("11. Remove room");
             System.out.println("12. Edit booking");
             System.out.println("13. Cancel booking");
-            System.out.println("14. Exit");
+            System.out.println("14. Log out");
+            System.out.println("15. Exit");
             System.out.print("> ");
             String choice = input.nextLine();
             System.out.println();
@@ -124,6 +134,8 @@ public class HotelApp {
             } else if (choice.equals("13")) {
                 myHotelLogic.cancelBooking();
             } else if (choice.equals("14")) {
+                loginMenu();
+            } else if (choice.equals("15")) {
                 System.out.println("Thank you for visiting our hotel!");
                 cont = false;
             }
@@ -139,7 +151,8 @@ public class HotelApp {
             System.out.println("1. Show rooms");
             System.out.println("2. Check In/Out");
             System.out.println("3. Register");
-            System.out.println("4. Exit");
+            System.out.println("4. Log out");
+            System.out.println("5. Exit");
             System.out.print("> ");
             String choice = input.nextLine();
             if (choice.equals("1")) {
@@ -164,6 +177,8 @@ public class HotelApp {
             } else if (choice.equals("3")) {
                 myHotelLogic.customerMenuCheckIn();
             } else if (choice.equals("4")) {
+                loginMenu();
+            } else if (choice.equals("5")) {
                 cont = false;
                 System.out.println("Thanks for using HKR Hotel app");
             }
