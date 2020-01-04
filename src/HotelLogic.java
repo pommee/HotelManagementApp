@@ -248,6 +248,8 @@ public class HotelLogic {
     }
 
     public void checkInCustomer() {
+        boolean cont = true;
+        Date currentDate = new Date();
         if (arrListCustomer.size() <= 0) {
             System.out.println("No customers in the system");
         } else {
@@ -262,43 +264,55 @@ public class HotelLogic {
                     System.out.print("What room do you want to book: ");
                     int choice = input.nextInt();
                     if (roomNumberExists(choice)) {
-                        System.out.print("What date do you want to check-in (mm-dd-yyy): ");
-                        String checkInDate = input.next();
-                        Date checkInDate1 = null;
-                        try {
-                            checkInDate1 = dateFormat.parse(checkInDate);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        System.out.print("What date do you want to check out (mm-dd-yyy): ");
-                        String checkOutDate = input.next();
-                        Date checkOutDate1 = null;
-                        try {
-                            checkOutDate1 = dateFormat.parse(checkOutDate);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        System.out.println("Do you want to book " + ssn + " to room number: " + choice + "?");
-                        System.out.print("Check-in Date: ");
-                        System.out.println(dateFormat.format(checkInDate1));
-                        System.out.print("Check-out Date: ");
-                        System.out.println(dateFormat.format(checkOutDate1));
-                        System.out.println("1. Yes");
-                        System.out.println("2. No");
-                        String answer = input.nextLine();
-                        if (answer.equals("1")) {
-                            for (Room room : arrListRoom) {
-                                if (room.getRoomNumber() == choice) {
-                                    room.setBooked(true);
-                                    room.setBookedBy(ssn);
+                        do {
+                            System.out.print("What date do you want to check-in (mm-dd-yyy): ");
+                            String checkInDate = input.next();
+                            Date checkInDate1 = null;
+                            try {
+                                checkInDate1 = dateFormat.parse(checkInDate);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            if (checkInDate1.compareTo(currentDate) < 0) {
+                                System.out.println("Entered date has to be at least one day from now");
+                            } else {
+                                System.out.print("What date do you want to check out (mm-dd-yyy): ");
+                                String checkOutDate = input.next();
+                                Date checkOutDate1 = null;
+                                try {
+                                    checkOutDate1 = dateFormat.parse(checkOutDate);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                if (checkOutDate1.getTime() - checkInDate1.getTime() <= 0) {
+                                    System.out.println("Entered date has to be at least one day more than check-in Date");
+                                } else {
+                                    input.nextLine();
+                                    cont = false;
+                                    System.out.println("Do you want to book " + ssn + " to room number: " + choice + "?");
+                                    System.out.print("Check-in Date: ");
+                                    System.out.println(dateFormat.format(checkInDate1));
+                                    System.out.print("Check-out Date: ");
+                                    System.out.println(dateFormat.format(checkOutDate1));
+                                    System.out.println("1. Yes");
+                                    System.out.println("2. No");
+                                    String answer = input.nextLine();
+                                    if (answer.equals("1")) {
+                                        for (Room room : arrListRoom) {
+                                            if (room.getRoomNumber() == choice) {
+                                                room.setBooked(true);
+                                                room.setBookedBy(ssn);
+                                            }
+                                        }
+                                        arrListBookings.add(new Booking(1, checkInDate1, checkOutDate1, 2));
+                                        System.out.println("Booked");
+                                        input.nextLine();
+                                    } else if (answer.equals("2")) {
+                                        System.out.println("No booking has been done");
+                                    }
                                 }
                             }
-                            arrListBookings.add(new Booking(1, checkInDate1, checkOutDate1, 2));
-                            System.out.println("Booked");
-                            input.nextLine();
-                        } else if (answer.equals("2")) {
-                            System.out.println("No booking has been done");
-                        }
+                        } while (cont);
                     }
                 }
             } else {
