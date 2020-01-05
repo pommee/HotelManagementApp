@@ -265,7 +265,7 @@ public class HotelLogic {
                     int choice = input.nextInt();
                     if (roomNumberExists(choice)) {
                         do {
-                            System.out.print("What date do you want to check-in (mm-dd-yyy): ");
+                            System.out.print("What date do you want to check-in (mm-dd-yyyy): ");
                             String checkInDate = input.next();
                             Date checkInDate1 = null;
                             try {
@@ -276,7 +276,7 @@ public class HotelLogic {
                             if (checkInDate1.compareTo(currentDate) < 0) {
                                 System.out.println("Entered date has to be at least one day from now");
                             } else {
-                                System.out.print("What date do you want to check out (mm-dd-yyy): ");
+                                System.out.print("What date do you want to check out (mm-dd-yyyy): ");
                                 String checkOutDate = input.next();
                                 Date checkOutDate1 = null;
                                 try {
@@ -304,9 +304,16 @@ public class HotelLogic {
                                                 room.setBookedBy(ssn);
                                             }
                                         }
-                                        arrListBookings.add(new Booking(1, checkInDate1, checkOutDate1, 2));
+                                        int bookingId = 0;
+                                        double totalPrice = 0;
+                                        long days = 0;
+                                        days = Math.abs((checkInDate1.getTime() - checkOutDate1.getTime()) / 86400000);
+                                        for (Booking booking : arrListBookings) {
+                                            bookingId = booking.getBookingId() + 1;
+                                        }
+                                        totalPrice = getCustomerRoom(ssn).getPricePerNight() * days;
+                                        arrListBookings.add(new Booking(bookingId, checkInDate1, checkOutDate1, totalPrice));
                                         System.out.println("Booked");
-                                        input.nextLine();
                                     } else if (answer.equals("2")) {
                                         System.out.println("No booking has been done");
                                     }
