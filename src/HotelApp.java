@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -6,7 +7,7 @@ public class HotelApp {
     private Scanner input = new Scanner(System.in);
     private HotelLogic myHotelLogic = new HotelLogic();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         HotelApp myHotelApp = new HotelApp();
         myHotelApp.loginMenu();
     }
@@ -151,8 +152,9 @@ public class HotelApp {
             System.out.println("1. Show rooms");
             System.out.println("2. Check In/Out");
             System.out.println("3. Register");
-            System.out.println("4. Log out");
-            System.out.println("5. Exit");
+            System.out.println("4. View previous bookings");
+            System.out.println("5. Log out");
+            System.out.println("6. Exit");
             System.out.print("> ");
             String choice = input.nextLine();
             if (choice.equals("1")) {
@@ -177,10 +179,12 @@ public class HotelApp {
             } else if (choice.equals("3")) {
                 myHotelLogic.customerMenuCheckIn();
             } else if (choice.equals("4")) {
-                loginMenu();
+                myHotelLogic.previousBooking();
             } else if (choice.equals("5")) {
+                loginMenu();
+            } else if (choice.equals("6")) {
                 cont = false;
-                System.out.println("Thanks for using HKR Hotel app");
+                System.out.println("Thanks for using HKR Hotel app!");
             }
         } while (cont);
     }

@@ -26,7 +26,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Ssn: " + ssn + ", Name: " + name +
+        return "SSN: " + ssn + ", Name: " + name +
                 ", Address: " + address + ", Telephone-number: " + telephoneNumber;
     }
 
