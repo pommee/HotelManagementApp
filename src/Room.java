@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Room {
     private int roomNumber;
     private int numberOfBeds;

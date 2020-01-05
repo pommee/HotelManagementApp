@@ -39,7 +39,7 @@ public class Booking {
     @Override
     public String toString() {
 
-        return "Booking-Id: " + bookingId + ", Check-in date: " + checkInDate + ", Check-Out date: " + checkOutDate + ", Total price: " + totalPrice;
+        return "Booking-Id: " + bookingId + ", Check-in date: " + dateFormat.format(checkInDate) + ", Check-Out date: " + dateFormat.format(checkOutDate) + ", Total price [kr]: " + totalPrice;
     }
 
     public Booking(int bookingId, Date checkInDate, Date checkOutDate, double totalPrice) {
