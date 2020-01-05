@@ -1,9 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class HotelLogic {
 
@@ -277,7 +274,7 @@ public class HotelLogic {
                             Date checkInDate = null;
                             do {
                                 System.out.print("What date do you want to check-in (dd-mm-yyyy): ");
-                                String userDate = input.nextLine();
+                                String userDate = input.next();
                                 try {
                                     checkInDate = dateFormat.parse(userDate);
 
@@ -291,7 +288,7 @@ public class HotelLogic {
                                 Date checkOutDate = null;
                                 do {
                                     System.out.print("What date do you want to check out (dd-mm-yyyy): ");
-                                    String userDate = input.nextLine();
+                                    String userDate = input.next();
                                     try {
                                         checkOutDate = dateFormat.parse(userDate);
                                     } catch (ParseException e) {
