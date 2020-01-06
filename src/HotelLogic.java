@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -586,7 +585,14 @@ public class HotelLogic {
         System.out.println();
         for (Customer element : arrListCustomer) {
             if (element.getSsn().equals(ssn)) {
-                System.out.println("These are your previous bookings");
+                System.out.println("Current booking: ");
+                for (Booking booking : arrListBookings) {
+                    if (booking.getBookedBy().equals(ssn)) {
+                        System.out.println(booking);
+                    }
+                }
+                System.out.println();
+                System.out.println("Previous bookings:");
                 for (Booking element2 : arrListRecordBooking) {
                     if (element2.getBookedBy().equals(ssn)) {
                         System.out.println(element2);
