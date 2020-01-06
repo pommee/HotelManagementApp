@@ -75,7 +75,8 @@ public class HotelApp {
             System.out.println("12. Edit booking");
             System.out.println("13. Cancel booking");
             System.out.println("14. Log out");
-            System.out.println("15. Exit");
+            System.out.println("15. Previous Bookings");
+            System.out.println("16. Exit");
             System.out.print("> ");
             String choice = input.nextLine();
             System.out.println();
@@ -137,10 +138,11 @@ public class HotelApp {
             } else if (choice.equals("14")) {
                 loginMenu();
             } else if (choice.equals("15")) {
+                myHotelLogic.previousBooking();
+            } else if (choice.equals("16")) {
                 System.out.println("Thank you for visiting our hotel!");
                 cont = false;
             }
-
         } while (cont);
     }
 

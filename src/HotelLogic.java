@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -325,7 +326,6 @@ public class HotelLogic {
                                         }
                                         totalPrice = getCustomerRoom(ssn).getPricePerNight() * days;
                                         arrListBookings.add(new Booking(bookingId, checkInDate, checkOutDate, totalPrice, ssn));
-                                        arrListRecordBooking.add(new Booking(bookingId, checkInDate, checkOutDate, totalPrice, ssn));
                                         System.out.println("Booked");
                                     } else if (answer.equals("2")) {
                                         System.out.println("No booking has been done");
@@ -377,6 +377,8 @@ public class HotelLogic {
                             room.setBookedBy(null);
                         }
                     }
+                    arrListRecordBooking.addAll(arrListBookings);
+                    arrListBookings.removeIf(booking -> booking.getBookedBy().equals(ssn));
                     System.out.println("The customer has now checked out");
                 } else if (option == 2) {
                     System.out.println("Cancelled");
@@ -579,19 +581,15 @@ public class HotelLogic {
     }
 
     public void previousBooking() {
-        for (Customer element : arrListCustomer) {
-            System.out.println(element);
-        }
         System.out.print("Enter your SSN: ");
-        String inputSSN = input.nextLine();
+        String ssn = input.nextLine();
         System.out.println();
         for (Customer element : arrListCustomer) {
-            if (element.getSsn().equals(inputSSN)) {
-                System.out.println("These are your previous bookings:");
+            if (element.getSsn().equals(ssn)) {
+                System.out.println("These are your previous bookings");
                 for (Booking element2 : arrListRecordBooking) {
-                    if (element2.getBookingId() == 1) {
-                        //if element 2 getssn equals element ssn
-                        System.out.println();
+                    if (element2.getBookedBy().equals(ssn)) {
+                        System.out.println(element2);
                     }
                 }
             }
