@@ -608,5 +608,56 @@ public class HotelLogic {
             System.out.println("Error");
         }
     }
+
+    public void customerEditCustomer() {
+        if (!arrListCustomer.isEmpty()) {
+            for (Customer element : arrListCustomer) {
+                System.out.println(element);
+            }
+            System.out.print("Enter your SSN: ");
+            String inputSSN = input.nextLine();
+            System.out.println();
+            for (Customer element : arrListCustomer) {
+                if (element.getSsn().equals(inputSSN)) {
+
+                    System.out.println("What type of information would you like to edit " + arrListCustomer.get(arrListCustomer.indexOf(element)) + "?");
+                    System.out.println("1. SSN");
+                    System.out.println("2. Name");
+                    System.out.println("3. Address");
+                    System.out.println("4. Telephone number");
+
+                    String choice = input.nextLine();
+                    if (choice.equals("1")) {
+                        System.out.print("Enter new SSN: ");
+                        String newSSN = input.nextLine();
+                        Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
+                        custChange.setSsn(newSSN);
+                        System.out.println("Successfully changed your SSN.");
+                    } else if (choice.equals("2")) {
+                        System.out.print("Enter new name: ");
+                        String newName = input.nextLine();
+                        Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
+                        custChange.setName(newName);
+                        System.out.println("Successfully changed your name.");
+                    } else if (choice.equals("3")) {
+                        System.out.print("Enter new address: ");
+                        String newAddress = input.nextLine();
+                        Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
+                        custChange.setAddress(newAddress);
+                        System.out.println("Successfully changed your address.");
+                    } else if (choice.equals("4")) {
+                        System.out.print("Enter new telephone number: ");
+                        String newNr = input.nextLine();
+                        Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
+                        custChange.setTelephoneNumber(newNr);
+                        System.out.println("Successfully changed your telephone number.");
+                    }
+                }
+            }
+        } else {
+            System.out.println("There are currently no customers to edit.");
+        }
+    }
+
 }
 
