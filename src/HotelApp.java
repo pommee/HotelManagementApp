@@ -29,8 +29,7 @@ public class HotelApp {
             System.out.println();
             System.out.println("--- Login options ---");
             System.out.println("1. Hotel manager login");
-            System.out.println("2. Customer login");
-            System.out.print("3. Developer login" + "\n> ");
+            System.out.print("2. Customer login" + "\n> ");
             String choice = input.nextLine();
             if (choice.equals("1")) {
                 System.out.print("Please enter password: ");
@@ -44,14 +43,6 @@ public class HotelApp {
             } else if (choice.equals("2")) {
                 showCustomerMenu();
                 cont = false;
-            } else if (choice.equals("3")) {
-                System.out.print("Please enter password: ");
-                String password = input.nextLine();
-                if (password.equals("hkradmin")) {
-                    //call showDeveloperMenu
-                } else {
-                    System.out.println("Please try again!");
-                }
             }
         } while (cont);
     }
@@ -62,21 +53,20 @@ public class HotelApp {
             System.out.println();
             System.out.println("--- Manager ---");
             System.out.println("1. Add customer");
-            System.out.println("2. Show all customers");
-            System.out.println("3. Show rooms");
-            System.out.println("4. Show all bookings");
+            System.out.println("2. View all customers");
+            System.out.println("3. View rooms");
+            System.out.println("4. View all bookings");
             System.out.println("5. Check in/out customer");
-            System.out.println("6. Create customers");
-            System.out.println("7. Search for booking");
-            System.out.println("8. Edit room");
-            System.out.println("9. Edit customer");
-            System.out.println("10. Remove customer");
-            System.out.println("11. Remove room");
-            System.out.println("12. Edit booking");
-            System.out.println("13. Cancel booking");
+            System.out.println("6. Search for booking");
+            System.out.println("7. Edit room");
+            System.out.println("8. Edit customer");
+            System.out.println("9. Remove customer");
+            System.out.println("10. Remove room");
+            System.out.println("11. Edit booking");
+            System.out.println("12. Cancel booking");
+            System.out.println("13. Previous Bookings");
             System.out.println("14. Log out");
-            System.out.println("15. Previous Bookings");
-            System.out.println("16. Exit");
+            System.out.println("15. Exit");
             System.out.print("> ");
             String choice = input.nextLine();
             System.out.println();
@@ -87,8 +77,8 @@ public class HotelApp {
                 myHotelLogic.getCustomers();
             } else if (choice.equals("3")) {
                 System.out.println("-- Select option --");
-                System.out.println("1. Show available rooms only");
-                System.out.println("2. Show all rooms");
+                System.out.println("1. View available rooms only");
+                System.out.println("2. View all rooms");
                 System.out.println("3. Return to manager menu");
                 String subMenu = input.nextLine();
                 if (subMenu.equals("1")) {
@@ -120,27 +110,25 @@ public class HotelApp {
                     }
                 } while (contAnswer);
             } else if (choice.equals("6")) {
-                myHotelLogic.createCustomers();
-            } else if (choice.equals("7")) {
                 myHotelLogic.searchBooking();
-            } else if (choice.equals("8")) {
+            } else if (choice.equals("7")) {
                 myHotelLogic.editRoom();
-            } else if (choice.equals("9")) {
+            } else if (choice.equals("8")) {
                 myHotelLogic.editCustomer();
-            } else if (choice.equals("10")) {
+            } else if (choice.equals("9")) {
                 myHotelLogic.removeCustomer();
-            } else if (choice.equals("11")) {
+            } else if (choice.equals("10")) {
                 myHotelLogic.removeRoom();
-            } else if (choice.equals("12")) {
+            } else if (choice.equals("11")) {
                 myHotelLogic.editBooking();
-            } else if (choice.equals("13")) {
+            } else if (choice.equals("12")) {
                 myHotelLogic.cancelBooking();
+            } else if (choice.equals("13")) {
+                myHotelLogic.previousBooking();
             } else if (choice.equals("14")) {
                 loginMenu();
             } else if (choice.equals("15")) {
-                myHotelLogic.previousBooking();
-            } else if (choice.equals("16")) {
-                System.out.println("Thank you for visiting our hotel!");
+                System.out.println("Thank you for using the HKR Hotel App!");
                 cont = false;
             }
         } while (cont);
@@ -151,7 +139,7 @@ public class HotelApp {
         do {
             System.out.println();
             System.out.println("--- Customer ---");
-            System.out.println("1. Show rooms");
+            System.out.println("1. View rooms");
             System.out.println("2. Check In/Out");
             System.out.println("3. Register");
             System.out.println("4. View previous bookings");
@@ -175,7 +163,7 @@ public class HotelApp {
                         myHotelLogic.checkOutCustomer();
                         contAnswer = false;
                     } else {
-                        System.out.println("Please try again");
+                        System.out.println("Please try again!");
                     }
                 } while (contAnswer);
             } else if (choice.equals("3")) {
@@ -186,7 +174,7 @@ public class HotelApp {
                 loginMenu();
             } else if (choice.equals("6")) {
                 cont = false;
-                System.out.println("Thanks for using HKR Hotel app!");
+                System.out.println("Thanks for visiting HKR Hotel!");
             }
         } while (cont);
     }

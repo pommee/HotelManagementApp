@@ -1,3 +1,4 @@
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -171,26 +172,13 @@ public class HotelLogic {
         }
     }
 
-    public void createCustomers() {
-
-        if (arrListCustomer.isEmpty()) {
-            arrListCustomer.add(new Customer("195705060688", "Jakob Kristiansson", "Fältvägen 9A", "0736205531"));
-            arrListCustomer.add(new Customer("198704359382", "Mikael Persson", "Hjortgatan 3C", "0702716273"));
-            arrListCustomer.add(new Customer("197712224855", "Åke Jonsson", "Gladiolvägen 6B", "0738351905"));
-
-            System.out.println("Customers created.");
-        } else {
-            System.out.println("There are customers already created.");
-        }
-    }
-
     public void getRooms() {
         if (arrListRoom.size() > 0) {
             for (Room print : arrListRoom) {
                 System.out.println(print);
             }
         } else {
-            System.out.println("There are no rooms created to show.");
+            System.out.println("There are no rooms created to view.");
         }
     }
 
@@ -202,7 +190,7 @@ public class HotelLogic {
                 }
             }
         } else {
-            System.out.println("There are no rooms created to show only available rooms.");
+            System.out.println("There are no available rooms to view.");
         }
     }
 
@@ -322,6 +310,11 @@ public class HotelLogic {
                                         }
                                         totalPrice = getCustomerRoom(ssn).getPricePerNight() * days;
                                         arrListBookings.add(new Booking(bookingId, checkInDate, checkOutDate, totalPrice, ssn));
+                                        try {
+                                            saveText();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
                                         System.out.println("Booked");
                                     } else if (answer.equals("2")) {
                                         System.out.println("No booking has been done");
@@ -596,6 +589,23 @@ public class HotelLogic {
                     }
                 }
             }
+        }
+    }
+
+    public void saveText() throws IOException {
+        File fileName = new File("Bookings.txt");
+        try {
+            FileWriter fw = new FileWriter(fileName);
+            Writer output = new BufferedWriter(fw);
+
+            int sz = arrListBookings.size();
+
+            for (int i = 0; i < sz; i++) {
+                output.write(arrListBookings.get(i).toString() + "\n");
+            }
+            output.close();
+        } catch (Exception e) {
+            System.out.println("Error");
         }
     }
 }
