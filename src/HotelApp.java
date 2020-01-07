@@ -7,7 +7,7 @@ public class HotelApp {
     private Scanner input = new Scanner(System.in);
     private HotelLogic myHotelLogic = new HotelLogic();
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
         HotelApp myHotelApp = new HotelApp();
         myHotelApp.loginMenu();
     }

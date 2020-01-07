@@ -36,13 +36,13 @@ public class HotelLogic {
             System.out.print("Enter telephone-number: ");
             String telephoneNumber = input.nextLine();
             if (telephoneNumber.equals("")) {
-                System.out.println("No telephone-number was entered, try again");
+                System.out.println("No telephone-number was entered, try again.");
                 break;
             }
 
             isCustomerCreated(ssn);
             if (isCustomerCreated(ssn)) {
-                System.out.println("That ssn already exists");
+                System.out.println("That SSN already exists.");
             } else {
                 arrListCustomer.add(new Customer(ssn, name, address, telephoneNumber));
                 cont = false;
@@ -51,23 +51,20 @@ public class HotelLogic {
     }
 
     public void removeCustomer() {
-
-        int custId = 0;
         if (!arrListCustomer.isEmpty()) {
-            System.out.println("Enter the ID of the customer you would like to remove:");
-            for (Customer post : arrListCustomer) {
-                System.out.println("ID: " + custId + ", " + post);
-                custId++;
+            for (Customer element : arrListCustomer) {
+                System.out.println(element);
             }
-            try {
-                int removeIndex = input.nextInt();
-                System.out.println("Customer has successfully been removed.");
-                arrListCustomer.remove(removeIndex);
-            } catch (InputMismatchException e) {
-                System.out.println("Please enter a number.");
+            System.out.print("Enter the SSN of the customer you would like to remove: ");
+            String inputSSN = input.nextLine();
+            for (Customer element2 : arrListCustomer) {
+                if (element2.getSsn().equals(inputSSN)) {
+                    arrListCustomer.remove(element2);
+                    System.out.println("Customer has successfully been removed.");
+                }
             }
         } else {
-            System.out.println("There are no customers to remove.");
+            System.out.println("There are no customers to edit.");
         }
     }
 
@@ -233,7 +230,7 @@ public class HotelLogic {
 
     public void searchBooking() {
         if (arrListRoom.size() > 0) {
-            System.out.print("Enter ssn: ");
+            System.out.print("Enter SSN: ");
             String ssn = input.nextLine();
             if (isCustomerCreated(ssn)) {
                 for (Room room : arrListRoom) {
@@ -263,7 +260,7 @@ public class HotelLogic {
             boolean exists = customerExists(ssn);
             if (exists) {
                 if (arrListRoom.size() <= 0) {
-                    System.out.println("No rooms to book");
+                    System.out.println("No rooms to book.");
                 } else {
                     getAvailableRooms();
                     System.out.print("Enter the number of the room which you would like to book: ");
@@ -317,8 +314,8 @@ public class HotelLogic {
                                             }
                                         }
                                         int bookingId = 0;
-                                        double totalPrice = 0;
-                                        long days = 0;
+                                        double totalPrice;
+                                        long days;
                                         days = Math.abs((checkInDate.getTime() - checkOutDate.getTime()) / 86400000);
                                         for (Booking booking : arrListBookings) {
                                             bookingId = booking.getBookingId() + 1;
@@ -366,8 +363,8 @@ public class HotelLogic {
                 listCustomerRooms(ssn);
 
                 System.out.println("Do you wish to check out?");
-                System.out.println("1.Yes");
-                System.out.println("2.No");
+                System.out.println("1. Yes");
+                System.out.println("2. No");
                 int option = getUserNumberInput();
                 if (option == 1) {
                     for (Room room : arrListRoom) {
@@ -558,7 +555,7 @@ public class HotelLogic {
 
             isCustomerCreated(ssn);
             if (isCustomerCreated(ssn)) {
-                System.out.println("That ssn already exists");
+                System.out.println("That SSN already exists.");
             } else {
                 boolean successful = true;
                 do {
@@ -580,7 +577,7 @@ public class HotelLogic {
     }
 
     public void previousBooking() {
-        System.out.print("Enter your SSN: ");
+        System.out.print("Enter your SSN (YYYYMMDDXXXX): ");
         String ssn = input.nextLine();
         System.out.println();
         for (Customer element : arrListCustomer) {
