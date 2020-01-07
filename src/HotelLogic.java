@@ -46,6 +46,11 @@ public class HotelLogic {
                 System.out.println("That SSN already exists.");
             } else {
                 arrListCustomer.add(new Customer(ssn, name, address, telephoneNumber));
+                try {
+                    saveCustomerText();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 cont = false;
             }
         } while (cont);
@@ -168,6 +173,12 @@ public class HotelLogic {
                 boolean randomIsBooked = random.nextBoolean();
                 arrListRoom.add(new Room(i, randomBeds, randomHasBalcony, randomPrice));
                 arrListRoom.get(i).setBooked(randomIsBooked);
+
+            }
+            try {
+                saveRoomText();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -311,7 +322,7 @@ public class HotelLogic {
                                         totalPrice = getCustomerRoom(ssn).getPricePerNight() * days;
                                         arrListBookings.add(new Booking(bookingId, checkInDate, checkOutDate, totalPrice, ssn));
                                         try {
-                                            saveText();
+                                            saveBookingText();
                                         } catch (IOException e) {
                                             e.printStackTrace();
                                         }
@@ -592,23 +603,6 @@ public class HotelLogic {
         }
     }
 
-    public void saveText() throws IOException {
-        File fileName = new File("Bookings.txt");
-        try {
-            FileWriter fw = new FileWriter(fileName);
-            Writer output = new BufferedWriter(fw);
-
-            int sz = arrListBookings.size();
-
-            for (int i = 0; i < sz; i++) {
-                output.write(arrListBookings.get(i).toString() + "\n");
-            }
-            output.close();
-        } catch (Exception e) {
-            System.out.println("Error");
-        }
-    }
-
     public void customerEditCustomer() {
         if (!arrListCustomer.isEmpty()) {
             for (Customer element : arrListCustomer) {
@@ -659,5 +653,99 @@ public class HotelLogic {
         }
     }
 
+    public void saveBookingText() throws IOException {
+        File fileName = new File("Bookings.txt");
+        try {
+            FileWriter fw = new FileWriter(fileName);
+            Writer output = new BufferedWriter(fw);
+
+            int sz = arrListBookings.size();
+
+            for (int i = 0; i < sz; i++) {
+                output.write(arrListBookings.get(i).toString() + "\n");
+            }
+            output.close();
+        } catch (Exception e) {
+            System.out.println("Error.");
+        }
+    }
+
+    public void saveCustomerText() throws IOException {
+        File fileName = new File("Customers.txt");
+        try {
+            FileWriter fw = new FileWriter(fileName);
+            Writer output = new BufferedWriter(fw);
+
+            int sz = arrListCustomer.size();
+
+            for (int i = 0; i < sz; i++) {
+                output.write(arrListCustomer.get(i).toString() + "\n");
+            }
+            output.close();
+        } catch (Exception e) {
+            System.out.println("Error.");
+        }
+    }
+
+    public void saveRoomText() throws IOException {
+        File fileName = new File("Rooms.txt");
+        try {
+            FileWriter fw = new FileWriter(fileName);
+            Writer output = new BufferedWriter(fw);
+
+            int sz = arrListRoom.size();
+
+            for (int i = 0; i < sz; i++) {
+                output.write(arrListRoom.get(i).toString() + "\n");
+            }
+            output.close();
+        } catch (Exception e) {
+            System.out.println("Error.");
+        }
+    }
+
+
+    public void readBookingText() throws IOException, ParseException {
+
+        BufferedReader bkReader = new BufferedReader(new FileReader("Bookings.txt"));
+
+        for (String line = bkReader.readLine(); line != null; line = bkReader.readLine()) {
+            String[] data = line.split(",");
+            int bookingId = Integer.parseInt(data[0].split(": ")[1]);
+            Date checkInDate = dateFormat.parse(data[1].split(": ")[1]);
+            Date checkOutDate = dateFormat.parse(data[2].split(": ")[1]);
+            double totalPrice = Double.parseDouble(data[3].split(": ")[1]);
+            String bookedBy = data[4].split(": ")[1];
+            arrListBookings.add(new Booking(bookingId, checkInDate, checkOutDate, totalPrice, bookedBy));
+        }
+    }
+
+    public void readCustomerText() throws IOException, ParseException {
+
+        BufferedReader custReader = new BufferedReader(new FileReader("Customers.txt"));
+
+        for (String line = custReader.readLine(); line != null; line = custReader.readLine()) {
+            String[] data = line.split(",");
+            String ssn = data[0].split(": ")[1];
+            String name = data[1].split(": ")[1];
+            String address = data[2].split(": ")[1];
+            String telephoneNumber = data[3].split(": ")[1];
+            arrListCustomer.add(new Customer(ssn, name, address, telephoneNumber));
+        }
+    }
+
+    public void readRoomText() throws IOException, ParseException {
+
+        BufferedReader roomReader = new BufferedReader(new FileReader("Rooms.txt"));
+
+        for (String line = roomReader.readLine(); line != null; line = roomReader.readLine()) {
+            String[] data = line.split(",");
+            int roomNumber = Integer.parseInt(data[0].split(": ")[1]);
+            int numberOfBeds = Integer.parseInt(data[1].split(": ")[1]);
+            boolean hasBalcony = Boolean.parseBoolean(data[2].split(": ")[1]);
+            double pricePerNight = Double.parseDouble(data[3].split(": ")[1]);
+            arrListRoom.add(new Room(roomNumber, numberOfBeds, hasBalcony, pricePerNight));
+        }
+    }
 }
 

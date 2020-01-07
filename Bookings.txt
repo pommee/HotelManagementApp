@@ -1,0 +1,1 @@
+Booking-Id: 0, Check-in date: 01-20-2020, Check-Out date: 01-21-2020, Total price [kr]: 187.0, Booked by (SSN): 199303228429

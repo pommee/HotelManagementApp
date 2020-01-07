@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -7,12 +8,12 @@ public class HotelApp {
     private Scanner input = new Scanner(System.in);
     private HotelLogic myHotelLogic = new HotelLogic();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ParseException {
         HotelApp myHotelApp = new HotelApp();
         myHotelApp.loginMenu();
     }
 
-    private void loginMenu() {
+    private void loginMenu() throws IOException, ParseException {
         System.out.println("  _    _  _  __ _____    _    _         _         _ \n" +
                 " | |  | || |/ /|  __ \\  | |  | |       | |       | |\n" +
                 " | |__| || ' / | |__) | | |__| |  ___  | |_  ___ | |\n" +
@@ -26,6 +27,9 @@ public class HotelApp {
         System.out.println("Current date: " + (date));
         do {
             myHotelLogic.createRooms();
+            myHotelLogic.readBookingText();
+            myHotelLogic.readCustomerText();
+            myHotelLogic.readRoomText();
             System.out.println();
             System.out.println("--- Login options ---");
             System.out.println("1. Hotel manager login");
@@ -47,7 +51,7 @@ public class HotelApp {
         } while (cont);
     }
 
-    private void showManagerMenu() {
+    private void showManagerMenu() throws IOException, ParseException {
         boolean cont = true;
         do {
             System.out.println();
@@ -134,7 +138,7 @@ public class HotelApp {
         } while (cont);
     }
 
-    private void showCustomerMenu() {
+    private void showCustomerMenu() throws IOException, ParseException {
         boolean cont = true;
         do {
             System.out.println();
