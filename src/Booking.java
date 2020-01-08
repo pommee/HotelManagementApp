@@ -25,10 +25,6 @@ public class Booking {
         this.checkInDate = checkInDate;
     }
 
-    public Date getCheckOutDate() {
-        return checkOutDate;
-    }
-
     public void setCheckOutDate(Date checkOutDate) {
         this.checkOutDate = checkOutDate;
     }
@@ -39,10 +35,6 @@ public class Booking {
 
     public String getBookedBy() {
         return bookedBy;
-    }
-
-    public void setBookedBy(String bookedBy) {
-        this.bookedBy = bookedBy;
     }
 
     @Override

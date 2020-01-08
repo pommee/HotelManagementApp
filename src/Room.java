@@ -51,10 +51,6 @@ public class Room {
         return pricePerNight;
     }
 
-    public void setPricePerNight(double pricePerNight) {
-        this.pricePerNight = pricePerNight;
-    }
-
     @Override
     public String toString() {
         return "Room-Number: " + roomNumber + ", Number of beds: " + numberOfBeds +
