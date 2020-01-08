@@ -755,17 +755,21 @@ public class HotelLogic {
     }
 
     public void showBookingsBetweenDates() throws ParseException {
+
         for (Booking element : arrListBookings) {
             System.out.println(element);
         }
+
         System.out.print("Enter the first date you would like to search from (dd-mm-yyyy): ");
         String dateInput = input.nextLine();
         Date dateFrom = dateFormat.parse(dateInput);
         System.out.print("Enter the second date you would like to search from (dd-mm-yyyy): ");
         String dateInput2 = input.nextLine();
         Date dateTo = dateFormat.parse(dateInput2);
+
         if (!arrListBookings.isEmpty())
             System.out.println("Bookings between " + dateInput + " and " + dateInput2 + ":");
+
         for (Booking element : arrListBookings) {
             if (dateFrom.before(element.getCheckInDate()) && dateTo.after(element.getCheckInDate())) {
                 System.out.println(element);
