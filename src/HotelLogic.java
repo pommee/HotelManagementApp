@@ -712,14 +712,8 @@ public class HotelLogic {
         for (String line = bkReader.readLine(); line != null; line = bkReader.readLine()) {
             String[] data = line.split(",");
             int bookingId = Integer.parseInt(data[0].split(": ")[1]);
-            String checkInString = data[1].split(": ")[1];
-            String checkOutString = data[2].split(": ")[1];
-            Date checkInDate = dateFormat.parse(checkInString);
-            Date checkOutDate = dateFormat.parse(checkOutString);
-            /*
             Date checkInDate = dateFormat.parse(data[1].split(": ")[1]);
             Date checkOutDate = dateFormat.parse(data[2].split(": ")[1]);
-             */
             double totalPrice = Double.parseDouble(data[3].split(": ")[1]);
             String bookedBy = data[4].split(": ")[1];
             arrListBookings.add(new Booking(bookingId, checkInDate, checkOutDate, totalPrice, bookedBy));
