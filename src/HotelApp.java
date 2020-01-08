@@ -26,10 +26,10 @@ public class HotelApp {
         System.out.println();
         System.out.println("Current date: " + (date));
         do {
-            myHotelLogic.createRooms();
             myHotelLogic.readBookingText();
             myHotelLogic.readCustomerText();
             myHotelLogic.readRoomText();
+            myHotelLogic.createRooms();
             System.out.println();
             System.out.println("--- Login options ---");
             System.out.println("1. Hotel manager login");
@@ -154,8 +154,8 @@ public class HotelApp {
             String choice = input.nextLine();
             if (choice.equals("1")) {
                 myHotelLogic.getAvailableRooms();
-            } else if (choice.equals("2") {
-				myHotelLogic.customerEditCustomer;
+            } else if (choice.equals("2")) {
+				myHotelLogic.customerEditCustomer();
 			} else if (choice.equals("3")) {
                 boolean contAnswer = true;
                 do {
