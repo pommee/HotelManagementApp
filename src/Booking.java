@@ -7,7 +7,7 @@ public class Booking {
     private Date checkOutDate;
     private double totalPrice;
     private String bookedBy;
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
 
     public void setBookingId(int bookingId) {
         this.bookingId = bookingId;

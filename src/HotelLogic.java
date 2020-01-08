@@ -11,7 +11,7 @@ public class HotelLogic {
     private ArrayList<Booking> arrListBookings = new ArrayList<>();
     private ArrayList<Booking> arrListRecordBooking = new ArrayList<>();
 
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy", Locale.GERMANY);
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
 
     public void addCustomer() {
         boolean cont = true;
@@ -712,8 +712,14 @@ public class HotelLogic {
         for (String line = bkReader.readLine(); line != null; line = bkReader.readLine()) {
             String[] data = line.split(",");
             int bookingId = Integer.parseInt(data[0].split(": ")[1]);
+            String checkInString = data[1].split(": ")[1];
+            String checkOutString = data[2].split(": ")[1];
+            Date checkInDate = dateFormat.parse(checkInString);
+            Date checkOutDate = dateFormat.parse(checkOutString);
+            /*
             Date checkInDate = dateFormat.parse(data[1].split(": ")[1]);
             Date checkOutDate = dateFormat.parse(data[2].split(": ")[1]);
+             */
             double totalPrice = Double.parseDouble(data[3].split(": ")[1]);
             String bookedBy = data[4].split(": ")[1];
             arrListBookings.add(new Booking(bookingId, checkInDate, checkOutDate, totalPrice, bookedBy));
@@ -745,6 +751,25 @@ public class HotelLogic {
             boolean hasBalcony = Boolean.parseBoolean(data[2].split(": ")[1]);
             double pricePerNight = Double.parseDouble(data[3].split(": ")[1]);
             arrListRoom.add(new Room(roomNumber, numberOfBeds, hasBalcony, pricePerNight));
+        }
+    }
+
+    public void showBookingsBetweenDates() throws ParseException {
+        for (Booking element : arrListBookings) {
+            System.out.println(element);
+        }
+        System.out.print("Enter the first date you would like to search from (dd-mm-yyyy): ");
+        String dateInput = input.nextLine();
+        Date dateFrom = dateFormat.parse(dateInput);
+        System.out.print("Enter the second date you would like to search from (dd-mm-yyyy): ");
+        String dateInput2 = input.nextLine();
+        Date dateTo = dateFormat.parse(dateInput2);
+        if (!arrListBookings.isEmpty())
+            System.out.println("Bookings between " + dateInput + " and " + dateInput2 + ":");
+        for (Booking element : arrListBookings) {
+            if (dateFrom.before(element.getCheckInDate()) && dateTo.after(element.getCheckInDate())) {
+                System.out.println(element);
+            }
         }
     }
 }

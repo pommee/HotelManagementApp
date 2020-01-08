@@ -68,9 +68,10 @@ public class HotelApp {
             System.out.println("10. Remove room");
             System.out.println("11. Edit booking");
             System.out.println("12. Cancel booking");
-            System.out.println("13. Previous Bookings");
-            System.out.println("14. Log out");
-            System.out.println("15. Exit");
+            System.out.println("13. View bookings between dates");
+            System.out.println("14. Previous Bookings");
+            System.out.println("15. Log out");
+            System.out.println("16. Exit");
             System.out.print("> ");
             String choice = input.nextLine();
             System.out.println();
@@ -128,10 +129,12 @@ public class HotelApp {
             } else if (choice.equals("12")) {
                 myHotelLogic.cancelBooking();
             } else if (choice.equals("13")) {
-                myHotelLogic.previousBooking();
+                myHotelLogic.showBookingsBetweenDates();
             } else if (choice.equals("14")) {
-                loginMenu();
+                myHotelLogic.previousBooking();
             } else if (choice.equals("15")) {
+                loginMenu();
+            } else if (choice.equals("16")) {
                 System.out.println("Thank you for using the HKR Hotel App!");
                 cont = false;
             }
@@ -144,7 +147,7 @@ public class HotelApp {
             System.out.println();
             System.out.println("--- Customer ---");
             System.out.println("1. View rooms");
-			System.out.println("2. Edit information");
+            System.out.println("2. Edit information");
             System.out.println("3. Check In/Out");
             System.out.println("4. Register");
             System.out.println("5. View previous bookings");
@@ -155,8 +158,8 @@ public class HotelApp {
             if (choice.equals("1")) {
                 myHotelLogic.getAvailableRooms();
             } else if (choice.equals("2")) {
-				myHotelLogic.customerEditCustomer();
-			} else if (choice.equals("3")) {
+                myHotelLogic.customerEditCustomer();
+            } else if (choice.equals("3")) {
                 boolean contAnswer = true;
                 do {
                     System.out.println("1. Check in");
