@@ -431,59 +431,61 @@ public class HotelLogic {
             }
             try {
                 System.out.print("Enter the ID of the Booking you would like to edit: ");
-                int editIndex = input.nextInt() - 1;
-                System.out.println("What type of information would you like to edit of the booking " + arrListBookings.get(editIndex) + "?");
-                System.out.println("1. Booking ID");
-                System.out.println("2. Check-in date");
-                System.out.println("3. Check-out date");
-                System.out.println("4. Total price");
-                String menuChoice = input.nextLine();
-                if (menuChoice.equals("1")) {
-                    System.out.print("Enter new Booking ID: ");
-                    input.nextLine();
-                    int newBookingID = input.nextInt();
-                    Booking bookChange = arrListBookings.get(editIndex);
-                    bookChange.setBookingId(newBookingID);
-                    System.out.println("Successfully changed Booking ID.");
-                    //readBookingText();
-                } else if (menuChoice.equals("2")) {
-                    System.out.print("Enter new Check-in date (dd-mm-yyyy): ");
-                    input.nextLine();
-                    String newCheckIn = input.nextLine();
-                    Date newCheckIn2 = null;
-                    try {
-                        newCheckIn2 = dateFormat.parse(newCheckIn);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
+                int editIndex = input.nextInt();
+                input.nextLine();
+                for (Booking element : arrListBookings) {
+                    if (element.getBookingId() == editIndex) {
+                        System.out.println("1. Booking ID");
+                        System.out.println("2. Check-in date");
+                        System.out.println("3. Check-out date");
+                        System.out.println("4. Total price");
+                        System.out.print("Enter option to edit for BookID " + element.getBookingId() + ": ");
+                        String menuChoice = input.nextLine();
+                        if (menuChoice.equals("1")) {
+                            System.out.print("Enter new Booking ID: ");
+                            int newBookingID = input.nextInt();
+                            element.setBookingId(newBookingID);
+                            System.out.println("Successfully changed Booking ID.");
+                            saveBookingText();
+                        } else if (menuChoice.equals("2")) {
+                            System.out.print("Enter new Check-in date (dd-mm-yyyy): ");
+                            String newCheckIn = input.nextLine();
+                            Date newCheckIn2 = null;
+                            try {
+                                newCheckIn2 = dateFormat.parse(newCheckIn);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            element.setCheckInDate(newCheckIn2);
+                            saveBookingText();
+                            System.out.println("Successfully changed check-in date.");
+                        } else if (menuChoice.equals("3")) {
+                            System.out.print("Enter new Check-out date (dd-mm-yyyy): ");
+                            String newCheckOut = input.nextLine();
+                            Date newCheckOut2 = null;
+                            try {
+                                newCheckOut2 = dateFormat.parse(newCheckOut);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            element.setCheckOutDate(newCheckOut2);
+                            saveBookingText();
+                            System.out.println("Successfully changed check-out date.");
+                        } else if (menuChoice.equals("4")) {
+                            System.out.print("Enter new total price: ");
+                            double newTotalPrice = input.nextDouble();
+                            element.setTotalPrice(newTotalPrice);
+                            saveBookingText();
+                            System.out.println("Successfully changed total price.");
+                        }
                     }
-                    Booking bookChange = arrListBookings.get(editIndex);
-                    bookChange.setCheckInDate(newCheckIn2);
-                    System.out.println("Successfully changed check-in date.");
-                } else if (menuChoice.equals("3")) {
-                    System.out.print("Enter new Check-out date (dd-mm-yyyy): ");
-                    input.nextLine();
-                    String newCheckOut = input.nextLine();
-                    Date newCheckOut2 = null;
-                    try {
-                        newCheckOut2 = dateFormat.parse(newCheckOut);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    Booking bookChange = arrListBookings.get(editIndex);
-                    bookChange.setCheckOutDate(newCheckOut2);
-                    System.out.println("Successfully changed check-out date.");
-                } else if (menuChoice.equals("4")) {
-                    System.out.print("Enter new total price: ");
-                    input.nextLine();
-                    double newTotalPrice = input.nextDouble();
-                    Booking bookChange = arrListBookings.get(editIndex);
-                    bookChange.setTotalPrice(newTotalPrice);
-                    System.out.println("Successfully changed total price.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a number.");
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Please enter an ID that exists.");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         } else {
             System.out.println("There are no bookings to edit.");
@@ -516,7 +518,7 @@ public class HotelLogic {
         }
     }
 
-    public void customerMenuCheckIn() {
+    public void customerMenuCheckIn() throws IOException {
         boolean cont = true;
         do {
             System.out.print("\n" + "Enter ssn YYYYMMDD-XXXX: ");
@@ -555,6 +557,7 @@ public class HotelLogic {
                     String answer = input.nextLine();
                     if (answer.equals("y")) {
                         arrListCustomer.add(new Customer(ssn, name, address, telephoneNumber));
+                        saveCustomerText();
                         cont = false;
                         successful = false;
                     } else if (answer.equals("n")) {
