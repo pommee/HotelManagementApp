@@ -374,38 +374,44 @@ public class HotelLogic {
     }
 
     public void editRoom() throws IOException {
-        if (arrListCustomer.size() > 0) {
-            System.out.println("Enter the social security number of the customer who wishes to edit their room: ");
-            String ssn = input.nextLine();
-            boolean exists = customerExists(ssn);
-            if (exists) {
-                Room room = getCustomerRoom(ssn);
-                System.out.println(room);
+       for (Room element : arrListRoom) {
+           System.out.println(element);
+       }
+        System.out.print("Enter the number of the room you would like to edit: ");
+        String choice = input.nextLine();
 
-                System.out.println("Would you like to add an extra bed to a current booked room?");
-                System.out.println("1.Yes");
-                System.out.println("2.No");
-                int option = getUserNumberInput();
-                if (option == 1) {
-                    int beds = room.getNumberOfBeds();
-                    room.setNumberOfBeds(beds + 1);
-                    System.out.println("An extra bed has been added to the room.");
+        for (Room element : arrListRoom) {
+            if (element.getRoomNumber() == Integer.parseInt(choice)) {
+                System.out.println("-- Edit Room --");
+                System.out.println("1. Edit bed amount");
+                System.out.println("2. Add customer note");
+                System.out.print("Choose option: ");
+                String option = input.nextLine();
+                if (option.equals("1")) {
+                    System.out.println("The room currently has " + element.getNumberOfBeds() + " beds.");
+                    System.out.print("Enter new amount of beds (1-3): ");
+                    try {
+                        int beds = input.nextInt();
+                        input.nextLine();
+                        element.setNumberOfBeds(beds);
+                    } catch (InputMismatchException e) {
+                        System.out.println("Please enter a number.");
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Please enter a number between 1-3.");
+                    }
+                    System.out.println("Number of beds successfully changed.");
+                    saveRoomText();
+                } else if (option.equals("2")) {
+                    System.out.print("Enter customer note to add: ");
+                    String note = input.nextLine();
+                    element.setCustomerNote(note);
+                    System.out.println("Note successfully added.");
                     saveRoomText();
                 }
 
-                System.out.println("Do you want to add a customer note?");
-                System.out.println("1.Yes");
-                System.out.println("2.No");
-                int choice = getUserNumberInput();
-                if (choice == 1) {
-                    System.out.print("Enter your note: ");
-                    String customerNote = input.nextLine();
-                    room.setCustomerNote(customerNote);
-                    System.out.println("Customer notes: " + room.getCustomerNote());
-                    saveRoomText();
-                }
             }
         }
+
     }
 
     public int getUserNumberInput() {
@@ -563,7 +569,7 @@ public class HotelLogic {
                     } else if (answer.equals("n")) {
                         customerMenuCheckIn();
                     } else {
-                        System.out.println("That is not a valid option. Please try again");
+                        System.out.println("That is not a valid option. Please try again.");
                     }
                 } while (successful);
             }
@@ -608,11 +614,11 @@ public class HotelLogic {
             for (Customer element : arrListCustomer) {
                 if (element.getSsn().equals(inputSSN)) {
 
-                    System.out.println("What type of information would you like to edit " + arrListCustomer.get(arrListCustomer.indexOf(element)) + "?");
                     System.out.println("1. SSN");
                     System.out.println("2. Name");
                     System.out.println("3. Address");
                     System.out.println("4. Telephone number");
+                    System.out.print("Enter option to edit for the customer:  ");
 
                     String choice = input.nextLine();
                     if (choice.equals("1")) {
