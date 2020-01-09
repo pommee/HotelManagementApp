@@ -326,9 +326,9 @@ public class HotelLogic {
                                         } catch (IOException e) {
                                             e.printStackTrace();
                                         }
-                                        System.out.println("Booked");
+                                        System.out.println("Successfully booked customer.");
                                     } else if (answer.equals("2")) {
-                                        System.out.println("No booking has been done");
+                                        System.out.println("No booking has been done.");
                                     }
                                 }
                             }
@@ -336,7 +336,7 @@ public class HotelLogic {
                     }
                 }
             } else {
-                System.out.println("Customer does not exist");
+                System.out.println("Customer does not exist.");
             }
         }
     }
@@ -358,7 +358,7 @@ public class HotelLogic {
         }
     }
 
-    public void checkOutCustomer() {
+    public void checkOutCustomer() throws IOException {
         if (arrListCustomer.size() > 0) {
             System.out.print("Enter the social security number of the customer who wishes to check out: ");
             String ssn = input.nextLine();
@@ -379,13 +379,14 @@ public class HotelLogic {
                     }
                     arrListRecordBooking.addAll(arrListBookings);
                     arrListBookings.removeIf(booking -> booking.getBookedBy().equals(ssn));
-                    System.out.println("The customer has now checked out");
+                    saveBookingText();
+                    System.out.println("The customer has successfully checked out.");
                 } else if (option == 2) {
-                    System.out.println("Cancelled");
+                    System.out.println("Cancelled.");
                 }
             }
         } else {
-            System.out.println("No customers in the system");
+            System.out.println("No customers in the system.");
         }
     }
 
@@ -581,25 +582,29 @@ public class HotelLogic {
     }
 
     public void previousBooking() {
-        System.out.print("Enter your SSN (YYYYMMDDXXXX): ");
-        String ssn = input.nextLine();
-        System.out.println();
-        for (Customer element : arrListCustomer) {
-            if (element.getSsn().equals(ssn)) {
-                System.out.println("Current booking: ");
-                for (Booking booking : arrListBookings) {
-                    if (booking.getBookedBy().equals(ssn)) {
-                        System.out.println(booking);
+        if (!arrListRecordBooking.isEmpty()) {
+            System.out.print("Enter your SSN (YYYYMMDDXXXX): ");
+            String ssn = input.nextLine();
+            System.out.println();
+            for (Customer element : arrListCustomer) {
+                if (element.getSsn().equals(ssn)) {
+                    System.out.println("Current booking: ");
+                    for (Booking booking : arrListBookings) {
+                        if (booking.getBookedBy().equals(ssn)) {
+                            System.out.println(booking);
+                        }
                     }
-                }
-                System.out.println();
-                System.out.println("Previous bookings:");
-                for (Booking element2 : arrListRecordBooking) {
-                    if (element2.getBookedBy().equals(ssn)) {
-                        System.out.println(element2);
+                    System.out.println();
+                    System.out.println("Previous bookings:");
+                    for (Booking element2 : arrListRecordBooking) {
+                        if (element2.getBookedBy().equals(ssn)) {
+                            System.out.println(element2);
+                        }
                     }
                 }
             }
+        } else {
+            System.out.println("There are no previous bookings to view.");
         }
     }
 
@@ -704,7 +709,6 @@ public class HotelLogic {
         }
     }
 
-
     public void readBookingText() throws IOException, ParseException {
 
         BufferedReader bkReader = new BufferedReader(new FileReader("Bookings.txt"));
@@ -718,6 +722,7 @@ public class HotelLogic {
             String bookedBy = data[4].split(": ")[1];
             arrListBookings.add(new Booking(bookingId, checkInDate, checkOutDate, totalPrice, bookedBy));
         }
+
     }
 
     public void readCustomerText() throws IOException, ParseException {
@@ -732,6 +737,7 @@ public class HotelLogic {
             String telephoneNumber = data[3].split(": ")[1];
             arrListCustomer.add(new Customer(ssn, name, address, telephoneNumber));
         }
+
     }
 
     public void readRoomText() throws IOException, ParseException {
@@ -746,6 +752,7 @@ public class HotelLogic {
             double pricePerNight = Double.parseDouble(data[3].split(": ")[1]);
             arrListRoom.add(new Room(roomNumber, numberOfBeds, hasBalcony, pricePerNight));
         }
+
     }
 
     public void showBookingsBetweenDates() throws ParseException {
