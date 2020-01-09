@@ -63,37 +63,41 @@ public class HotelLogic {
             }
             System.out.print("Enter the SSN of the customer you would like to remove: ");
             String inputSSN = input.nextLine();
-            for (Customer element2 : arrListCustomer) {
-                if (element2.getSsn().equals(inputSSN)) {
-                    arrListCustomer.remove(element2);
-                    System.out.println("Customer has successfully been removed.");
-                }
+            arrListCustomer.removeIf(element -> element.getSsn().equals(inputSSN));
+            System.out.println("Customer with SSN: " + inputSSN + " has been successfully removed.");
+            try {
+                saveCustomerText();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         } else {
-            System.out.println("There are no customers to edit.");
+            System.out.println("There are no customers to remove.");
         }
     }
 
     public void removeRoom() {
 
         if (!arrListRoom.isEmpty()) {
-            System.out.println("Enter the number of the room you would like to remove:");
             for (Room post : arrListRoom) {
                 System.out.println(post);
             }
             try {
-                int roomNumber = input.nextInt();
-                System.out.println("Room " + roomNumber + " has successfully been removed.");
-                arrListRoom.remove(roomNumber);
+                System.out.print("Enter the number of the room you would like to remove: ");
+                int roomNr = input.nextInt();
+                arrListRoom.removeIf(element -> element.getRoomNumber() == roomNr);
+                saveRoomText();
+                System.out.println("Successfully removed room " + roomNr + ".");
+            } catch (IOException e) {
+                e.printStackTrace();
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a number.");
             }
         } else {
-            System.out.println("There are no rooms.");
+            System.out.println("There are no rooms to remove.");
         }
     }
 
-    public void editCustomer() throws IOException {
+    public void editCustomer() {
         if (!arrListCustomer.isEmpty()) {
             for (Customer element : arrListCustomer) {
                 System.out.println(element);
@@ -117,28 +121,24 @@ public class HotelLogic {
                         Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
                         custChange.setSsn(newSSN);
                         System.out.println("Successfully changed customers SSN.");
-                        saveCustomerText();
                     } else if (choice.equals("2")) {
                         System.out.print("Enter new name: ");
                         String newName = input.nextLine();
                         Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
                         custChange.setName(newName);
                         System.out.println("Successfully changed customers name.");
-                        saveCustomerText();
                     } else if (choice.equals("3")) {
                         System.out.print("Enter new address: ");
                         String newAddress = input.nextLine();
                         Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
                         custChange.setAddress(newAddress);
                         System.out.println("Successfully changed customers address.");
-                        saveCustomerText();
                     } else if (choice.equals("4")) {
                         System.out.print("Enter new telephone nr: ");
                         String newNr = input.nextLine();
                         Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
                         custChange.setTelephoneNumber(newNr);
                         System.out.println("Successfully changed customers telephone number.");
-                        saveCustomerText();
                     }
                 }
             }
@@ -163,27 +163,6 @@ public class HotelLogic {
             }
         } else {
             System.out.println("There are currently no registered customers");
-        }
-    }
-
-    public void createRooms() {
-
-        if (arrListRoom.isEmpty()) {
-            Random random = new Random();
-            for (int i = 0; i <= 20; i++) {
-                int randomBeds = random.nextInt((3 - 1) + 1) + 1;
-                double randomPrice = random.nextInt(300 - 100) + 100;
-                boolean randomHasBalcony = random.nextBoolean();
-                boolean randomIsBooked = random.nextBoolean();
-                arrListRoom.add(new Room(i, randomBeds, randomHasBalcony, randomPrice));
-                arrListRoom.get(i).setBooked(randomIsBooked);
-
-            }
-            try {
-                saveRoomText();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -227,7 +206,7 @@ public class HotelLogic {
                 return true;
             }
         }
-        System.out.println("SSN" + " not in system");
+        System.out.println("SSN is not in system.");
         return false;
     }
 
@@ -242,10 +221,10 @@ public class HotelLogic {
                     }
                 }
             } else {
-                System.out.println("Customer not registered");
+                System.out.println("Customer not registered.");
             }
         } else {
-            System.out.println("No rooms created");
+            System.out.println("No rooms create.d");
         }
     }
 
@@ -253,7 +232,7 @@ public class HotelLogic {
         boolean cont = true;
         Date currentDate = new Date();
         if (arrListCustomer.size() <= 0) {
-            System.out.println("No customers in the system");
+            System.out.println("No customers in the system.");
         } else {
             for (Customer element : arrListCustomer) {
                 System.out.println(element);
@@ -283,7 +262,7 @@ public class HotelLogic {
                                 }
                             } while (checkInDate == null);
                             if (checkInDate.compareTo(currentDate) < 0) {
-                                System.out.println("Entered date has to be at least one day from now");
+                                System.out.println("Entered date has to be at least one day from now.");
                             } else {
                                 Date checkOutDate = null;
                                 do {
@@ -296,7 +275,7 @@ public class HotelLogic {
                                     }
                                 } while (checkOutDate == null);
                                 if (checkOutDate.getTime() - checkInDate.getTime() <= 0) {
-                                    System.out.println("Entered date has to be at least one day more than check-in Date");
+                                    System.out.println("Entered date has to be at least one day more than check-in Date.");
                                 } else {
                                     input.nextLine();
                                     cont = false;
@@ -410,7 +389,7 @@ public class HotelLogic {
                 if (option == 1) {
                     int beds = room.getNumberOfBeds();
                     room.setNumberOfBeds(beds + 1);
-                    System.out.println("An extra bed has been added to the room");
+                    System.out.println("An extra bed has been added to the room.");
                     saveRoomText();
                 }
 
@@ -438,7 +417,7 @@ public class HotelLogic {
                 number = Integer.parseInt(userInput);
                 doLoop = false;
             } catch (NumberFormatException e) {
-                System.out.println("Enter a number instead");
+                System.out.println("Enter a number instead.");
             }
         }
         return number;
@@ -466,6 +445,7 @@ public class HotelLogic {
                     Booking bookChange = arrListBookings.get(editIndex);
                     bookChange.setBookingId(newBookingID);
                     System.out.println("Successfully changed Booking ID.");
+                    //readBookingText();
                 } else if (menuChoice.equals("2")) {
                     System.out.print("Enter new Check-in date (dd-mm-yyyy): ");
                     input.nextLine();
@@ -522,7 +502,7 @@ public class HotelLogic {
 
     public void cancelBooking() {
 
-        if (arrListBookings.isEmpty()) {
+        if (!arrListBookings.isEmpty()) {
             for (Room element : arrListRoom) {
                 if (element.isBooked()) {
                     System.out.println(element);
@@ -542,25 +522,25 @@ public class HotelLogic {
             System.out.print("\n" + "Enter ssn YYYYMMDD-XXXX: ");
             String ssn = input.nextLine();
             if (ssn.equals("")) {
-                System.out.println("No ssn was entered, try again");
+                System.out.println("No ssn was entered, try again.");
                 break;
             }
             System.out.print("Enter name: ");
             String name = input.nextLine();
             if (name.equals("")) {
-                System.out.println("No name was entered, try again");
+                System.out.println("No name was entered, try again.");
                 break;
             }
             System.out.print("Enter address: ");
             String address = input.nextLine();
             if (address.equals("")) {
-                System.out.println("No address was entered, try again");
+                System.out.println("No address was entered, try again.");
                 break;
             }
             System.out.print("Enter telephone-number: ");
             String telephoneNumber = input.nextLine();
             if (telephoneNumber.equals("")) {
-                System.out.println("No telephone-number was entered, try again");
+                System.out.println("No telephone-number was entered, try again.");
                 break;
             }
 
@@ -614,7 +594,7 @@ public class HotelLogic {
         }
     }
 
-    public void customerEditCustomer() throws IOException {
+    public void customerEditCustomer() {
         if (!arrListCustomer.isEmpty()) {
             for (Customer element : arrListCustomer) {
                 System.out.println(element);
@@ -638,28 +618,24 @@ public class HotelLogic {
                         Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
                         custChange.setSsn(newSSN);
                         System.out.println("Successfully changed your SSN.");
-                        saveCustomerText();
                     } else if (choice.equals("2")) {
                         System.out.print("Enter new name: ");
                         String newName = input.nextLine();
                         Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
                         custChange.setName(newName);
                         System.out.println("Successfully changed your name.");
-                        saveCustomerText();
                     } else if (choice.equals("3")) {
                         System.out.print("Enter new address: ");
                         String newAddress = input.nextLine();
                         Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
                         custChange.setAddress(newAddress);
                         System.out.println("Successfully changed your address.");
-                        saveCustomerText();
                     } else if (choice.equals("4")) {
                         System.out.print("Enter new telephone number: ");
                         String newNr = input.nextLine();
                         Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
                         custChange.setTelephoneNumber(newNr);
                         System.out.println("Successfully changed your telephone number.");
-                        saveCustomerText();
                     }
                 }
             }

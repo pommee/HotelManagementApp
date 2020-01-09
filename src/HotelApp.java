@@ -29,7 +29,6 @@ public class HotelApp {
             myHotelLogic.readBookingText();
             myHotelLogic.readCustomerText();
             myHotelLogic.readRoomText();
-            myHotelLogic.createRooms();
             System.out.println();
             System.out.println("--- Login options ---");
             System.out.println("1. Hotel manager login");
@@ -37,7 +36,7 @@ public class HotelApp {
             String choice = input.nextLine();
             if (choice.equals("1")) {
                 System.out.print("Please enter password: ");
-                String password = input.nextLine();
+                String password = "abc123";
                 if (password.equals("abc123")) {
                     showManagerMenu();
                     cont = false;
