@@ -2,6 +2,7 @@ import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 public class HotelLogic {
 
@@ -228,7 +229,7 @@ public class HotelLogic {
                 System.out.println("Customer not registered.");
             }
         } else {
-            System.out.println("No rooms create.d");
+            System.out.println("No rooms created");
         }
     }
 
@@ -392,41 +393,44 @@ public class HotelLogic {
         for (Room element : arrListRoom) {
             System.out.println(element);
         }
-        System.out.print("Enter the number of the room you would like to edit: ");
-        String choice = input.nextLine();
-
-        for (Room element : arrListRoom) {
-            if (element.getRoomNumber() == Integer.parseInt(choice)) {
-                System.out.println("-- Edit Room --");
-                System.out.println("1. Edit bed amount");
-                System.out.println("2. Add customer note");
-                System.out.print("Choose option: ");
-                String option = input.nextLine();
-                if (option.equals("1")) {
-                    System.out.println("The room currently has " + element.getNumberOfBeds() + " beds.");
-                    System.out.print("Enter new amount of beds (1-3): ");
-                    try {
-                        int beds = input.nextInt();
-                        input.nextLine();
-                        element.setNumberOfBeds(beds);
-                    } catch (InputMismatchException e) {
-                        System.out.println("Please enter a number.");
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println("Please enter a number between 1-3.");
+        try {
+            System.out.print("Enter the number of the room you would like to edit: ");
+            String choice = input.nextLine();
+            for (Room element : arrListRoom) {
+                if (element.getRoomNumber() == Integer.parseInt(choice)) {
+                    System.out.println("-- Edit Room --");
+                    System.out.println("1. Edit bed amount");
+                    System.out.println("2. Add customer note");
+                    System.out.print("Choose option: ");
+                    String option = input.nextLine();
+                    if (option.equals("1")) {
+                        System.out.println("The room currently has " + element.getNumberOfBeds() + " beds.");
+                        System.out.print("Enter new amount of beds (1-3): ");
+                        try {
+                            int beds = input.nextInt();
+                            input.nextLine();
+                            element.setNumberOfBeds(beds);
+                        } catch (InputMismatchException e) {
+                            System.out.println("Please enter a number.");
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println("Please enter a number between 1-3.");
+                        }
+                        System.out.println("Number of beds successfully changed.");
+                        saveRoomText();
+                    } else if (option.equals("2")) {
+                        System.out.print("Enter customer note to add: ");
+                        String note = input.nextLine();
+                        element.setCustomerNote(note);
+                        System.out.println("Note successfully added.");
+                        saveRoomText();
                     }
-                    System.out.println("Number of beds successfully changed.");
-                    saveRoomText();
-                } else if (option.equals("2")) {
-                    System.out.print("Enter customer note to add: ");
-                    String note = input.nextLine();
-                    element.setCustomerNote(note);
-                    System.out.println("Note successfully added.");
-                    saveRoomText();
+
                 }
-
             }
+        } catch (Exception e) {
+            System.out.println("\n" + "Please try again");
+            editRoom();
         }
-
     }
 
     public void editBooking() {

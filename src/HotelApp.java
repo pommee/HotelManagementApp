@@ -49,6 +49,8 @@ public class HotelApp {
                 myHotelLogic.readCustomerText();
                 myHotelLogic.readRoomText();
                 loginMenu();
+            } else {
+                System.out.println("Invalid option, please try again");
             }
         } while (cont);
     }
@@ -139,6 +141,8 @@ public class HotelApp {
             } else if (choice.equals("16")) {
                 System.out.println("Thank you for using the HKR Hotel App!");
                 cont = false;
+            } else {
+                System.out.println("Invalid option, please try again");
             }
         } while (cont);
     }
