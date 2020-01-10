@@ -13,7 +13,7 @@ public class HotelLogic {
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
 
-    public void addCustomer() throws IOException {
+    public void addCustomer() {
         boolean cont = true;
         do {
             System.out.print("Enter SSN (YYYYMMDDXXXX): ");
@@ -46,13 +46,17 @@ public class HotelLogic {
                 System.out.println("That SSN already exists.");
             } else {
                 arrListCustomer.add(new Customer(ssn, name, address, telephoneNumber));
-                saveCustomerText();
+                try {
+                    saveCustomerText();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 cont = false;
             }
         } while (cont);
     }
 
-    public void removeCustomer() throws IOException {
+    public void removeCustomer() {
         if (!arrListCustomer.isEmpty()) {
             for (Customer element : arrListCustomer) {
                 System.out.println(element);
@@ -61,7 +65,11 @@ public class HotelLogic {
             String inputSSN = input.nextLine();
             arrListCustomer.removeIf(element -> element.getSsn().equals(inputSSN));
             System.out.println("Customer with SSN: " + inputSSN + " has been successfully removed.");
-            saveCustomerText();
+            try {
+                saveCustomerText();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
             System.out.println("There are no customers to remove.");
         }

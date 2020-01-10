@@ -1,6 +1,0 @@
-Booking-Id: 0, Check-in date: 12-01-2020, Check-Out date: 18-01-2020, Total price [kr]: 130.4, Booked by (SSN): 199303228429
-Booking-Id: 1, Check-in date: 13-01-2020, Check-Out date: 19-01-2020, Total price [kr]: 1044.0, Booked by (SSN): 199602229144
-Booking-Id: 2, Check-in date: 14-01-2020, Check-Out date: 20-01-2020, Total price [kr]: 876.0, Booked by (SSN): 199510112299
-Booking-Id: 3, Check-in date: 15-01-2020, Check-Out date: 21-01-2020, Total price [kr]: 1152.0, Booked by (SSN): 199403039988
-Booking-Id: 4, Check-in date: 16-01-2020, Check-Out date: 22-01-2020, Total price [kr]: 1596.0, Booked by (SSN): 199111123030
-Booking-Id: 5, Check-in date: 17-01-2020, Check-Out date: 23-01-2020, Total price [kr]: 1332.0, Booked by (SSN): 199605245050
