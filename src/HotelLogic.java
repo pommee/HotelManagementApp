@@ -13,7 +13,7 @@ public class HotelLogic {
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
 
-    public void addCustomer() {
+    public void addCustomer() throws IOException {
         boolean cont = true;
         do {
             System.out.print("Enter SSN (YYYYMMDDXXXX): ");
@@ -46,17 +46,13 @@ public class HotelLogic {
                 System.out.println("That SSN already exists.");
             } else {
                 arrListCustomer.add(new Customer(ssn, name, address, telephoneNumber));
-                try {
-                    saveCustomerText();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                saveCustomerText();
                 cont = false;
             }
         } while (cont);
     }
 
-    public void removeCustomer() {
+    public void removeCustomer() throws IOException {
         if (!arrListCustomer.isEmpty()) {
             for (Customer element : arrListCustomer) {
                 System.out.println(element);
@@ -65,11 +61,7 @@ public class HotelLogic {
             String inputSSN = input.nextLine();
             arrListCustomer.removeIf(element -> element.getSsn().equals(inputSSN));
             System.out.println("Customer with SSN: " + inputSSN + " has been successfully removed.");
-            try {
-                saveCustomerText();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            saveCustomerText();
         } else {
             System.out.println("There are no customers to remove.");
         }
@@ -352,6 +344,9 @@ public class HotelLogic {
 
     public void checkOutCustomer() throws IOException {
         if (arrListCustomer.size() > 0) {
+            for (Customer element : arrListCustomer) {
+                System.out.println(element);
+            }
             System.out.print("Enter the social security number of the customer who wishes to check out: ");
             String ssn = input.nextLine();
             boolean exists = customerExists(ssn);
@@ -361,20 +356,23 @@ public class HotelLogic {
                 System.out.println("Do you wish to check out?");
                 System.out.println("1. Yes");
                 System.out.println("2. No");
-                int option = getUserNumberInput();
-                if (option == 1) {
+                String option = input.nextLine();
+                if (option.equals("1")) {
                     for (Room room : arrListRoom) {
                         if (room.isBookedBy(ssn)) {
                             room.setBooked(false);
                             room.setBookedBy(null);
+                            saveRoomText();
                         }
                     }
                     arrListRecordBooking.addAll(arrListBookings);
                     arrListBookings.removeIf(booking -> booking.getBookedBy().equals(ssn));
                     saveBookingText();
                     System.out.println("The customer has successfully checked out.");
-                } else if (option == 2) {
+                } else if (option.equals("2")) {
                     System.out.println("Cancelled.");
+                } else {
+                    System.out.println("Please make a valid input.");
                 }
             }
         } else {
@@ -421,21 +419,6 @@ public class HotelLogic {
             }
         }
 
-    }
-
-    public int getUserNumberInput() {
-        boolean doLoop = true;
-        int number = 0;
-        while (doLoop) {
-            String userInput = input.nextLine();
-            try {
-                number = Integer.parseInt(userInput);
-                doLoop = false;
-            } catch (NumberFormatException e) {
-                System.out.println("Enter a number instead.");
-            }
-        }
-        return number;
     }
 
     public void editBooking() {
@@ -788,5 +771,29 @@ public class HotelLogic {
             System.out.println("Invalid date specified, please try again.");
         }
     }
-}
 
+    public void applyCoupon() throws IOException {
+        for (Customer element : arrListCustomer) {
+            System.out.println(element);
+        }
+        System.out.print("Enter your SSN: ");
+        String userSSN = input.nextLine();
+
+        for (Booking element : arrListBookings) {
+            if (element.getBookedBy().equals(userSSN)) {
+                System.out.println("Current price: " + element.getTotalPrice());
+                System.out.print("Enter coupon code to get 20% off: ");
+                String coupon = input.nextLine();
+                if (coupon.equals("NYSTART")) {
+                    double discount = element.getTotalPrice() - (20 * element.getTotalPrice() / 100);
+                    element.setTotalPrice(discount);
+                    saveBookingText();
+                    System.out.println("Price is now: " + element.getTotalPrice());
+                } else {
+                    System.out.println("Coupon code not recognized.");
+                }
+            }
+        }
+    }
+
+}

@@ -181,8 +181,10 @@ public class HotelApp {
             } else if (choice.equals("5")) {
                 myHotelLogic.previousBooking();
             } else if (choice.equals("6")) {
-                loginMenu();
+                myHotelLogic.applyCoupon();
             } else if (choice.equals("7")) {
+                loginMenu();
+            } else if (choice.equals("8")) {
                 cont = false;
                 System.out.println("Thanks for visiting HKR Hotel!");
             }

@@ -33,6 +33,10 @@ public class Booking {
         this.totalPrice = totalPrice;
     }
 
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
     public String getBookedBy() {
         return bookedBy;
     }
