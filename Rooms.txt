@@ -1,4 +1,4 @@
-Room-Number: 0, Number of beds: 1, Balcony: false, Price: 252.0, Booked: false, Booked by: null, Customer note: null
+Room-Number: 0, Number of beds: 1, Balcony: false, Price: 252.0, Booked: false, Booked by: 199303228429, Customer note: null
 Room-Number: 1, Number of beds: 2, Balcony: true, Price: 163.0, Booked: false, Booked by: null, Customer note: null
 Room-Number: 2, Number of beds: 3, Balcony: true, Price: 176.0, Booked: false, Booked by: null, Customer note: null
 Room-Number: 3, Number of beds: 3, Balcony: false, Price: 290.0, Booked: false, Booked by: null, Customer note: null

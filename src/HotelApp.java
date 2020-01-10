@@ -36,7 +36,7 @@ public class HotelApp {
             String choice = input.nextLine();
             if (choice.equals("1")) {
                 System.out.print("Please enter password: ");
-                String password = "abc123";
+                String password = input.nextLine();
                 if (password.equals("abc123")) {
                     showManagerMenu();
                     cont = false;
@@ -150,8 +150,9 @@ public class HotelApp {
             System.out.println("3. Check In/Out");
             System.out.println("4. Register");
             System.out.println("5. View previous bookings");
-            System.out.println("6. Log out");
-            System.out.println("7. Exit");
+            System.out.println("6. Apply coupon");
+            System.out.println("7. Log out");
+            System.out.println("8. Exit");
             System.out.print("> ");
             String choice = input.nextLine();
             if (choice.equals("1")) {
