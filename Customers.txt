@@ -1,6 +1,6 @@
-SSN: 199303228429, Name: Gustav Åberg, Address: Kvarngatan 5, Telephone-number: 0736209922
 SSN: 199602229144, Name: Nicklas Jonsson, Address: Gladiolvägen 3, Telephone-number: 0738227384
 SSN: 199510112299, Name: Jonas Nilsson, Address: Tivoligatan 4, Telephone-number: 0733293745
 SSN: 199403039988, Name: Emil Olsson, Address: Milnergatan 5, Telephone-number: 0736247893
 SSN: 199111123030, Name: Olle Hedlund, Address: Kyrkogårdsgatan 1, Telephone-number: 0739887312
 SSN: 199605245050, Name: Henrik Klasson, Address: Klassonvägen 1, Telephone-number: 0735215124
+SSN: 199303228429, Name: Gustav Åberg, Address: Kvarngatan 5, Telephone-number: 0736209922

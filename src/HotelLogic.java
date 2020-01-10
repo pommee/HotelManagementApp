@@ -64,12 +64,14 @@ public class HotelLogic {
             }
             System.out.print("Enter the SSN of the customer you would like to remove: ");
             String inputSSN = input.nextLine();
-            arrListCustomer.removeIf(element -> element.getSsn().equals(inputSSN));
-            System.out.println("Customer with SSN: " + inputSSN + " has been successfully removed.");
-            try {
-                saveCustomerText();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (customerExists(inputSSN)) {
+                arrListCustomer.removeIf(element -> element.getSsn().equals(inputSSN));
+                System.out.println("Customer with SSN: " + inputSSN + " has been successfully removed.");
+                try {
+                    saveCustomerText();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         } else {
             System.out.println("There are no customers to remove.");
@@ -105,45 +107,54 @@ public class HotelLogic {
             }
             System.out.print("Enter the SSN of the customer you would like to edit: ");
             String inputSSN = input.nextLine();
-            System.out.println();
-            for (Customer element : arrListCustomer) {
-                if (element.getSsn().equals(inputSSN)) {
+            if (customerExists(inputSSN)) {
+                System.out.println();
+                for (Customer element : arrListCustomer) {
+                    if (element.getSsn().equals(inputSSN)) {
 
-                    System.out.println("What type of information would you like to edit of customer " + arrListCustomer.get(arrListCustomer.indexOf(element)) + "?");
-                    System.out.println("1. SSN");
-                    System.out.println("2. Name");
-                    System.out.println("3. Address");
-                    System.out.println("4. Telephone number");
+                        System.out.println("What type of information would you like to edit of customer " + arrListCustomer.get(arrListCustomer.indexOf(element)) + "?");
+                        System.out.println("1. SSN");
+                        System.out.println("2. Name");
+                        System.out.println("3. Address");
+                        System.out.println("4. Telephone number");
 
-                    String choice = input.nextLine();
-                    if (choice.equals("1")) {
-                        System.out.print("Enter new SSN: ");
-                        String newSSN = input.nextLine();
-                        Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
-                        custChange.setSsn(newSSN);
-                        saveCustomerText();
-                        System.out.println("Successfully changed customers SSN.");
-                    } else if (choice.equals("2")) {
-                        System.out.print("Enter new name: ");
-                        String newName = input.nextLine();
-                        Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
-                        custChange.setName(newName);
-                        saveCustomerText();
-                        System.out.println("Successfully changed customers name.");
-                    } else if (choice.equals("3")) {
-                        System.out.print("Enter new address: ");
-                        String newAddress = input.nextLine();
-                        Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
-                        custChange.setAddress(newAddress);
-                        saveCustomerText();
-                        System.out.println("Successfully changed customers address.");
-                    } else if (choice.equals("4")) {
-                        System.out.print("Enter new telephone nr: ");
-                        String newNr = input.nextLine();
-                        Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
-                        custChange.setTelephoneNumber(newNr);
-                        saveCustomerText();
-                        System.out.println("Successfully changed customers telephone number.");
+                        boolean cont = true;
+                        do {
+                            String choice = input.nextLine();
+                            if (choice.equals("1")) {
+                                System.out.print("Enter new SSN: ");
+                                String newSSN = input.nextLine();
+                                Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
+                                custChange.setSsn(newSSN);
+                                saveCustomerText();
+                                System.out.println("Successfully changed customers SSN.");
+                                cont = false;
+                            } else if (choice.equals("2")) {
+                                System.out.print("Enter new name: ");
+                                String newName = input.nextLine();
+                                Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
+                                custChange.setName(newName);
+                                saveCustomerText();
+                                System.out.println("Successfully changed customers name.");
+                                cont = false;
+                            } else if (choice.equals("3")) {
+                                System.out.print("Enter new address: ");
+                                String newAddress = input.nextLine();
+                                Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
+                                custChange.setAddress(newAddress);
+                                saveCustomerText();
+                                System.out.println("Successfully changed customers address.");
+                                cont = false;
+                            } else if (choice.equals("4")) {
+                                System.out.print("Enter new telephone nr: ");
+                                String newNr = input.nextLine();
+                                Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
+                                custChange.setTelephoneNumber(newNr);
+                                saveCustomerText();
+                                System.out.println("Successfully changed customers telephone number.");
+                                cont = false;
+                            }
+                        } while (cont);
                     }
                 }
             }
@@ -234,103 +245,105 @@ public class HotelLogic {
     }
 
     public void checkInCustomer() {
-        boolean cont = true;
-        Date currentDate = new Date();
-        if (arrListCustomer.size() <= 0) {
-            System.out.println("No customers in the system.");
-        } else {
-            for (Customer element : arrListCustomer) {
-                System.out.println(element);
-            }
-            System.out.print("Enter SSN of the customer you would like to check-in: ");
-            String ssn = input.nextLine();
-            boolean exists = customerExists(ssn);
-            if (exists) {
-                if (arrListRoom.size() <= 0) {
-                    System.out.println("No rooms to book.");
-                } else {
-                    getAvailableRooms();
-                    System.out.print("Enter the number of the room which you would like to book: ");
-                    int choice = input.nextInt();
-                    if (roomNumberExists(choice)) {
+        try {
+            boolean cont = true;
+            Date currentDate = new Date();
+            if (arrListCustomer.size() <= 0) {
+                System.out.println("No customers in the system.");
+            } else {
+                for (Customer element : arrListCustomer) {
+                    System.out.println(element);
+                }
+                System.out.print("Enter SSN of the customer you would like to check-in: ");
+                String ssn = input.nextLine();
+                boolean exists = customerExists(ssn);
+                if (exists) {
+                    if (arrListRoom.size() <= 0) {
+                        System.out.println("No rooms to book.");
+                    } else {
+                        getAvailableRooms();
+                        System.out.print("Enter the number of the room which you would like to book: ");
+                        int choice = input.nextInt();
+                        if (roomNumberExists(choice)) {
 
-                        do {
-                            Date checkInDate = null;
                             do {
-                                System.out.print("What date do you want to check-in (dd-mm-yyyy): ");
-                                String userDate = input.next();
-                                try {
-                                    checkInDate = dateFormat.parse(userDate);
-
-                                } catch (ParseException ex) {
-                                    System.out.println("Invalid date.");
-                                }
-                            } while (checkInDate == null);
-                            if (checkInDate.compareTo(currentDate) < 0) {
-                                System.out.println("Entered date has to be at least one day from now.");
-                            } else {
-                                Date checkOutDate = null;
+                                Date checkInDate = null;
                                 do {
-                                    System.out.print("What date do you want to check out (dd-mm-yyyy): ");
+                                    System.out.print("What date do you want to check-in (dd-mm-yyyy): ");
                                     String userDate = input.next();
                                     try {
-                                        checkOutDate = dateFormat.parse(userDate);
-                                    } catch (ParseException e) {
+                                        checkInDate = dateFormat.parse(userDate);
+
+                                    } catch (ParseException ex) {
                                         System.out.println("Invalid date.");
                                     }
-                                } while (checkOutDate == null);
-                                if (checkOutDate.getTime() - checkInDate.getTime() <= 0) {
-                                    System.out.println("Entered date has to be at least one day more than check-in Date.");
+                                } while (checkInDate == null);
+                                if (checkInDate.compareTo(currentDate) < 0) {
+                                    System.out.println("Entered date has to be at least one day from now.");
                                 } else {
-                                    input.nextLine();
-                                    cont = false;
-                                    System.out.println("-- Confirm Check-In --");
-                                    System.out.println("Do you want to book " + ssn + " to room number: " + choice + "?");
-                                    System.out.print("Check-in Date: ");
-                                    System.out.println(dateFormat.format(checkInDate));
-                                    System.out.print("Check-out Date: ");
-                                    System.out.println(dateFormat.format(checkOutDate));
-                                    System.out.println("1. Yes");
-                                    System.out.println("2. No");
-                                    String answer = input.nextLine();
-                                    if (answer.equals("1")) {
-                                        for (Room room : arrListRoom) {
-                                            if (room.getRoomNumber() == choice) {
-                                                room.setBooked(true);
-                                                room.setBookedBy(ssn);
-                                                try {
-                                                    saveRoomText();
-                                                } catch (IOException e) {
-                                                    e.printStackTrace();
+                                    Date checkOutDate = null;
+                                    do {
+                                        System.out.print("What date do you want to check out (dd-mm-yyyy): ");
+                                        String userDate = input.next();
+                                        try {
+                                            checkOutDate = dateFormat.parse(userDate);
+                                        } catch (ParseException e) {
+                                            System.out.println("Invalid date.");
+                                        }
+                                    } while (checkOutDate == null);
+                                    if (checkOutDate.getTime() - checkInDate.getTime() <= 0) {
+                                        System.out.println("Entered date has to be at least one day more than check-in Date.");
+                                    } else {
+                                        input.nextLine();
+                                        cont = false;
+                                        System.out.println("-- Confirm Check-In --");
+                                        System.out.println("Do you want to book " + ssn + " to room number: " + choice + "?");
+                                        System.out.print("Check-in Date: ");
+                                        System.out.println(dateFormat.format(checkInDate));
+                                        System.out.print("Check-out Date: ");
+                                        System.out.println(dateFormat.format(checkOutDate));
+                                        System.out.println("1. Yes");
+                                        System.out.println("2. No");
+                                        String answer = input.nextLine();
+                                        if (answer.equals("1")) {
+                                            for (Room room : arrListRoom) {
+                                                if (room.getRoomNumber() == choice) {
+                                                    room.setBooked(true);
+                                                    room.setBookedBy(ssn);
+                                                    try {
+                                                        saveRoomText();
+                                                    } catch (IOException e) {
+                                                        e.printStackTrace();
+                                                    }
                                                 }
                                             }
+                                            int bookingId = 0;
+                                            double totalPrice;
+                                            long days;
+                                            days = Math.abs((checkInDate.getTime() - checkOutDate.getTime()) / 86400000);
+                                            for (Booking booking : arrListBookings) {
+                                                bookingId = booking.getBookingId() + 1;
+                                            }
+                                            totalPrice = getCustomerRoom(ssn).getPricePerNight() * days;
+                                            arrListBookings.add(new Booking(bookingId, checkInDate, checkOutDate, totalPrice, ssn));
+                                            try {
+                                                saveBookingText();
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+                                            System.out.println("Successfully booked customer.");
+                                        } else if (answer.equals("2")) {
+                                            System.out.println("No booking has been done.");
                                         }
-                                        int bookingId = 0;
-                                        double totalPrice;
-                                        long days;
-                                        days = Math.abs((checkInDate.getTime() - checkOutDate.getTime()) / 86400000);
-                                        for (Booking booking : arrListBookings) {
-                                            bookingId = booking.getBookingId() + 1;
-                                        }
-                                        totalPrice = getCustomerRoom(ssn).getPricePerNight() * days;
-                                        arrListBookings.add(new Booking(bookingId, checkInDate, checkOutDate, totalPrice, ssn));
-                                        try {
-                                            saveBookingText();
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
-                                        System.out.println("Successfully booked customer.");
-                                    } else if (answer.equals("2")) {
-                                        System.out.println("No booking has been done.");
                                     }
                                 }
-                            }
-                        } while (cont);
+                            } while (cont);
+                        }
                     }
                 }
-            } else {
-                System.out.println("Customer does not exist.");
             }
+        } catch (Exception e) {
+            System.out.println("Please try again");
         }
     }
 
@@ -522,10 +535,10 @@ public class HotelLogic {
             }
             System.out.print("Enter the number of the roon which you would like to cancel booking: ");
             try {
-            int cancelBooking = input.nextInt();
-            arrListRoom.get(cancelBooking).setBooked(false);
-            arrListRoom.get(cancelBooking).setBookedBy(null);
-            arrListRoom.get(cancelBooking).setCustomerNote(null);
+                int cancelBooking = input.nextInt();
+                arrListRoom.get(cancelBooking).setBooked(false);
+                arrListRoom.get(cancelBooking).setBookedBy(null);
+                arrListRoom.get(cancelBooking).setCustomerNote(null);
                 saveRoomText();
             } catch (IOException e) {
                 e.printStackTrace();
