@@ -26,13 +26,11 @@ public class HotelApp {
         System.out.println();
         System.out.println("Current date: " + (date));
         do {
-            myHotelLogic.readBookingText();
-            myHotelLogic.readCustomerText();
-            myHotelLogic.readRoomText();
             System.out.println();
             System.out.println("--- Login options ---");
             System.out.println("1. Hotel manager login");
-            System.out.print("2. Customer login" + "\n> ");
+            System.out.println("2. Customer login");
+            System.out.print("3. Initialize files" + "\n> ");
             String choice = input.nextLine();
             if (choice.equals("1")) {
                 System.out.print("Please enter password: ");
@@ -46,6 +44,11 @@ public class HotelApp {
             } else if (choice.equals("2")) {
                 showCustomerMenu();
                 cont = false;
+            } else if (choice.equals("3")) {
+                myHotelLogic.readBookingText();
+                myHotelLogic.readCustomerText();
+                myHotelLogic.readRoomText();
+                loginMenu();
             }
         } while (cont);
     }

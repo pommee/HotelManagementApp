@@ -516,9 +516,21 @@ public class HotelLogic {
                     System.out.println(element);
                 }
             }
-            System.out.print("Enter the number of the room which you would like to cancel booking: ");
+            System.out.print("Enter the number of the roon which you would like to cancel booking: ");
+            try {
             int cancelBooking = input.nextInt();
             arrListRoom.get(cancelBooking).setBooked(false);
+            arrListRoom.get(cancelBooking).setBookedBy(null);
+            arrListRoom.get(cancelBooking).setCustomerNote(null);
+                saveRoomText();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a number.");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Please enter a valid number.");
+            }
+            System.out.println("Booking cancelled.");
         } else {
             System.out.println("There are no bookings to cancel.");
         }
@@ -721,7 +733,6 @@ public class HotelLogic {
             String bookedBy = data[4].split(": ")[1];
             arrListBookings.add(new Booking(bookingId, checkInDate, checkOutDate, totalPrice, bookedBy));
         }
-
     }
 
     public void readCustomerText() throws IOException, ParseException {
@@ -736,7 +747,6 @@ public class HotelLogic {
             String telephoneNumber = data[3].split(": ")[1];
             arrListCustomer.add(new Customer(ssn, name, address, telephoneNumber));
         }
-
     }
 
     public void readRoomText() throws IOException, ParseException {
@@ -749,9 +759,11 @@ public class HotelLogic {
             int numberOfBeds = Integer.parseInt(data[1].split(": ")[1]);
             boolean hasBalcony = Boolean.parseBoolean(data[2].split(": ")[1]);
             double pricePerNight = Double.parseDouble(data[3].split(": ")[1]);
-            arrListRoom.add(new Room(roomNumber, numberOfBeds, hasBalcony, pricePerNight));
+            boolean isBooked = Boolean.parseBoolean(data[4].split(": ")[1]);
+            String bookedBy = (data[5].split(": ")[1]);
+            String customerNote = (data[6].split(": ")[1]);
+            arrListRoom.add(new Room(roomNumber, numberOfBeds, hasBalcony, pricePerNight, isBooked, bookedBy, customerNote));
         }
-
     }
 
     public void showBookingsBetweenDates() throws ParseException {
@@ -781,27 +793,31 @@ public class HotelLogic {
     }
 
     public void applyCoupon() throws IOException {
-        for (Customer element : arrListCustomer) {
-            System.out.println(element);
-        }
-        System.out.print("Enter your SSN: ");
-        String userSSN = input.nextLine();
+        if (!arrListBookings.isEmpty() || !arrListCustomer.isEmpty()) {
+            for (Customer element : arrListCustomer) {
+                System.out.println(element);
+            }
+            System.out.print("Enter your SSN: ");
+            String userSSN = input.nextLine();
 
-        for (Booking element : arrListBookings) {
-            if (element.getBookedBy().equals(userSSN)) {
-                System.out.println("Current price: " + element.getTotalPrice());
-                System.out.print("Enter coupon code to get 20% off: ");
-                String coupon = input.nextLine();
-                if (coupon.equals("NYSTART")) {
-                    double discount = element.getTotalPrice() - (20 * element.getTotalPrice() / 100);
-                    element.setTotalPrice(discount);
-                    saveBookingText();
-                    System.out.println("Price is now: " + element.getTotalPrice());
-                } else {
-                    System.out.println("Coupon code not recognized.");
+            for (Booking element : arrListBookings) {
+
+                if (element.getBookedBy().equals(userSSN)) {
+                    System.out.println("Current price: " + element.getTotalPrice());
+                    System.out.print("Enter coupon code to get 20% off: ");
+                    String coupon = input.nextLine();
+                    if (coupon.equals("NYSTART")) {
+                        double discount = element.getTotalPrice() - (20 * element.getTotalPrice() / 100);
+                        element.setTotalPrice(discount);
+                        saveBookingText();
+                        System.out.println("Price is now: " + element.getTotalPrice());
+                    } else {
+                        System.out.println("Coupon code not recognized.");
+                    }
                 }
             }
+        } else {
+            System.out.println("There are no bookings or customers.");
         }
     }
-
 }

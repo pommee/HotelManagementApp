@@ -7,16 +7,22 @@ public class Room {
     private String bookedBy;
     private String customerNote;
 
+    public Room(int roomNumber, int numberOfBeds, boolean hasBalcony, Double pricePerNight, boolean isBooked, String bookedBy, String customerNote) {
+        this.roomNumber = roomNumber;
+        this.numberOfBeds = numberOfBeds;
+        this.hasBalcony = hasBalcony;
+        this.pricePerNight = pricePerNight;
+        this.isBooked = isBooked;
+        this.bookedBy = bookedBy;
+        this.customerNote = customerNote;
+    }
+
     public int getNumberOfBeds() {
         return numberOfBeds;
     }
 
     public void setNumberOfBeds(int numberOfBeds) {
         this.numberOfBeds = numberOfBeds;
-    }
-
-    public String getCustomerNote() {
-        return customerNote;
     }
 
     public void setCustomerNote(String customerNote) {
@@ -57,10 +63,4 @@ public class Room {
                 ", Balcony: " + hasBalcony + ", Price: " + pricePerNight + ", Booked: " + isBooked + ", Booked by: " + bookedBy + ", Customer note: " + customerNote;
     }
 
-    public Room(int roomNumber, int numberOfBeds, boolean hasBalcony, Double pricePerNight) {
-        this.roomNumber = roomNumber;
-        this.numberOfBeds = numberOfBeds;
-        this.hasBalcony = hasBalcony;
-        this.pricePerNight = pricePerNight;
-    }
 }

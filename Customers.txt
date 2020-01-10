@@ -3,4 +3,4 @@ SSN: 199602229144, Name: Nicklas Jonsson, Address: Gladiolvägen 3, Telephone-nu
 SSN: 199510112299, Name: Jonas Nilsson, Address: Tivoligatan 4, Telephone-number: 0733293745
 SSN: 199403039988, Name: Emil Olsson, Address: Milnergatan 5, Telephone-number: 0736247893
 SSN: 199111123030, Name: Olle Hedlund, Address: Kyrkogårdsgatan 1, Telephone-number: 0739887312
-SSN: 199605245050, Name: Henrik Klasson, Address: Klassonvägen 1, Telephone-number: 073521512
+SSN: 199605245050, Name: Henrik Klasson, Address: Klassonvägen 1, Telephone-number: 0735215124
