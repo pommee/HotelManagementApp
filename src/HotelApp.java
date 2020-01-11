@@ -67,7 +67,7 @@ public class HotelApp {
             System.out.println("| 1. Add customer                 |");
             System.out.println("| 2. View all customers           |");
             System.out.println("| 3. View rooms                   |");
-            System.out.println("| 4. View all bookings            |");
+            System.out.println("| 4. View bookings                |");
             System.out.println("| 5. Check in/out customer        |");
             System.out.println("| 6. Search for booking           |");
             System.out.println("| 7. Edit room                    |");
@@ -76,10 +76,8 @@ public class HotelApp {
             System.out.println("| 10. Remove room                 |");
             System.out.println("| 11. Edit booking                |");
             System.out.println("| 12. Cancel booking              |");
-            System.out.println("| 13. View bookings between dates |");
-            System.out.println("| 14. Previous Bookings           |");
-            System.out.println("| 15. Log out                     |");
-            System.out.println("| 16. Exit                        |");
+            System.out.println("| 13. Log out                     |");
+            System.out.println("| 14. Exit                        |");
             System.out.println("*---------------------------------*");
             System.out.print("> ");
             String choice = input.nextLine();
@@ -90,10 +88,12 @@ public class HotelApp {
             } else if (choice.equals("2")) {
                 myHotelLogic.getCustomers();
             } else if (choice.equals("3")) {
-                System.out.println("-- Select option --");
-                System.out.println("1. View available rooms only");
-                System.out.println("2. View all rooms");
-                System.out.println("3. Return to manager menu");
+                System.out.println("*------- Select option -------*|");
+                System.out.println("| 1. View available rooms      |");
+                System.out.println("| 2. View all rooms            |");
+                System.out.println("| 3. Return to manager menu    |");
+                System.out.println("*------------------------------*");
+                System.out.print("> ");
                 String subMenu = input.nextLine();
                 if (subMenu.equals("1")) {
                     myHotelLogic.getAvailableRooms();
@@ -105,7 +105,22 @@ public class HotelApp {
                     System.out.println("Please enter a number between 1-3.");
                 }
             } else if (choice.equals("4")) {
-                myHotelLogic.getBookings();
+                System.out.println("*-------- Select option --------*|");
+                System.out.println("| 1. View all bookings           |");
+                System.out.println("| 2. View previous bookings      |");
+                System.out.println("| 3. View bookings between dates |");
+                System.out.println("*--------------------------------*");
+                System.out.print("> ");
+                String subMenu = input.nextLine();
+                if (subMenu.equals("1")) {
+                    myHotelLogic.getBookings();
+                } else if (subMenu.equals("2")) {
+                    myHotelLogic.previousBooking();
+                } else if (subMenu.equals("3")) {
+                    myHotelLogic.showBookingsBetweenDates();
+                } else {
+                    System.out.println("Please enter a number between 1-3.");
+                }
             } else if (choice.equals("5")) {
                 boolean contAnswer = true;
                 do {
@@ -138,12 +153,8 @@ public class HotelApp {
             } else if (choice.equals("12")) {
                 myHotelLogic.cancelBooking();
             } else if (choice.equals("13")) {
-                myHotelLogic.showBookingsBetweenDates();
-            } else if (choice.equals("14")) {
-                myHotelLogic.previousBooking();
-            } else if (choice.equals("15")) {
                 loginMenu();
-            } else if (choice.equals("16")) {
+            } else if (choice.equals("14")) {
                 System.out.println("Thank you for using the HKR Hotel App!");
                 cont = false;
             } else {

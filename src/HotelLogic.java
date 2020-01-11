@@ -11,9 +11,6 @@ public class HotelLogic {
     private ArrayList<Booking> arrListBookings = new ArrayList<>();
     private ArrayList<Booking> arrListRecordBooking = new ArrayList<>();
 
-    public boolean readBooking = false;
-    public boolean readCustomer = false;
-    public boolean readRooms = false;
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
 
