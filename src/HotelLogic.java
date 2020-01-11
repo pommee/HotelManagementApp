@@ -2,7 +2,6 @@ import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
 
 public class HotelLogic {
 
@@ -11,6 +10,10 @@ public class HotelLogic {
     private ArrayList<Customer> arrListCustomer = new ArrayList<>();
     private ArrayList<Booking> arrListBookings = new ArrayList<>();
     private ArrayList<Booking> arrListRecordBooking = new ArrayList<>();
+
+    public boolean readBooking = false;
+    public boolean readCustomer = false;
+    public boolean readRooms = false;
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
 
@@ -302,6 +305,7 @@ public class HotelLogic {
                                         System.out.println(dateFormat.format(checkInDate));
                                         System.out.print("Check-out Date: ");
                                         System.out.println(dateFormat.format(checkOutDate));
+                                        ;
                                         System.out.println("1. Yes");
                                         System.out.println("2. No");
                                         String answer = input.nextLine();
@@ -343,7 +347,7 @@ public class HotelLogic {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Please try again");
+            System.out.println("Please try again.");
         }
     }
 
@@ -441,7 +445,7 @@ public class HotelLogic {
                 }
             }
         } catch (Exception e) {
-            System.out.println("\n" + "Please try again");
+            System.out.println("\n" + "Please try again.");
             editRoom();
         }
     }
@@ -632,60 +636,6 @@ public class HotelLogic {
         }
     }
 
-    public void customerEditCustomer() throws IOException {
-        if (!arrListCustomer.isEmpty()) {
-            for (Customer element : arrListCustomer) {
-                System.out.println(element);
-            }
-            System.out.print("Enter your SSN: ");
-            String inputSSN = input.nextLine();
-            System.out.println();
-            for (Customer element : arrListCustomer) {
-                if (element.getSsn().equals(inputSSN)) {
-
-                    System.out.println("1. SSN");
-                    System.out.println("2. Name");
-                    System.out.println("3. Address");
-                    System.out.println("4. Telephone number");
-                    System.out.print("Enter option to edit for the customer:  ");
-
-                    String choice = input.nextLine();
-                    if (choice.equals("1")) {
-                        System.out.print("Enter new SSN: ");
-                        String newSSN = input.nextLine();
-                        Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
-                        custChange.setSsn(newSSN);
-                        saveCustomerText();
-                        System.out.println("Successfully changed your SSN.");
-                    } else if (choice.equals("2")) {
-                        System.out.print("Enter new name: ");
-                        String newName = input.nextLine();
-                        Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
-                        custChange.setName(newName);
-                        saveCustomerText();
-                        System.out.println("Successfully changed your name.");
-                    } else if (choice.equals("3")) {
-                        System.out.print("Enter new address: ");
-                        String newAddress = input.nextLine();
-                        Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
-                        custChange.setAddress(newAddress);
-                        saveCustomerText();
-                        System.out.println("Successfully changed your address.");
-                    } else if (choice.equals("4")) {
-                        System.out.print("Enter new telephone number: ");
-                        String newNr = input.nextLine();
-                        Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
-                        custChange.setTelephoneNumber(newNr);
-                        saveCustomerText();
-                        System.out.println("Successfully changed your telephone number.");
-                    }
-                }
-            }
-        } else {
-            System.out.println("There are currently no customers to edit.");
-        }
-    }
-
     public void saveBookingText() throws IOException {
         File fileName = new File("Bookings.txt");
         try {
@@ -739,18 +689,19 @@ public class HotelLogic {
 
     public void readBookingText() throws IOException, ParseException {
 
-        BufferedReader bkReader = new BufferedReader(new FileReader("Bookings.txt"));
+            BufferedReader bkReader = new BufferedReader(new FileReader("Bookings.txt"));
 
-        for (String line = bkReader.readLine(); line != null; line = bkReader.readLine()) {
-            String[] data = line.split(",");
-            int bookingId = Integer.parseInt(data[0].split(": ")[1]);
-            Date checkInDate = dateFormat.parse(data[1].split(": ")[1]);
-            Date checkOutDate = dateFormat.parse(data[2].split(": ")[1]);
-            double totalPrice = Double.parseDouble(data[3].split(": ")[1]);
-            String bookedBy = data[4].split(": ")[1];
-            arrListBookings.add(new Booking(bookingId, checkInDate, checkOutDate, totalPrice, bookedBy));
+            for (String line = bkReader.readLine(); line != null; line = bkReader.readLine()) {
+                String[] data = line.split(",");
+                int bookingId = Integer.parseInt(data[0].split(": ")[1]);
+                Date checkInDate = dateFormat.parse(data[1].split(": ")[1]);
+                Date checkOutDate = dateFormat.parse(data[2].split(": ")[1]);
+                double totalPrice = Double.parseDouble(data[3].split(": ")[1]);
+                String bookedBy = data[4].split(": ")[1];
+                arrListBookings.add(new Booking(bookingId, checkInDate, checkOutDate, totalPrice, bookedBy));
+            }
         }
-    }
+
 
     public void readCustomerText() throws IOException, ParseException {
 
@@ -784,33 +735,37 @@ public class HotelLogic {
     }
 
     public void showBookingsBetweenDates() throws ParseException {
-
-        for (Booking element : arrListBookings) {
-            System.out.println(element);
-        }
-        try {
-            System.out.print("Enter the first date you would like to search from (dd-mm-yyyy): ");
-            String dateInput = input.nextLine();
-            Date dateFrom = dateFormat.parse(dateInput);
-            System.out.print("Enter the second date you would like to search to (dd-mm-yyyy): ");
-            String dateInput2 = input.nextLine();
-            Date dateTo = dateFormat.parse(dateInput2);
-
-            if (!arrListBookings.isEmpty())
-                System.out.println("Bookings between " + dateInput + " and " + dateInput2 + ":");
+        if (!arrListBookings.isEmpty()) {
 
             for (Booking element : arrListBookings) {
-                if (dateFrom.before(element.getCheckInDate()) && dateTo.after(element.getCheckInDate())) {
-                    System.out.println(element);
-                }
+                System.out.println(element);
             }
-        } catch (ParseException e) {
-            System.out.println("Invalid date specified, please try again.");
+            try {
+                System.out.print("Enter the first date you would like to search from (dd-mm-yyyy): ");
+                String dateInput = input.nextLine();
+                Date dateFrom = dateFormat.parse(dateInput);
+                System.out.print("Enter the second date you would like to search to (dd-mm-yyyy): ");
+                String dateInput2 = input.nextLine();
+                Date dateTo = dateFormat.parse(dateInput2);
+
+                if (!arrListBookings.isEmpty())
+                    System.out.println("Bookings between " + dateInput + " and " + dateInput2 + ":");
+
+                for (Booking element : arrListBookings) {
+                    if (dateFrom.before(element.getCheckInDate()) && dateTo.after(element.getCheckInDate())) {
+                        System.out.println(element);
+                    }
+                }
+            } catch (ParseException e) {
+                System.out.println("Invalid date specified, please try again.");
+            }
+        } else {
+            System.out.println("There are no bookings to view.");
         }
     }
 
     public void applyCoupon() throws IOException {
-        if (!arrListBookings.isEmpty() || !arrListCustomer.isEmpty()) {
+        if (!arrListBookings.isEmpty() && !arrListCustomer.isEmpty()) {
             for (Customer element : arrListCustomer) {
                 System.out.println(element);
             }
@@ -831,6 +786,8 @@ public class HotelLogic {
                     } else {
                         System.out.println("Coupon code not recognized.");
                     }
+                } else {
+                    System.out.println("That customer has not made a booking.");
                 }
             }
         } else {

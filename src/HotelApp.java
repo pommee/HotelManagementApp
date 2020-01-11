@@ -7,6 +7,8 @@ public class HotelApp {
     private boolean cont = true;
     private Scanner input = new Scanner(System.in);
     private HotelLogic myHotelLogic = new HotelLogic();
+    private boolean doneOnce = false;
+
 
     public static void main(String[] args) throws IOException, ParseException {
         HotelApp myHotelApp = new HotelApp();
@@ -26,11 +28,16 @@ public class HotelApp {
         System.out.println();
         System.out.println("Current date: " + (date));
         do {
+            if (!doneOnce) {
+                myHotelLogic.readBookingText();
+                myHotelLogic.readCustomerText();
+                myHotelLogic.readRoomText();
+                doneOnce = true;
+            }
             System.out.println();
             System.out.println("--- Login options ---");
             System.out.println("1. Hotel manager login");
-            System.out.println("2. Customer login");
-            System.out.print("3. Initialize files" + "\n> ");
+            System.out.print("2. Customer login" + "\n> ");
             String choice = input.nextLine();
             if (choice.equals("1")) {
                 System.out.print("Please enter password: ");
@@ -44,11 +51,6 @@ public class HotelApp {
             } else if (choice.equals("2")) {
                 showCustomerMenu();
                 cont = false;
-            } else if (choice.equals("3")) {
-                myHotelLogic.readBookingText();
-                myHotelLogic.readCustomerText();
-                myHotelLogic.readRoomText();
-                loginMenu();
             } else {
                 System.out.println("Invalid option, please try again");
             }
@@ -165,7 +167,7 @@ public class HotelApp {
             if (choice.equals("1")) {
                 myHotelLogic.getAvailableRooms();
             } else if (choice.equals("2")) {
-                myHotelLogic.customerEditCustomer();
+                myHotelLogic.editCustomer();
             } else if (choice.equals("3")) {
                 boolean contAnswer = true;
                 do {
