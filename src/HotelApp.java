@@ -35,9 +35,11 @@ public class HotelApp {
                 doneOnce = true;
             }
             System.out.println();
-            System.out.println("--- Login options ---");
-            System.out.println("1. Hotel manager login");
-            System.out.print("2. Customer login" + "\n> ");
+            System.out.println("*----- Login options -----*");
+            System.out.println("| 1. Hotel manager login  |");
+            System.out.println("| 2. Customer login       |");
+            System.out.println("*-------------------------*");
+            System.out.print("> ");
             String choice = input.nextLine();
             if (choice.equals("1")) {
                 System.out.print("Please enter password: ");
@@ -61,23 +63,24 @@ public class HotelApp {
         boolean cont = true;
         do {
             System.out.println();
-            System.out.println("--- Manager ---");
-            System.out.println("1. Add customer");
-            System.out.println("2. View all customers");
-            System.out.println("3. View rooms");
-            System.out.println("4. View all bookings");
-            System.out.println("5. Check in/out customer");
-            System.out.println("6. Search for booking");
-            System.out.println("7. Edit room");
-            System.out.println("8. Edit customer");
-            System.out.println("9. Remove customer");
-            System.out.println("10. Remove room");
-            System.out.println("11. Edit booking");
-            System.out.println("12. Cancel booking");
-            System.out.println("13. View bookings between dates");
-            System.out.println("14. Previous Bookings");
-            System.out.println("15. Log out");
-            System.out.println("16. Exit");
+            System.out.println("*------------ Manager ------------*");
+            System.out.println("| 1. Add customer                 |");
+            System.out.println("| 2. View all customers           |");
+            System.out.println("| 3. View rooms                   |");
+            System.out.println("| 4. View all bookings            |");
+            System.out.println("| 5. Check in/out customer        |");
+            System.out.println("| 6. Search for booking           |");
+            System.out.println("| 7. Edit room                    |");
+            System.out.println("| 8. Edit customer                |");
+            System.out.println("| 9. Remove customer              |");
+            System.out.println("| 10. Remove room                 |");
+            System.out.println("| 11. Edit booking                |");
+            System.out.println("| 12. Cancel booking              |");
+            System.out.println("| 13. View bookings between dates |");
+            System.out.println("| 14. Previous Bookings           |");
+            System.out.println("| 15. Log out                     |");
+            System.out.println("| 16. Exit                        |");
+            System.out.println("*---------------------------------*");
             System.out.print("> ");
             String choice = input.nextLine();
             System.out.println();
@@ -153,15 +156,16 @@ public class HotelApp {
         boolean cont = true;
         do {
             System.out.println();
-            System.out.println("--- Customer ---");
-            System.out.println("1. View rooms");
-            System.out.println("2. Edit information");
-            System.out.println("3. Check In/Out");
-            System.out.println("4. Register");
-            System.out.println("5. View previous bookings");
-            System.out.println("6. Apply coupon");
-            System.out.println("7. Log out");
-            System.out.println("8. Exit");
+            System.out.println("*--------- Customer ---------*");
+            System.out.println("| 1. View rooms              |");
+            System.out.println("| 2. Edit information        |");
+            System.out.println("| 3. Check In/Out            |");
+            System.out.println("| 4. Register                |");
+            System.out.println("| 5. View previous bookings  |");
+            System.out.println("| 6. Apply coupon            |");
+            System.out.println("| 7. Log out                 |");
+            System.out.println("| 8. Exit                    |");
+            System.out.println("*----------------------------*");
             System.out.print("> ");
             String choice = input.nextLine();
             if (choice.equals("1")) {
