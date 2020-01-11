@@ -109,6 +109,7 @@ public class HotelApp {
                 System.out.println("| 1. View all bookings           |");
                 System.out.println("| 2. View previous bookings      |");
                 System.out.println("| 3. View bookings between dates |");
+                System.out.println("| 4. Return to manager menu      |");
                 System.out.println("*--------------------------------*");
                 System.out.print("> ");
                 String subMenu = input.nextLine();
@@ -118,8 +119,10 @@ public class HotelApp {
                     myHotelLogic.previousBooking();
                 } else if (subMenu.equals("3")) {
                     myHotelLogic.showBookingsBetweenDates();
+                } else if (subMenu.equals("4")) {
+                    showManagerMenu();
                 } else {
-                    System.out.println("Please enter a number between 1-3.");
+                    System.out.println("Please enter a number between 1-4.");
                 }
             } else if (choice.equals("5")) {
                 boolean contAnswer = true;

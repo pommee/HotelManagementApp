@@ -534,9 +534,10 @@ public class HotelLogic {
                     System.out.println(element);
                 }
             }
-            System.out.print("Enter the number of the roon which you would like to cancel booking: ");
+            System.out.print("Enter the number of the room which you would like to cancel booking: ");
             try {
                 int cancelBooking = input.nextInt();
+                input.nextLine();
                 arrListRoom.get(cancelBooking).setBooked(false);
                 arrListRoom.get(cancelBooking).setBookedBy(null);
                 arrListRoom.get(cancelBooking).setCustomerNote(null);
@@ -548,7 +549,7 @@ public class HotelLogic {
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Please enter a valid number.");
             }
-            System.out.println("Booking cancelled.");
+            System.out.println("Booking successfully cancelled.");
         } else {
             System.out.println("There are no bookings to cancel.");
         }
@@ -686,18 +687,18 @@ public class HotelLogic {
 
     public void readBookingText() throws IOException, ParseException {
 
-            BufferedReader bkReader = new BufferedReader(new FileReader("Bookings.txt"));
+        BufferedReader bkReader = new BufferedReader(new FileReader("Bookings.txt"));
 
-            for (String line = bkReader.readLine(); line != null; line = bkReader.readLine()) {
-                String[] data = line.split(",");
-                int bookingId = Integer.parseInt(data[0].split(": ")[1]);
-                Date checkInDate = dateFormat.parse(data[1].split(": ")[1]);
-                Date checkOutDate = dateFormat.parse(data[2].split(": ")[1]);
-                double totalPrice = Double.parseDouble(data[3].split(": ")[1]);
-                String bookedBy = data[4].split(": ")[1];
-                arrListBookings.add(new Booking(bookingId, checkInDate, checkOutDate, totalPrice, bookedBy));
-            }
+        for (String line = bkReader.readLine(); line != null; line = bkReader.readLine()) {
+            String[] data = line.split(",");
+            int bookingId = Integer.parseInt(data[0].split(": ")[1]);
+            Date checkInDate = dateFormat.parse(data[1].split(": ")[1]);
+            Date checkOutDate = dateFormat.parse(data[2].split(": ")[1]);
+            double totalPrice = Double.parseDouble(data[3].split(": ")[1]);
+            String bookedBy = data[4].split(": ")[1];
+            arrListBookings.add(new Booking(bookingId, checkInDate, checkOutDate, totalPrice, bookedBy));
         }
+    }
 
 
     public void readCustomerText() throws IOException, ParseException {
