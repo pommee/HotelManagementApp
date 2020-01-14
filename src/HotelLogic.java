@@ -20,12 +20,13 @@ public class HotelLogic {
             System.out.print("Enter SSN (YYYYMMDDXXXX): ");
             String ssn = input.nextLine();
             if (ssn.matches("[0-9]+")) {
-                    if (ssn.equals("")) {
-                        System.out.println("No SSN was entered, try again.");
-                        break;
-                    }
-                    System.out.print("Enter name: ");
-                    String name = input.nextLine();
+                if (ssn.equals("")) {
+                    System.out.println("No SSN was entered, try again.");
+                    break;
+                }
+                System.out.print("Enter name: ");
+                String name = input.nextLine();
+                if (name.matches("[A-Öa-ö]+")) {
                     if (name.equals("")) {
                         System.out.println("No name was entered, try again.");
                         break;
@@ -38,24 +39,31 @@ public class HotelLogic {
                     }
                     System.out.print("Enter telephone-number: ");
                     String telephoneNumber = input.nextLine();
-                    if (telephoneNumber.equals("")) {
-                        System.out.println("No telephone-number was entered, try again.");
-                        break;
-                    }
-
-                    isCustomerCreated(ssn);
-                    if (isCustomerCreated(ssn)) {
-                        System.out.println("That SSN already exists.");
-                    } else {
-                        arrListCustomer.add(new Customer(ssn, name, address, telephoneNumber));
-                        try {
-                            saveCustomerText();
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                    if (telephoneNumber.matches("[0-9]+")) {
+                        if (telephoneNumber.equals("")) {
+                            System.out.println("No telephone-number was entered, try again.");
+                            break;
                         }
-                        cont = false;
+
+                        isCustomerCreated(ssn);
+                        if (isCustomerCreated(ssn)) {
+                            System.out.println("That SSN already exists.");
+                        } else {
+                            arrListCustomer.add(new Customer(ssn, name, address, telephoneNumber));
+                            try {
+                                saveCustomerText();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            cont = false;
+                        }
+                    } else {
+                        System.out.println("Please only enter numbers");
                     }
-                }else {
+                } else {
+                    System.out.println("Please only enter letters");
+                }
+            } else {
                 System.out.println("Please only enter numbers");
             }
         } while (cont);
