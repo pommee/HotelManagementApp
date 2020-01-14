@@ -185,7 +185,7 @@ public class HotelApp {
             if (choice.equals("1")) {
                 myHotelLogic.getAvailableRooms();
             } else if (choice.equals("2")) {
-                myHotelLogic.editCustomer();
+                myHotelLogic.customerEditCustomer();
             } else if (choice.equals("3")) {
                 boolean contAnswer = true;
                 do {
@@ -194,10 +194,10 @@ public class HotelApp {
                     System.out.print("Select an option: ");
                     String option = input.nextLine();
                     if (option.equals("1")) {
-                        myHotelLogic.checkInCustomer();
+                        myHotelLogic.customerCheckInCustomer();
                         contAnswer = false;
                     } else if (option.equals("2")) {
-                        myHotelLogic.checkOutCustomer();
+                        myHotelLogic.customerCheckOutCustomer();
                         contAnswer = false;
                     } else {
                         System.out.println("Please try again!");
