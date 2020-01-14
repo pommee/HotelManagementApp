@@ -19,40 +19,44 @@ public class HotelLogic {
         do {
             System.out.print("Enter SSN (YYYYMMDDXXXX): ");
             String ssn = input.nextLine();
-            if (ssn.equals("")) {
-                System.out.println("No SSN was entered, try again.");
-                break;
-            }
-            System.out.print("Enter name: ");
-            String name = input.nextLine();
-            if (name.equals("")) {
-                System.out.println("No name was entered, try again.");
-                break;
-            }
-            System.out.print("Enter address: ");
-            String address = input.nextLine();
-            if (address.equals("")) {
-                System.out.println("No address was entered, try again.");
-                break;
-            }
-            System.out.print("Enter telephone-number: ");
-            String telephoneNumber = input.nextLine();
-            if (telephoneNumber.equals("")) {
-                System.out.println("No telephone-number was entered, try again.");
-                break;
-            }
+            if (ssn.matches("[0-9]+")) {
+                    if (ssn.equals("")) {
+                        System.out.println("No SSN was entered, try again.");
+                        break;
+                    }
+                    System.out.print("Enter name: ");
+                    String name = input.nextLine();
+                    if (name.equals("")) {
+                        System.out.println("No name was entered, try again.");
+                        break;
+                    }
+                    System.out.print("Enter address: ");
+                    String address = input.nextLine();
+                    if (address.equals("")) {
+                        System.out.println("No address was entered, try again.");
+                        break;
+                    }
+                    System.out.print("Enter telephone-number: ");
+                    String telephoneNumber = input.nextLine();
+                    if (telephoneNumber.equals("")) {
+                        System.out.println("No telephone-number was entered, try again.");
+                        break;
+                    }
 
-            isCustomerCreated(ssn);
-            if (isCustomerCreated(ssn)) {
-                System.out.println("That SSN already exists.");
-            } else {
-                arrListCustomer.add(new Customer(ssn, name, address, telephoneNumber));
-                try {
-                    saveCustomerText();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                cont = false;
+                    isCustomerCreated(ssn);
+                    if (isCustomerCreated(ssn)) {
+                        System.out.println("That SSN already exists.");
+                    } else {
+                        arrListCustomer.add(new Customer(ssn, name, address, telephoneNumber));
+                        try {
+                            saveCustomerText();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        cont = false;
+                    }
+                }else {
+                System.out.println("Please only enter numbers");
             }
         } while (cont);
     }
@@ -65,8 +69,15 @@ public class HotelLogic {
             System.out.print("Enter the SSN of the customer you would like to remove: ");
             String inputSSN = input.nextLine();
             if (customerExists(inputSSN)) {
-                arrListCustomer.removeIf(element -> element.getSsn().equals(inputSSN));
-                System.out.println("Customer with SSN: " + inputSSN + " has been successfully removed.");
+                System.out.println("Are you sure you want to remove " + inputSSN + "? " + "(y/n)");
+                System.out.print("> ");
+                String answer = input.nextLine();
+                if (answer.equals("y")) {
+                    arrListCustomer.removeIf(element -> element.getSsn().equals(inputSSN));
+                    System.out.println("Customer with SSN: " + inputSSN + " has been successfully removed.");
+                } else if (answer.equals("n")) {
+                    System.out.println("No changes have been made");
+                }
                 try {
                     saveCustomerText();
                 } catch (IOException e) {
