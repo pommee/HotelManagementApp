@@ -488,7 +488,7 @@ public class HotelLogic {
                         String menuChoice = input.nextLine();
                         if (menuChoice.equals("1")) {
                             System.out.print("Enter new Booking ID: ");
-                            int newBookingID = input.nextInt();
+                            int newBookingID = Integer.parseInt(input.nextLine());
                             element.setBookingId(newBookingID);
                             System.out.println("Successfully changed Booking ID.");
                             saveBookingText();
@@ -518,10 +518,12 @@ public class HotelLogic {
                             System.out.println("Successfully changed check-out date.");
                         } else if (menuChoice.equals("4")) {
                             System.out.print("Enter new total price: ");
-                            double newTotalPrice = input.nextDouble();
+                            double newTotalPrice = Double.parseDouble(input.nextLine());
                             element.setTotalPrice(newTotalPrice);
                             saveBookingText();
                             System.out.println("Successfully changed total price.");
+                        } else {
+                            System.out.println("Please enter a number between 1-4.");
                         }
                     }
                 }
