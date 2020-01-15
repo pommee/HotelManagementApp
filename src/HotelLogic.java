@@ -580,16 +580,16 @@ public class HotelLogic {
     public void customerMenuCheckIn() throws IOException {
         boolean cont = true;
         do {
-            System.out.print("\n" + "Enter ssn YYYYMMDDXXXX: ");
+            System.out.print("\n" + "Enter SSN (YYYYMMDDXXXX): ");
             String ssn = input.nextLine();
             if (ssn.matches("[0-9]+")) {
                 if (ssn.equals("")) {
-                    System.out.println("No ssn was entered, try again.");
+                    System.out.println("No SSN was entered, try again.");
                     break;
                 }
                 System.out.print("Enter name: ");
                 String name = input.nextLine();
-                if (name.matches("[A-Za-z]+")) {
+                if (name.matches("[A-Za-z ]+")) {
                     if (name.equals("")) {
                         System.out.println("No name was entered, try again.");
                         break;
@@ -630,13 +630,13 @@ public class HotelLogic {
                             } while (successful);
                         }
                     } else {
-                        System.out.println("Please only enter numbers");
+                        System.out.println("Please only enter numbers.");
                     }
                 } else {
-                    System.out.println("Please only enter characters");
+                    System.out.println("Please only enter characters.");
                 }
             } else {
-                System.out.println("Please only enter numbers");
+                System.out.println("Please only enter numbers.");
             }
         } while (cont);
     }

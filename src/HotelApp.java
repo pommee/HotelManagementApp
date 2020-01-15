@@ -158,8 +158,9 @@ public class HotelApp {
             } else if (choice.equals("13")) {
                 loginMenu();
             } else if (choice.equals("14")) {
-                System.out.println("Thank you for using the HKR Hotel App!");
                 cont = false;
+                System.out.println("Thank you for using the HKR Hotel App!");
+                System.exit(0);
             } else {
                 System.out.println("Invalid option, please try again");
             }
@@ -214,6 +215,7 @@ public class HotelApp {
             } else if (choice.equals("8")) {
                 cont = false;
                 System.out.println("Thanks for visiting HKR Hotel!");
+                System.exit(0);
             } else {
                 System.out.println("Please enter a valid option");
             }
