@@ -474,10 +474,11 @@ public class HotelLogic {
             }
             try {
                 System.out.print("Enter the ID of the Booking you would like to edit: ");
-                String editIndex = input.nextLine();
+                int editIndex = input.nextInt();
+                input.nextLine();
 
                 for (Booking element : arrListBookings) {
-                    if (element.getBookingId() == Integer.parseInt(editIndex)) {
+                    if (element.getBookingId() == editIndex) {
                         System.out.println("1. Booking ID");
                         System.out.println("2. Check-in date");
                         System.out.println("3. Check-out date");
