@@ -474,10 +474,10 @@ public class HotelLogic {
             }
             try {
                 System.out.print("Enter the ID of the Booking you would like to edit: ");
-                int editIndex = input.nextInt();
-                input.nextLine();
+                String editIndex = input.nextLine();
+
                 for (Booking element : arrListBookings) {
-                    if (element.getBookingId() == editIndex) {
+                    if (element.getBookingId() == Integer.parseInt(editIndex)) {
                         System.out.println("1. Booking ID");
                         System.out.println("2. Check-in date");
                         System.out.println("3. Check-out date");
@@ -779,9 +779,6 @@ public class HotelLogic {
 
     public void applyCoupon() throws IOException {
         if (!arrListBookings.isEmpty() && !arrListCustomer.isEmpty()) {
-            for (Customer element : arrListCustomer) {
-                System.out.println(element);
-            }
             System.out.print("Enter your SSN: ");
             String userSSN = input.nextLine();
 
