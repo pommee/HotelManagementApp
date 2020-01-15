@@ -105,13 +105,13 @@ public class HotelLogic {
             }
             try {
                 System.out.print("Enter the number of the room you would like to remove: ");
-                int roomNr = input.nextInt();
+                int roomNr = Integer.parseInt(input.nextLine());
                 arrListRoom.removeIf(element -> element.getRoomNumber() == roomNr);
                 saveRoomText();
                 System.out.println("Successfully removed room " + roomNr + ".");
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException | NumberFormatException e) {
                 System.out.println("Please enter a number.");
             }
         } else {
@@ -456,6 +456,8 @@ public class HotelLogic {
                         element.setCustomerNote(note);
                         System.out.println("Note successfully added.");
                         saveRoomText();
+                    } else {
+                        System.out.println("Please enter a proper number.");
                     }
 
                 }
@@ -825,7 +827,6 @@ public class HotelLogic {
                 System.out.println();
                 for (Customer element : arrListCustomer) {
                     if (element.getSsn().equals(inputSSN)) {
-
                         System.out.println("What type of information would you like to edit of customer " + arrListCustomer.get(arrListCustomer.indexOf(element)) + "?");
                         System.out.println("1. SSN");
                         System.out.println("2. Name");
@@ -846,7 +847,7 @@ public class HotelLogic {
                                         System.out.println("Successfully changed customers SSN.");
                                         cont = false;
                                     } else {
-                                        System.out.println("Please only enter numbers");
+                                        System.out.println("Please only enter numbers.");
                                     }
                                 } while (cont);
                             } else if (choice.equals("2")) {
@@ -860,7 +861,7 @@ public class HotelLogic {
                                         System.out.println("Successfully changed customers name.");
                                         cont = false;
                                     } else {
-                                        System.out.println("Please only enter characters");
+                                        System.out.println("Please only enter characters.");
                                     }
                                 } while (cont);
                             } else if (choice.equals("3")) {
@@ -882,9 +883,11 @@ public class HotelLogic {
                                         System.out.println("Successfully changed customers telephone number.");
                                         cont = false;
                                     } else {
-                                        System.out.println("Please only enter numbers");
+                                        System.out.println("Please only enter numbers.");
                                     }
                                 } while (cont);
+                            } else {
+                                System.out.println("Please enter a proper number.");
                             }
                         } while (cont);
                     }
