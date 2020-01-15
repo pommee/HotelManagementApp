@@ -26,7 +26,7 @@ public class HotelLogic {
                 }
                 System.out.print("Enter name: ");
                 String name = input.nextLine();
-                if (name.matches("[A-Öa-ö]+")) {
+                if (name.matches("[A-Öa-ö ]+")) {
                     if (name.equals("")) {
                         System.out.println("No name was entered, try again.");
                         break;
@@ -58,13 +58,13 @@ public class HotelLogic {
                             cont = false;
                         }
                     } else {
-                        System.out.println("Please only enter numbers");
+                        System.out.println("Please only enter numbers.");
                     }
                 } else {
-                    System.out.println("Please only enter letters");
+                    System.out.println("Please only enter letters.");
                 }
             } else {
-                System.out.println("Please only enter numbers");
+                System.out.println("Please only enter numbers.");
             }
         } while (cont);
     }
