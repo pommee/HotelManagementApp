@@ -796,23 +796,24 @@ public class HotelLogic {
         if (!arrListBookings.isEmpty() && !arrListCustomer.isEmpty()) {
             System.out.print("Enter your SSN: ");
             String userSSN = input.nextLine();
+            boolean exists = customerExists(userSSN);
 
-            for (Booking element : arrListBookings) {
+            if (exists) {
+                for (Booking element : arrListBookings) {
 
-                if (element.getBookedBy().equals(userSSN)) {
-                    System.out.println("Current price: " + element.getTotalPrice());
-                    System.out.print("Enter coupon code to get 20% off: ");
-                    String coupon = input.nextLine();
-                    if (coupon.equals("NYSTART")) {
-                        double discount = element.getTotalPrice() - (20 * element.getTotalPrice() / 100);
-                        element.setTotalPrice(discount);
-                        saveBookingText();
-                        System.out.println("Price is now: " + element.getTotalPrice());
-                    } else {
-                        System.out.println("Coupon code not recognized.");
+                    if (element.getBookedBy().equals(userSSN)) {
+                        System.out.println("Current price: " + element.getTotalPrice());
+                        System.out.print("Enter coupon code to get 20% off: ");
+                        String coupon = input.nextLine();
+                        if (coupon.equals("NYSTART")) {
+                            double discount = element.getTotalPrice() - (20 * element.getTotalPrice() / 100);
+                            element.setTotalPrice(discount);
+                            saveBookingText();
+                            System.out.println("Price is now: " + element.getTotalPrice());
+                        } else {
+                            System.out.println("Coupon code not recognized.");
+                        }
                     }
-                } else {
-                    System.out.println("That customer has not made a booking.");
                 }
             }
         } else {
