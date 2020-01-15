@@ -555,15 +555,14 @@ public class HotelLogic {
             }
             System.out.print("Enter the number of the room which you would like to cancel booking: ");
             try {
-                int cancelBooking = input.nextInt();
-                input.nextLine();
+                int cancelBooking = Integer.parseInt(input.nextLine());
                 arrListRoom.get(cancelBooking).setBooked(false);
                 arrListRoom.get(cancelBooking).setBookedBy(null);
                 arrListRoom.get(cancelBooking).setCustomerNote(null);
                 saveRoomText();
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException | NumberFormatException e) {
                 System.out.println("Please enter a number.");
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Please enter a valid number.");
