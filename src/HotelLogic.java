@@ -474,8 +474,7 @@ public class HotelLogic {
             }
             try {
                 System.out.print("Enter the ID of the Booking you would like to edit: ");
-                int editIndex = input.nextInt();
-                input.nextLine();
+                int editIndex = Integer.parseInt(input.nextLine());
 
                 for (Booking element : arrListBookings) {
                     if (element.getBookingId() == editIndex) {
@@ -524,7 +523,7 @@ public class HotelLogic {
                         }
                     }
                 }
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException | NumberFormatException e) {
                 System.out.println("Please enter a number.");
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Please enter an ID that exists.");
