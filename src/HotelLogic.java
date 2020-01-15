@@ -578,49 +578,61 @@ public class HotelLogic {
         do {
             System.out.print("\n" + "Enter ssn YYYYMMDDXXXX: ");
             String ssn = input.nextLine();
-            if (ssn.equals("")) {
-                System.out.println("No ssn was entered, try again.");
-                break;
-            }
-            System.out.print("Enter name: ");
-            String name = input.nextLine();
-            if (name.equals("")) {
-                System.out.println("No name was entered, try again.");
-                break;
-            }
-            System.out.print("Enter address: ");
-            String address = input.nextLine();
-            if (address.equals("")) {
-                System.out.println("No address was entered, try again.");
-                break;
-            }
-            System.out.print("Enter telephone-number: ");
-            String telephoneNumber = input.nextLine();
-            if (telephoneNumber.equals("")) {
-                System.out.println("No telephone-number was entered, try again.");
-                break;
-            }
-
-            isCustomerCreated(ssn);
-            if (isCustomerCreated(ssn)) {
-                System.out.println("That SSN already exists.");
-            } else {
-                boolean successful = true;
-                do {
-                    System.out.println("\n" + "Is all information correct? (y/n)");
-                    System.out.print("> ");
-                    String answer = input.nextLine();
-                    if (answer.equals("y")) {
-                        arrListCustomer.add(new Customer(ssn, name, address, telephoneNumber));
-                        saveCustomerText();
-                        cont = false;
-                        successful = false;
-                    } else if (answer.equals("n")) {
-                        customerMenuCheckIn();
-                    } else {
-                        System.out.println("That is not a valid option. Please try again.");
+            if (ssn.matches("[0-9]+")) {
+                if (ssn.equals("")) {
+                    System.out.println("No ssn was entered, try again.");
+                    break;
+                }
+                System.out.print("Enter name: ");
+                String name = input.nextLine();
+                if (name.matches("[A-Za-z]+")) {
+                    if (name.equals("")) {
+                        System.out.println("No name was entered, try again.");
+                        break;
                     }
-                } while (successful);
+                    System.out.print("Enter address: ");
+                    String address = input.nextLine();
+                    if (address.equals("")) {
+                        System.out.println("No address was entered, try again.");
+                        break;
+                    }
+                    System.out.print("Enter telephone-number: ");
+                    String telephoneNumber = input.nextLine();
+                    if (telephoneNumber.matches("[0-9]+")) {
+                        if (telephoneNumber.equals("")) {
+                            System.out.println("No telephone-number was entered, try again.");
+                            break;
+                        }
+
+                        isCustomerCreated(ssn);
+                        if (isCustomerCreated(ssn)) {
+                            System.out.println("That SSN already exists.");
+                        } else {
+                            boolean successful = true;
+                            do {
+                                System.out.println("\n" + "Is all information correct? (y/n)");
+                                System.out.print("> ");
+                                String answer = input.nextLine();
+                                if (answer.equals("y")) {
+                                    arrListCustomer.add(new Customer(ssn, name, address, telephoneNumber));
+                                    saveCustomerText();
+                                    cont = false;
+                                    successful = false;
+                                } else if (answer.equals("n")) {
+                                    customerMenuCheckIn();
+                                } else {
+                                    System.out.println("That is not a valid option. Please try again.");
+                                }
+                            } while (successful);
+                        }
+                    } else {
+                        System.out.println("Please only enter numbers");
+                    }
+                } else {
+                    System.out.println("Please only enter characters");
+                }
+            } else {
+                System.out.println("Please only enter numbers");
             }
         } while (cont);
     }
@@ -824,21 +836,33 @@ public class HotelLogic {
                         do {
                             String choice = input.nextLine();
                             if (choice.equals("1")) {
-                                System.out.print("Enter new SSN: ");
-                                String newSSN = input.nextLine();
-                                Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
-                                custChange.setSsn(newSSN);
-                                saveCustomerText();
-                                System.out.println("Successfully changed customers SSN.");
-                                cont = false;
+                                do {
+                                    System.out.print("Enter new SSN: ");
+                                    String newSSN = input.nextLine();
+                                    if (newSSN.matches("[0-9]+")) {
+                                        Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
+                                        custChange.setSsn(newSSN);
+                                        saveCustomerText();
+                                        System.out.println("Successfully changed customers SSN.");
+                                        cont = false;
+                                    } else {
+                                        System.out.println("Please only enter numbers");
+                                    }
+                                } while (cont);
                             } else if (choice.equals("2")) {
-                                System.out.print("Enter new name: ");
-                                String newName = input.nextLine();
-                                Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
-                                custChange.setName(newName);
-                                saveCustomerText();
-                                System.out.println("Successfully changed customers name.");
-                                cont = false;
+                                do {
+                                    System.out.print("Enter new name: ");
+                                    String newName = input.nextLine();
+                                    if (newName.matches("[A-Za-z]+")) {
+                                        Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
+                                        custChange.setName(newName);
+                                        saveCustomerText();
+                                        System.out.println("Successfully changed customers name.");
+                                        cont = false;
+                                    } else {
+                                        System.out.println("Please only enter characters");
+                                    }
+                                } while (cont);
                             } else if (choice.equals("3")) {
                                 System.out.print("Enter new address: ");
                                 String newAddress = input.nextLine();
@@ -848,13 +872,19 @@ public class HotelLogic {
                                 System.out.println("Successfully changed customers address.");
                                 cont = false;
                             } else if (choice.equals("4")) {
-                                System.out.print("Enter new telephone nr: ");
-                                String newNr = input.nextLine();
-                                Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
-                                custChange.setTelephoneNumber(newNr);
-                                saveCustomerText();
-                                System.out.println("Successfully changed customers telephone number.");
-                                cont = false;
+                                do {
+                                    System.out.print("Enter new telephone nr: ");
+                                    String newNr = input.nextLine();
+                                    if (newNr.matches("[0-9]+")) {
+                                        Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
+                                        custChange.setTelephoneNumber(newNr);
+                                        saveCustomerText();
+                                        System.out.println("Successfully changed customers telephone number.");
+                                        cont = false;
+                                    } else {
+                                        System.out.println("Please only enter numbers");
+                                    }
+                                } while (cont);
                             }
                         } while (cont);
                     }

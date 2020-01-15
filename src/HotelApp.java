@@ -214,6 +214,8 @@ public class HotelApp {
             } else if (choice.equals("8")) {
                 cont = false;
                 System.out.println("Thanks for visiting HKR Hotel!");
+            } else {
+                System.out.println("Please enter a valid option");
             }
         } while (cont);
     }
