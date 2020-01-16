@@ -860,7 +860,7 @@ public class HotelLogic {
                                 do {
                                     System.out.print("Enter new name: ");
                                     String newName = input.nextLine();
-                                    if (newName.matches("[A-Za-z]+")) {
+                                    if (newName.matches("[A-Za-z ]+")) {
                                         Customer custChange = arrListCustomer.get(arrListCustomer.indexOf(element));
                                         custChange.setName(newName);
                                         saveCustomerText();
