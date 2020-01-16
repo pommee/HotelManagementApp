@@ -440,16 +440,19 @@ public class HotelLogic {
                         System.out.println("The room currently has " + element.getNumberOfBeds() + " beds.");
                         System.out.print("Enter new amount of beds (1-3): ");
                         try {
-                            int beds = input.nextInt();
-                            input.nextLine();
-                            element.setNumberOfBeds(beds);
+                            int beds = Integer.parseInt(input.nextLine());
+                            if (beds <= 3 && beds >=1) {
+                                element.setNumberOfBeds(beds);
+                                System.out.println("Number of beds successfully changed.");
+                                saveRoomText();
+                            } else {
+                                System.out.println("Please enter a number between 1-3.");
+                            }
                         } catch (InputMismatchException e) {
                             System.out.println("Please enter a number.");
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("Please enter a number between 1-3.");
                         }
-                        System.out.println("Number of beds successfully changed.");
-                        saveRoomText();
                     } else if (option.equals("2")) {
                         System.out.print("Enter customer note to add: ");
                         String note = input.nextLine();
